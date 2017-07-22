@@ -96,7 +96,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
     int i;
     unsigned char nr_btn = ps3dat->nr_buttons;
     unsigned char nr_stk = ps3dat->nr_sticks;
-    int xx,yy,x,y,z;
+    int xx,yy,ph,x,y,z,p,c1,c2,c3,c4,v1,v2,ww;
 
 //  printf("%d %d\n",nr_btn,nr_stk);
 
@@ -108,71 +108,81 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 //  printf(" 6=%4d ",ps3dat->stick [PAD_LEFT_Y]);
 //  printf(" 7=%4d ",ps3dat->stick [PAD_RIGHT_X]);
 //  system("clear");
-    printf(" 03=%4d ",servo03);
-    printf(" 03b=%4d ",servo03b);
-    printf(" 04=%4d ",servo04);
-    printf(" 04b=%4d ",servo04b);
-    printf("\n");
-    printf(" 05=%4d ",servo05);
-    printf(" 05b=%4d ",servo05b);
-    printf(" 06=%4d ",servo06);
-    printf("\n");
-    printf(" mode=%2d ",mode);
-    printf(" a_mode=%2d ",a_mode);
-    printf(" b_mode=%2d ",b_mode);
-    printf(" btn_tri=%2d ",btn_tri);
-    //  printf(" 8=%4d ",ps3dat->stick [PAD_RIGHT_Y]);
-    printf("\n");
+//    printf(" 03=%4d ",servo03);
+//    printf(" 03b=%4d ",servo03b);
+//    printf(" 04=%4d ",servo04);
+//    printf(" 04b=%4d ",servo04b);
+//    printf("\n");
+//    printf(" 05=%4d ",servo05);
+//    printf(" 05b=%4d ",servo05b);
+//    printf(" 06=%4d ",servo06);
+//    printf("\n");
+//    printf(" mode=%2d ",mode);
+//    printf(" a_mode=%2d ",a_mode);
+//    printf(" b_mode=%2d ",b_mode);
+//    printf(" btn_tri=%2d ",btn_tri);
+//    //  printf(" 8=%4d ",ps3dat->stick [PAD_RIGHT_Y]);
+//    printf("\n");
 
-    xx = ps3dat->stick [PAD_LEFT_X];
-    yy = ps3dat->stick [PAD_LEFT_Y];
+    v1 = ps3dat->stick [PAD_LEFT_X];    // 縦軸入力
+    v2 = ps3dat->stick [PAD_LEFT_Y];    // 横軸入力
+    ww = ps3dat->stick [PAD_RIGHT_X];   // 回転入力
 
-    x = -xx * cos(-M_PI/4) - yy * sin(-M_PI/4);
-    y = -xx * sin(-M_PI/4) + yy * cos(-M_PI/4);
+    c1 = ( 8 * v1 +  8 * v2 +  6 * ww ) / 10;   // 左前
+    c2 = ( 8 * v1 + -8 * v2 + -6 * ww ) / 10;   // 右前
+    c3 = ( 8 * v1 + -8 * v2 +  6 * ww ) / 10;   // 左後
+    c4 = ( 8 * v1 +  8 * v2 + -6 * ww ) / 10;   // 右後
 
-    if(abs(x) < 5) {
+    printf(" c1=%4d ",c1);
+    printf(" c2=%4d ",c2);
+    printf(" c3=%4d ",c3);
+    printf(" c4=%4d ",c4);
+    printf("\n");
+/*
+    if(abs(c1) < 5) {   // 左前
+        softPwmWrite( 5,0);
+        softPwmWrite( 6,0);
+    } else if(c1 > 0) {
+        softPwmWrite( 5,0);
+        softPwmWrite( 6,abs(c1));
+    } else {
+        softPwmWrite( 5,abs(c1));
+        softPwmWrite( 6,0);
+    };
+
+    if(abs(c2) < 5) {   // 右前
         softPwmWrite(26,0);
         softPwmWrite(27,0);
-    } else if(x > 0) {
+    } else if(c2 > 0) {
         softPwmWrite(26,0);
-        softPwmWrite(27,abs(x));
+        softPwmWrite(27,abs(c2));
     } else {
-        softPwmWrite(26,abs(x));
+        softPwmWrite(26,abs(c2));
         softPwmWrite(27,0);
     };
 
-    if(abs(y) < 5) {
-        softPwmWrite(5,0);
-        softPwmWrite(6,0);
-    } else if(y > 0) {
-        softPwmWrite(5,0);
-        softPwmWrite(6,abs(y));
-    } else {
-        softPwmWrite(5,abs(y));
-        softPwmWrite(6,0);
-    };
-
-
-    z = ps3dat->stick [PAD_RIGHT_Y];
-
-    if(abs(z) < 5) {
+    if(abs(c3) < 5) {   // 左後
         softPwmWrite(28,0);
         softPwmWrite(29,0);
-        softPwmWrite(24,0);
-        softPwmWrite(25,0);
-    } else if(z > 0) {
+    } else if(c3 > 0) {
         softPwmWrite(28,0);
-        softPwmWrite(29,abs(z));
-        softPwmWrite(24,abs(z));
-        softPwmWrite(25,0);
+        softPwmWrite(29,abs(c3));
     } else {
-        softPwmWrite(28,abs(z));
+        softPwmWrite(28,abs(c3));
         softPwmWrite(29,0);
-        softPwmWrite(24,0);
-        softPwmWrite(25,abs(z));
-
     };
 
+    if(abs(c4) < 5) {   // 右後
+        softPwmWrite(25,0);
+        softPwmWrite(24,0);
+    } else if(c4 > 0) {
+        softPwmWrite(25,0);
+        softPwmWrite(24,abs(c4));
+    } else {
+        softPwmWrite(25,abs(c4));
+        softPwmWrite(24,0);
+    };
+*/
 
 //  setServo(fds , 0 , ps3dat->stick [PAD_RIGHT_X]);
 //  setServo(fds , 1 , ps3dat->stick [PAD_RIGHT_X]);
@@ -203,6 +213,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 //  if(ps3dat->button[PAD_KEY_DOWN]) { servo06--; };
 //  setServo(fds , 6 , servo06);
 
+/*
     if(!ps3dat->button[PAD_KEY_L1] && !ps3dat->button[PAD_KEY_L2]) {
         servo05 = 84 - servo05b; // 999
 
@@ -215,10 +226,11 @@ int ps3c_test(struct ps3ctls *ps3dat) {
         b_mode = 0;
     };
     setServo(fds , 5 , servo05);
-
+*/
 
 //  if(ps3dat->button[PAD_KEY_SQUARE]) {softPwmWrite(3,50);} else {softPwmWrite(3,0);}; //beep
 
+/*
     if(ps3dat->button[PAD_KEY_TRIANGLE]) btn_tri++;
     if(!ps3dat->button[PAD_KEY_TRIANGLE]) btn_tri = 0;
     if(b_btn_tri > btn_tri) {mode++;if(mode > 8) mode = 0;};
@@ -277,6 +289,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
     if(b_btn_cross > btn_cross) {b_mode++;if(b_mode > 1) b_mode = 0;};
     b_btn_cross = btn_cross;
 
+*/
 //  if(ps3dat->button[PAD_KEY_R1]) btn_r1++;
 //  if(!ps3dat->button[PAD_KEY_R1]) btn_r1 = 0;
 //  if(b_btn_r1 > btn_r1) {softPwmWrite(3,50);delay(100);softPwmWrite(3,0);};
@@ -287,7 +300,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 //  if(b_btn_r2 > btn_r2) {softPwmWrite(3,50);delay(100);softPwmWrite(3,0);};
 //  b_btn_r2 = btn_r2;
 
-
+/*
     if( ps3dat->stick [PAD_R1] > 5 ) {servo04b++;if(servo04b >= 190) servo04b = 190;};//200
     if( ps3dat->stick [PAD_R2] > 5 ) {servo04b--;if(servo04b <= 20) servo04b = 20;};
 
@@ -304,122 +317,123 @@ int ps3c_test(struct ps3ctls *ps3dat) {
     if(a_mode == 6) servo03 = -100;
     if(a_mode == 7) servo03 = -140;
     if(a_mode == 8) servo03 = -168;//-160
+*/
 //  if(a_mode == 9) a_mode = 10;//10
 //  if(a_mode == 10) {};
 
-    servo04 = 33 - servo04b;
+//    servo04 = 33 - servo04b;
 
-    setServo(fds , 3 , servo03);
-    setServo(fds , 4 , servo04);
-    setServo(fds , 5 , servo05);
+//    setServo(fds , 3 , servo03);
+//    setServo(fds , 4 , servo04);
+//    setServo(fds , 5 , servo05);
 
 //  setServo(fds , 5 , ps3dat->stick [PAD_RIGHT_X]); // servo center
 //  printf("XX %4d XX",ps3dat->stick [PAD_RIGHT_X]);
 
-    setServo(fds , 6 , servo06);
+//    setServo(fds , 6 , servo06);
 
 
-    if(mode == 100) {
-        setServo(fds , 0 , -50);//-90
-        //setServo(fds , 0 , -90);
+//    if(mode == 100) {
+//        setServo(fds , 0 , -50);//-90
+//        //setServo(fds , 0 , -90);
 
-        mode = 101;
-    };
-    if(mode == 101) {
-    };
-    if(mode == 102) {
-        //setServo(fds , 1 , -90);//-90
-        setServo(fds , 1 , -90);
+//        mode = 101;
+//    };
+//    if(mode == 101) {
+//    };
+//    if(mode == 102) {
+//        //setServo(fds , 1 , -90);//-90
+//        setServo(fds , 1 , -90);
 
-        mode = 103;
-    };
-    if(mode == 103) {
-    };
-    if(mode == 104) {
-        setServo(fds , 1 , -90);
-        //setServo(fds , 1 , -90);//-90
-        //setServo(fds , 0 , -90);
+//        mode = 103;
+//    };
+//    if(mode == 103) {
+//    };
+//    if(mode == 104) {
+//        setServo(fds , 1 , -90);
+//        //setServo(fds , 1 , -90);//-90
+//        //setServo(fds , 0 , -90);
+//
+//        mode = 2;
+//    };
+//    if(mode == 0) {
+//        setServo(fds , 0 ,  0);
+//        setServo(fds , 1 , 10);
+//    };
+//    if(mode == 1) {
+//        setServo(fds , 0 , -90);
+//        setServo(fds , 1 , -90);
+//
+//        softPwmWrite(28,0);
+//        softPwmWrite(29,100);
+//        softPwmWrite(24,0);
+//        softPwmWrite(25,60);
+//        delay(800);
+//        softPwmWrite(28,0);
+//        softPwmWrite(29,0);
+//
+//        softPwmWrite(24,20);
+//        softPwmWrite(25,0);
+//        delay(300);
+//        softPwmWrite(24,0);
+//        softPwmWrite(25,0);
+//        system("mpg123 /home/pi/Music/gundam_startup.mp3 &");
 
-        mode = 2;
-    };
-    if(mode == 0) {
-        setServo(fds , 0 ,  0);
-        setServo(fds , 1 , 10);
-    };
-    if(mode == 1) {
-        setServo(fds , 0 , -90);
-        setServo(fds , 1 , -90);
+//        mode = 2;
+//    };
 
-        softPwmWrite(28,0);
-        softPwmWrite(29,100);
-        softPwmWrite(24,0);
-        softPwmWrite(25,60);
-        delay(800);
-        softPwmWrite(28,0);
-        softPwmWrite(29,0);
+//    if(mode == 2) {
+//    };
 
-        softPwmWrite(24,20);
-        softPwmWrite(25,0);
-        delay(300);
-        softPwmWrite(24,0);
-        softPwmWrite(25,0);
-        system("mpg123 /home/pi/Music/gundam_startup.mp3 &");
+//    if(mode == 3) {
+//        mode = 5;
+//    };
 
-        mode = 2;
-    };
+ //   if(mode == 4) {
+ //   };
 
-    if(mode == 2) {
-    };
-
-    if(mode == 3) {
-        mode = 5;
-    };
-
-    if(mode == 4) {
-    };
-
-    if(mode == 5) {
-        softPwmWrite(24,10);
-        softPwmWrite(25,0);
-
-
-        for(i=0;i<70;i++) {
-            setServo(fds , 0 , i-70);
-            setServo(fds , 1 , i-80);
-            delay(40);
-        };
-
-        softPwmWrite(24,0);
-        softPwmWrite(25,0);
+//    if(mode == 5) {
+//        softPwmWrite(24,10);
+//        softPwmWrite(25,0);
 
 
-        setServo(fds , 0 ,  0);
-        setServo(fds , 1 , 10);
-        mode = 6;
-    };
+//      for(i=0;i<70;i++) {
+//            setServo(fds , 0 , i-70);
+//            setServo(fds , 1 , i-80);
+//            delay(40);
+//        };
 
-    if(mode == 6) {};
-    if(mode == 7) {
-        system("mpg123 /home/pi/Music/arm-action2.mp3 &");
-        setServo(fds , 0 , +126);
-        setServo(fds , 1 , +110);
-        setServo(fds , 2 , +120);
-        mode = 8;
-    };
-    if(mode == 8) {};
-    if(mode == 9) {
-        for (i=0;i<126;i++) {
-            setServo(fds , 0 , 126-i);
-            setServo(fds , 1 , 110-i);
-            delay(20);
-        };
-        mode = 0;
-    };
+//        softPwmWrite(24,0);
+//        softPwmWrite(25,0);
+
+
+//        setServo(fds , 0 ,  0);
+//        setServo(fds , 1 , 10);
+//        mode = 6;
+//    };
+
+//    if(mode == 6) {};
+//    if(mode == 7) {
+//        system("mpg123 /home/pi/Music/arm-action2.mp3 &");
+//        setServo(fds , 0 , +126);
+//        setServo(fds , 1 , +110);
+//        setServo(fds , 2 , +120);
+//        mode = 8;
+//    };
+//    if(mode == 8) {};
+//    if(mode == 9) {
+//        for (i=0;i<126;i++) {
+//            setServo(fds , 0 , 126-i);
+//            setServo(fds , 1 , 110-i);
+//            delay(20);
+//        };
+//        mode = 0;
+//    };
 
     if(ps3dat->button[PAD_KEY_START]) {
-        system("mpg123 /home/pi/Music/shuu.mp3 &");
-        softPwmWrite(5,0);
-        softPwmWrite(6,0);
+//        system("mpg123 /home/pi/Music/shuu.mp3 &");
+        softPwmWrite( 5,0);
+        softPwmWrite( 6,0);
         softPwmWrite(26,0);
         softPwmWrite(27,0);
         softPwmWrite(28,0);
@@ -428,7 +442,6 @@ int ps3c_test(struct ps3ctls *ps3dat) {
         softPwmWrite(25,0);
         softPwmWrite(14,0);
         softPwmWrite(23,0);
-        softPwmWrite(3,0);
         delay(3000);
         return -1; // end of program
     };
@@ -531,14 +544,14 @@ void main() {
     struct ps3ctls ps3dat;
 
     wiringPiSetup();
-    softPwmCreate(5,0,20); // motor-1 10ms
-    softPwmCreate(6,0,20); // motor-1 10ms
-    softPwmCreate(26,0,20); // motor-2 10ms
-    softPwmCreate(27,0,20); // motor-2 10ms
-    softPwmCreate(28,0,20); // motor-3 10ms
-    softPwmCreate(29,0,20); // motor-3 10ms
-    softPwmCreate(25,0,20); // motor-4 10ms
-    softPwmCreate(24,0,20); // motor-4 10ms
+    softPwmCreate( 5,0,20); // motor-1 20ms   // 左前
+    softPwmCreate( 6,0,20); // motor-1 20ms
+    softPwmCreate(26,0,20); // motor-2 20ms   // 右前
+    softPwmCreate(27,0,20); // motor-2 20ms
+    softPwmCreate(28,0,20); // motor-3 20ms   // 左後
+    softPwmCreate(29,0,20); // motor-3 20ms
+    softPwmCreate(25,0,20); // motor-4 20ms   // 右後
+    softPwmCreate(24,0,20); // motor-4 20ms
 
     softPwmCreate(1,0,20); // motor-5 10ms // NC
     softPwmCreate(4,0,20); // motor-5 10ms // NC
@@ -551,7 +564,7 @@ void main() {
     resetPCA9685(fds2);
     setPCA9685Freq(fds2,50);
 
-    system("mpg123 /home/pi/Music/move_it.mp3 &");
+ //   system("mpg123 /home/pi/Music/move_it.mp3 &");
 
     if(!(ps3c_init(&ps3dat, df))) {
 
