@@ -248,12 +248,14 @@ void main() {
 	int bmeter = 0;
 
 	wiringPiSetup();
+	/*
 	softPwmCreate( 1,0,20); // start-0 20ms // swing motor
 	softPwmCreate( 5,0,20); // start-0 20ms // left  motor
 	softPwmCreate( 6,0,20); // start-0 20ms
 	softPwmCreate(26,0,20); // start-0 20ms // right motor
 	softPwmCreate(28,0,20); // start-0 20ms
 	softPwmCreate(25,0,20); // start-0 20ms // beeper
+	*/
 
 	pinMode( 7,INPUT);pullUpDnControl( 7,PUD_UP); // sensor 1
 	pinMode( 0,INPUT);pullUpDnControl( 0,PUD_UP); // sensor 2
@@ -265,7 +267,11 @@ void main() {
 	pinMode(15,INPUT);pullUpDnControl(15,PUD_UP); // tact sw
 	pinMode(16,INPUT);pullUpDnControl(16,PUD_UP); // encoder
 	
-//	pinMode(26,OUTPUT);digitalWrite(26,0);
+	pinMode(1,OUTPUT);digitalWrite(1,1);
+	pinMode(5,OUTPUT);digitalWrite(5,1);
+	pinMode(6,OUTPUT);digitalWrite(6,0);
+	pinMode(26,OUTPUT);digitalWrite(26,1);
+	pinMode(27,OUTPUT);digitalWrite(27,0);
 /*
 	pinMode(25,OUTPUT);digitalWrite( 25,1);sleep(1);digitalWrite( 25,0);sleep(1);
 	pinMode(25,OUTPUT);digitalWrite( 25,1);sleep(1);digitalWrite( 25,0);sleep(1);
