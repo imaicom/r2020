@@ -248,28 +248,32 @@ void main() {
 	int bmeter = 0;
 
 	wiringPiSetup();
-	softPwmCreate(16,0,20); // start-0 10ms
-	softPwmCreate( 1,0,20); // start-0 10ms
-	softPwmCreate(28,0,20); // start-0 10ms
-	softPwmCreate(29,0,20); // start-0 10ms
-	softPwmCreate(25,0,20); // start-0 10ms
+	softPwmCreate( 1,0,20); // start-0 20ms // swing motor
+	softPwmCreate( 5,0,20); // start-0 20ms // left  motor
+	softPwmCreate( 6,0,20); // start-0 20ms
+	softPwmCreate(26,0,20); // start-0 20ms // right motor
+	softPwmCreate(28,0,20); // start-0 20ms
+	softPwmCreate(25,0,20); // start-0 20ms // beeper
 
-	pinMode( 3,INPUT);pullUpDnControl( 3,PUD_UP);
-	pinMode(12,INPUT);pullUpDnControl(12,PUD_UP);
-	pinMode(21,INPUT);pullUpDnControl(21,PUD_UP); // 1 right
-	pinMode(22,INPUT);pullUpDnControl(22,PUD_UP); // 2 right-center
-	pinMode(30,INPUT);pullUpDnControl(30,PUD_UP); // center
-	pinMode(23,INPUT);pullUpDnControl(23,PUD_UP); // 3 left-center
-	pinMode(24,INPUT);pullUpDnControl(24,PUD_UP); // 4 left
-	pinMode(15,INPUT);pullUpDnControl(15,PUD_UP);
-	pinMode( 5,INPUT);pullUpDnControl( 5,PUD_UP);
-	pinMode( 6,INPUT);pullUpDnControl( 6,PUD_UP);
+	pinMode( 7,INPUT);pullUpDnControl( 3,PUD_UP); // sensor 1
+	pinMode( 0,INPUT);pullUpDnControl(12,PUD_UP); // sensor 2
+	pinMode( 2,INPUT);pullUpDnControl(21,PUD_UP); // sensor 3
+	pinMode( 3,INPUT);pullUpDnControl(22,PUD_UP); // sensor 4
+	pinMode(12,INPUT);pullUpDnControl(30,PUD_UP); // sensor 5
+	pinMode(13,INPUT);pullUpDnControl(23,PUD_UP); // sensor 6
+	pinMode(14,INPUT);pullUpDnControl(24,PUD_UP); // sensor 7
+	pinMode(15,INPUT);pullUpDnControl(15,PUD_UP); // tact sw
+	pinMode(16,INPUT);pullUpDnControl( 5,PUD_UP); // encoder
 	
-	pinMode(4,OUTPUT);digitalWrite(4,0);
-	pinMode(7,OUTPUT);digitalWrite(7,0);
+//	pinMode(26,OUTPUT);digitalWrite(26,0);
+//	pinMode( 1,OUTPUT);digitalWrite( 1,1);
+
+	softPwmWrite(25,50);
+	
 	write_file("cntWheel"		,0 );
 	write_file("bar"			,0 );
 
+	while(1) {}; // stopper
 
 //	while(1) {
 		if(!(ps3c_init(&ps3dat, df))) {
