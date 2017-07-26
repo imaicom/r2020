@@ -253,7 +253,7 @@ void main() {
 	softPwmCreate( 6,0,20); // start-0 20ms
 	softPwmCreate(26,0,20); // start-0 20ms // right motor
 	softPwmCreate(28,0,20); // start-0 20ms
-	softPwmCreate(25,0,20); // start-0 20ms // beeper
+//	softPwmCreate(25,0,20); // start-0 20ms // beeper
 
 	pinMode( 7,INPUT);pullUpDnControl( 3,PUD_UP); // sensor 1
 	pinMode( 0,INPUT);pullUpDnControl(12,PUD_UP); // sensor 2
@@ -266,9 +266,16 @@ void main() {
 	pinMode(16,INPUT);pullUpDnControl( 5,PUD_UP); // encoder
 	
 //	pinMode(26,OUTPUT);digitalWrite(26,0);
-//	pinMode( 1,OUTPUT);digitalWrite( 1,1);
+	pinMode(25,OUTPUT);digitalWrite( 25,1);sleep(1);digitalWrite( 25,0);sleep(1);
+	pinMode(25,OUTPUT);digitalWrite( 25,1);sleep(1);digitalWrite( 25,0);sleep(1);
+	pinMode(25,OUTPUT);digitalWrite( 25,1);sleep(1);digitalWrite( 25,0);sleep(1);
+	pinMode(25,OUTPUT);digitalWrite( 25,1);sleep(1);digitalWrite( 25,0);sleep(1);
+	pinMode(25,OUTPUT);digitalWrite( 25,1);sleep(1);digitalWrite( 25,0);sleep(1);
+	pinMode(25,OUTPUT);digitalWrite( 25,1);sleep(1);digitalWrite( 25,0);sleep(1);
+	pinMode(25,OUTPUT);digitalWrite( 25,1);sleep(1);digitalWrite( 25,0);sleep(1);
+	pinMode(25,OUTPUT);digitalWrite( 25,1);sleep(1);digitalWrite( 25,0);sleep(1);
 
-	softPwmWrite(25,50);
+//	softPwmWrite(25,10);
 	
 	write_file("cntWheel"		,0 );
 	write_file("bar"			,0 );
