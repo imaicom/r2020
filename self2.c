@@ -253,19 +253,20 @@ void main() {
 	softPwmCreate( 6,0,20); // start-0 20ms
 	softPwmCreate(26,0,20); // start-0 20ms // right motor
 	softPwmCreate(28,0,20); // start-0 20ms
-//	softPwmCreate(25,0,20); // start-0 20ms // beeper
+	softPwmCreate(25,0,20); // start-0 20ms // beeper
 
-	pinMode( 7,INPUT);pullUpDnControl( 3,PUD_UP); // sensor 1
-	pinMode( 0,INPUT);pullUpDnControl(12,PUD_UP); // sensor 2
-	pinMode( 2,INPUT);pullUpDnControl(21,PUD_UP); // sensor 3
-	pinMode( 3,INPUT);pullUpDnControl(22,PUD_UP); // sensor 4
-	pinMode(12,INPUT);pullUpDnControl(30,PUD_UP); // sensor 5
-	pinMode(13,INPUT);pullUpDnControl(23,PUD_UP); // sensor 6
-	pinMode(14,INPUT);pullUpDnControl(24,PUD_UP); // sensor 7
+	pinMode( 7,INPUT);pullUpDnControl( 7,PUD_UP); // sensor 1
+	pinMode( 0,INPUT);pullUpDnControl( 0,PUD_UP); // sensor 2
+	pinMode( 2,INPUT);pullUpDnControl( 2,PUD_UP); // sensor 3
+	pinMode( 3,INPUT);pullUpDnControl( 3,PUD_UP); // sensor 4
+	pinMode(12,INPUT);pullUpDnControl(12,PUD_UP); // sensor 5
+	pinMode(13,INPUT);pullUpDnControl(13,PUD_UP); // sensor 6
+	pinMode(14,INPUT);pullUpDnControl(14,PUD_UP); // sensor 7
 	pinMode(15,INPUT);pullUpDnControl(15,PUD_UP); // tact sw
-	pinMode(16,INPUT);pullUpDnControl( 5,PUD_UP); // encoder
+	pinMode(16,INPUT);pullUpDnControl(16,PUD_UP); // encoder
 	
 //	pinMode(26,OUTPUT);digitalWrite(26,0);
+/*
 	pinMode(25,OUTPUT);digitalWrite( 25,1);sleep(1);digitalWrite( 25,0);sleep(1);
 	pinMode(25,OUTPUT);digitalWrite( 25,1);sleep(1);digitalWrite( 25,0);sleep(1);
 	pinMode(25,OUTPUT);digitalWrite( 25,1);sleep(1);digitalWrite( 25,0);sleep(1);
@@ -274,8 +275,9 @@ void main() {
 	pinMode(25,OUTPUT);digitalWrite( 25,1);sleep(1);digitalWrite( 25,0);sleep(1);
 	pinMode(25,OUTPUT);digitalWrite( 25,1);sleep(1);digitalWrite( 25,0);sleep(1);
 	pinMode(25,OUTPUT);digitalWrite( 25,1);sleep(1);digitalWrite( 25,0);sleep(1);
+*/
 
-//	softPwmWrite(25,10);
+	softPwmWrite(25,50);
 	
 	write_file("cntWheel"		,0 );
 	write_file("bar"			,0 );
