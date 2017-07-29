@@ -111,7 +111,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 
     v1 = -ps3dat->stick [PAD_LEFT_X];    // 縦軸入力
     v2 = ps3dat->stick [PAD_LEFT_Y];    // 横軸入力
-    ww = -ps3dat->stick [PAD_RIGHT_X];   // 回転入力
+    ww = ps3dat->stick [PAD_RIGHT_X];   // 回転入力　この計算はおかしいので修正すること
 
     c1 = ( 8 * v1 +  8 * v2 +  6 * ww ) / 10;   // 左前
     c2 = ( 8 * v1 + -8 * v2 + -6 * ww ) / 10;   // 右前
