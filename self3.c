@@ -138,6 +138,13 @@ int ps3c_test(struct ps3ctls *ps3dat) {
     printf(" c2=%4d ",c2);
     printf(" c3=%4d ",c3);
     printf(" c4=%4d ",c4);
+    printf(" s7=%4d ",digitalRead(7));   // 左床センサ
+    printf(" s0=%4d ",digitalRead(0));
+    printf(" s2=%4d ",digitalRead(2));
+    printf(" s3=%4d ",digitalRead(3));   // 中心床センサ
+    printf(" s12=%3d ",digitalRead(12));
+    printf(" s13=%3d ",digitalRead(13));
+    printf(" s14=%3d ",digitalRead(14));   // 右床センサ
     printf("\n");
 
     if(abs(c1) < 5) {   // 左前
