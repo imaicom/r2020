@@ -163,7 +163,7 @@ int automatic_test2() {
             softPwmWrite( 1,0);  // とりあえず、大回転モータを停止しとく
             f = 0; // モニタに戻る
         };
-        if(digitalRead(15)!=0) {  // 瞬間押しの場合は、自動モードに入る。
+        if(digitalRead(15)!=0) {  // 瞬間押しの場合は、自動モードに入る
 
             write_file("cntWheel",0);
 
