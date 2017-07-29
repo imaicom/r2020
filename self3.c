@@ -145,6 +145,9 @@ int ps3c_test(struct ps3ctls *ps3dat) {
     printf(" s12=%3d ",digitalRead(12));
     printf(" s13=%3d ",digitalRead(13));
     printf(" s14=%3d ",digitalRead(14));   // 右床センサ
+    printf(" s15=%3d ",digitalRead(15));   // タクトスイッチ
+    printf(" s16=%3d ",digitalRead(16));   // エンコーダ
+    printf(" s1=%4d ",digitalRead(4));   // 大回転センサ
     printf("\n");
 
     if(abs(c1) < 5) {   // 左前
@@ -557,11 +560,11 @@ void main() {
     long int i,j;
 
     wiringPiSetup();
-    softPwmCreate( 5,0,20); // motor-1 20ms   // 左前
+    softPwmCreate( 5,0,20); // motor-1 20ms   // 左？モータ
     softPwmCreate( 6,0,20); // motor-1 20ms
-    softPwmCreate(26,0,20); // motor-2 20ms   // 右前
+    softPwmCreate(26,0,20); // motor-2 20ms   // 右？モータ
     softPwmCreate(27,0,20); // motor-2 20ms
-    softPwmCreate( 1,0,20); // motor-3 20ms   // 左後
+    softPwmCreate( 1,0,20); // motor-3 20ms   // 大回転モータ
     
     pinMode(23,OUTPUT);	// センササーボ 0:収納 1:出し
     pinMode(25,OUTPUT);	// ブザー
@@ -576,6 +579,7 @@ void main() {
     
     pinMode(15,INPUT);	// タクトスイッチ
 	pinMode(16,INPUT);	// エンコーダ
+	pinMode(4,INPUT);	// 大回転センサ
  
     
  //   softPwmCreate(25,0, 1); // motor-3 20ms
