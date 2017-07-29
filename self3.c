@@ -8,6 +8,7 @@
 
 #include <wiringPi.h>
 #include <softPwm.h>
+#include <softTone.h>
 
 #include "controller.h"
 #include <math.h>
@@ -163,14 +164,17 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 
     if(abs(c3) < 5) {   // 左後
         softPwmWrite( 1,0);
-        softPwmWrite(25,0);
+ //       softPwmWrite(25,0);
     } else if(c3 > 0) {
         softPwmWrite( 1,0);
-        softPwmWrite(25,abs(c3));
+ //       softPwmWrite(25,abs(c3));
     } else {
         softPwmWrite( 1,abs(c3));
-        softPwmWrite(25,0);
+ //       softPwmWrite(25,0);
     };
+    
+    if(ps3dat->button[PAD_KEY_LEFT] ) { digitalWrite(23,1); };
+    if(ps3dat->button[PAD_KEY_RIGHT]) { digitalWrite(23,0); };
 /*
     if(abs(c4) < 5) {   // 右後
         softPwmWrite(25,0);
@@ -542,6 +546,7 @@ void main() {
 
     char *df = "/dev/input/js0";
     struct ps3ctls ps3dat;
+    long int i,j;
 
     wiringPiSetup();
     softPwmCreate( 5,0,20); // motor-1 20ms   // 左前
@@ -549,7 +554,34 @@ void main() {
     softPwmCreate(26,0,20); // motor-2 20ms   // 右前
     softPwmCreate(27,0,20); // motor-2 20ms
     softPwmCreate( 1,0,20); // motor-3 20ms   // 左後
-    softPwmCreate(25,0,20); // motor-3 20ms
+    
+    pinMode(23,OUTPUT);	// センササーボ 0:収納 1:出し
+    pinMode(25,OUTPUT);	// ブザー
+    
+    pinMode(7,INPUT);	// センサ
+    pinMode(0,INPUT);
+    pinMode(2,INPUT);
+    pinMode(3,INPUT);
+    pinMode(12,INPUT);
+    pinMode(13,INPUT);
+    pinMode(14,INPUT);
+    
+    pinMode(15,INPUT);	// タクトスイッチ
+	pinMode(16,INPUT);	// エンコーダ
+ 
+    
+ //   softPwmCreate(25,0, 1); // motor-3 20ms
+    
+ //   softToneCreate(25);
+ //   softToneWrite(25,200000);
+ //   delay(3000);
+
+//	for (j=1;j<3000000;j++) {
+//		digitalWrite(25,1);
+//		for (i=1;i<3000000;i++) {};
+//		digitalWrite(25,0);
+//	};
+	digitalWrite(25,1);
 
     fds = wiringPiI2CSetup(0x40);   // PCA9685-0
     resetPCA9685(fds);
