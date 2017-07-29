@@ -182,6 +182,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
     
     if(ps3dat->button[PAD_KEY_LEFT] ) { digitalWrite(23,1); };
     if(ps3dat->button[PAD_KEY_RIGHT]) { digitalWrite(23,0); };
+    if(ps3dat->button[PAD_KEY_UP]   ) { digitalWrite(25,1);delay(2);digitalWrite(25,0);delay(2); };
 /*
     if(abs(c4) < 5) {   // 右後
         softPwmWrite(25,0);
@@ -588,7 +589,6 @@ void main() {
 //		for (i=1;i<3000000;i++) {};
 //		digitalWrite(25,0);
 //	};
-	digitalWrite(25,1);
 
     fds = wiringPiI2CSetup(0x40);   // PCA9685-0
     resetPCA9685(fds);
