@@ -118,11 +118,12 @@ int ps3c_test(struct ps3ctls *ps3dat) {
     c3 = ( 8 * v1 + -8 * v2 +  6 * ww ) / 10;   // 左後
     c4 = ( 8 * v1 +  8 * v2 + -6 * ww ) / 10;   // 右後
     
-	printf(" c1=%4d ",c1);
-	printf(" c2=%4d ",c2);
-	printf(" c3=%4d ",c3);
-	printf(" c4=%4d ",c4);
-	printf("\n"); 
+    printf(" 左前=%4d ",c1);
+    printf(" 右前=%4d ",c2);
+    printf("\n");
+    printf(" 左後=%4d ",c3);
+    printf(" 右後=%4d ",c4);
+    printf("\n");
 
 	if(abs(c1) < 5) {   // 左前
 		softPwmWrite(27,0);
