@@ -113,16 +113,17 @@ int ps3c_test(struct ps3ctls *ps3dat) {
     v2 = ps3dat->stick [PAD_LEFT_Y];    // 横軸入力
     ww = -ps3dat->stick [PAD_RIGHT_X];   // 回転入力　この計算はおかしいので修正すること
 
-    c1 = ( 8 * v1 +  8 * v2 +  6 * ww ) / 10;   // 左前
-    c2 = ( 8 * v1 + -8 * v2 + -6 * ww ) / 10;   // 右前
-    c3 = ( 8 * v1 + -8 * v2 +  6 * ww ) / 10;   // 左後
+    c1 = ( 8 * v1 +  8 * v2 + -6 * -ww ) / 10;   // 左前
+    c2 = ( 8 * v1 + -8 * v2 +  6 * ww ) / 10;   // 右前
+    c3 = ( 8 * v1 + -8 * v2 +  6 * -ww ) / 10;   // 左後
     c4 = ( 8 * v1 +  8 * v2 + -6 * ww ) / 10;   // 右後
-    
+
     printf(" 左前=%4d ",c1);
     printf(" 右前=%4d ",c2);
     printf("\n");
     printf(" 左後=%4d ",c3);
     printf(" 右後=%4d ",c4);
+    printf("\n");
     printf("\n");
 
 	if(abs(c1) < 5) {   // 左前
