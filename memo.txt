@@ -14,3 +14,6 @@ git push
 
 more ~/.config/lxsession/LXDE-pi/autostart
 vi   ~/.config/lxsession/LXDE-pi/autostart
+
+more /etc/rc.local
+vi   /etc/rc.local
