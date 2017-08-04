@@ -17,3 +17,8 @@ vi   ~/.config/lxsession/LXDE-pi/autostart
 
 more /etc/rc.local
 vi   /etc/rc.local
+
+sudo raspi-config
+# 3 Enable Boot to Desktop/Scratch
+# Console Text console, requiring login (default)
+# startx
