@@ -127,19 +127,19 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 //    //  printf(" 8=%4d ",ps3dat->stick [PAD_RIGHT_Y]);
 //    printf("\n");
 
-    v1 = ps3dat->stick [PAD_LEFT_X];    // 縦軸入力
-    v2 = ps3dat->stick [PAD_LEFT_Y];    // 横軸入力
-    ww = ps3dat->stick [PAD_RIGHT_X];   // 回転入力
+//    v1 = ps3dat->stick [PAD_LEFT_X];    // 縦軸入力
+//    v2 = ps3dat->stick [PAD_LEFT_Y];    // 横軸入力
+//    ww = ps3dat->stick [PAD_RIGHT_X];   // 回転入力
 
-    c1 = ( 8 * v1 +  8 * v2 +  6 * ww ) / 10;   // 左前
-    c2 = ( 8 * v1 + -8 * v2 + -6 * ww ) / 10;   // 右前
-    c3 = ( 8 * v1 + -8 * v2 +  6 * ww ) / 10;   // 左後
-    c4 = ( 8 * v1 +  8 * v2 + -6 * ww ) / 10;   // 右後
+//    c1 = ( 8 * v1 +  8 * v2 +  6 * ww ) / 10;   // 左前
+//    c2 = ( 8 * v1 + -8 * v2 + -6 * ww ) / 10;   // 右前
+//    c3 = ( 8 * v1 + -8 * v2 +  6 * ww ) / 10;   // 左後
+//    c4 = ( 8 * v1 +  8 * v2 + -6 * ww ) / 10;   // 右後
 
-    printf(" c1=%4d ",c1);
-    printf(" c2=%4d ",c2);
-    printf(" c3=%4d ",c3);
-    printf(" c4=%4d ",c4);
+//    printf(" c1=%4d ",c1);
+//    printf(" c2=%4d ",c2);
+//    printf(" c3=%4d ",c3);
+//    printf(" c4=%4d ",c4);
     printf(" s7=%4d ",digitalRead(7));   // 左床センサ
     printf(" s0=%4d ",digitalRead(0));
     printf(" s2=%4d ",digitalRead(2));
@@ -155,7 +155,42 @@ int ps3c_test(struct ps3ctls *ps3dat) {
     
 //	if((digitalRead(4)!=rotation)&&(digitalRead(4)==0)) system("python /home/pi/r2017/simplebeep.py");
 	rotation = digitalRead(4);
+	
+	if(digitalRead(15)==0) {
 
+  		softPwmWrite( 1,30);	// １回転
+		delay(1000);
+		while(digitalRead(4));
+		softPwmWrite( 1,0);
+		delay(500);
+
+		softPwmWrite( 1,30);	// １回転
+		delay(1000);
+		while(digitalRead(4));
+		softPwmWrite( 1,0);
+		delay(500);
+		
+		softPwmWrite( 5,50);	// 前進
+		softPwmWrite(27,50);		
+		delay(500);
+		softPwmWrite( 5,0);
+		softPwmWrite(27,0);
+		delay(500);
+
+		softPwmWrite( 6,50);	// 後進
+		softPwmWrite(26,50);		
+		delay(500);
+		softPwmWrite( 6,0);
+		softPwmWrite(26,0);
+		delay(500);
+
+
+		//system("python /home/pi/r2017/simplebeep.py");
+	} else {
+		softPwmWrite( 1,0);
+	};
+
+/*
     if(abs(c1) < 5) {   // 左前
         softPwmWrite( 5,0);
         softPwmWrite( 6,0);
@@ -177,18 +212,8 @@ int ps3c_test(struct ps3ctls *ps3dat) {
         softPwmWrite(26,abs(c2));
         softPwmWrite(27,0);
     };
-
-    if(abs(c3) < 5) {   // 左後
-        softPwmWrite( 1,0);
- //       softPwmWrite(25,0);
-    } else if(c3 > 0) {
-        softPwmWrite( 1,0);
- //       softPwmWrite(25,abs(c3));
-    } else {
-        softPwmWrite( 1,abs(c3));
- //       softPwmWrite(25,0);
-    };
-    
+*/
+     
     if(ps3dat->button[PAD_KEY_LEFT] ) { digitalWrite(23,1); };
     if(ps3dat->button[PAD_KEY_RIGHT]) { digitalWrite(23,0); };
     if(ps3dat->button[PAD_KEY_UP]   ) { digitalWrite(25,1);delay(2);digitalWrite(25,0);delay(2); };
