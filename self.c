@@ -1,4 +1,4 @@
-// cc -o remote remote.c -lwiringPi -lm
+// cc -o self self.c -lwiringPi -lm
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
