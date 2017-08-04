@@ -44,37 +44,41 @@ int btn_r2 = 0;
 int b_btn_r2 = 0;
 
 int rotation = 0;
+int f = 1;
 
 int automatic() {
 	
 	if(digitalRead(15)==0) {
-
-  		softPwmWrite( 1,30);	// １回転
-		delay(1000);
-		while(digitalRead(4));
-		softPwmWrite( 1,0);
 		delay(500);
+		if(digitalRead(15)==0) {f = 0;};
+		if(digitalRead(15)!=0) {
 
-		softPwmWrite( 1,30);	// １回転
-		delay(1000);
-		while(digitalRead(4));
-		softPwmWrite( 1,0);
-		delay(500);
+			softPwmWrite( 1,30);	// １回転
+			delay(1000);
+			while(digitalRead(4));
+			softPwmWrite( 1,0);
+			delay(500);
+
+			softPwmWrite( 1,30);	// １回転
+			delay(1000);
+			while(digitalRead(4));
+			softPwmWrite( 1,0);
+			delay(500);
 		
-		softPwmWrite( 5,50);	// 前進
-		softPwmWrite(27,50);		
-		delay(500);
-		softPwmWrite( 5,0);
-		softPwmWrite(27,0);
-		delay(500);
+			softPwmWrite( 5,50);	// 前進
+			softPwmWrite(27,50);		
+			delay(500);
+			softPwmWrite( 5,0);
+			softPwmWrite(27,0);
+			delay(500);
 
-		softPwmWrite( 6,50);	// 後進
-		softPwmWrite(26,50);		
-		delay(500);
-		softPwmWrite( 6,0);
-		softPwmWrite(26,0);
-		delay(500);
-
+			softPwmWrite( 6,50);	// 後進
+			softPwmWrite(26,50);		
+			delay(500);
+			softPwmWrite( 6,0);
+			softPwmWrite(26,0);
+			delay(500);
+		};
 
 		//system("python /home/pi/r2017/simplebeep.py");
 	} else {
@@ -248,6 +252,6 @@ void main() {
         } while (!(ps3c_input(&ps3dat)));
 
         ps3c_exit(&ps3dat);
-    } else while(1) automatic();
+    } else while(f) automatic();
 }
 
