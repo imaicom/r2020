@@ -58,6 +58,8 @@ int servo05 = 84; // 999
 int servo05b = 0;
 int servo06 = -45;
 
+int rotation = 2;
+
 int resetPCA9685(int fd) {
     wiringPiI2CWriteReg8(fd,0,0);
 }
@@ -149,6 +151,10 @@ int ps3c_test(struct ps3ctls *ps3dat) {
     printf(" s16=%3d ",digitalRead(16));   // エンコーダ
     printf(" s1=%4d ",digitalRead(4));   // 大回転センサ
     printf("\n");
+       
+    
+//	if((digitalRead(4)!=rotation)&&(digitalRead(4)==0)) system("python /home/pi/r2017/simplebeep.py");
+	rotation = digitalRead(4);
 
     if(abs(c1) < 5) {   // 左前
         softPwmWrite( 5,0);
