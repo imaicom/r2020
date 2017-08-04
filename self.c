@@ -244,7 +244,8 @@ void main() {
  
    
  //   system("mpg123 /home/pi/Music/move_it.mp3 &");
-
+	system("python /home/pi/r2017/simplebeep.py");
+	
     if(!(ps3c_init(&ps3dat, df))) {
 
         do {
