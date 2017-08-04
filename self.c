@@ -58,7 +58,7 @@ int servo05 = 84; // 999
 int servo05b = 0;
 int servo06 = -45;
 
-int rotation = 2;
+int rotation = 0;
 
 int resetPCA9685(int fd) {
     wiringPiI2CWriteReg8(fd,0,0);
