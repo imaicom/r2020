@@ -176,6 +176,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 		setPCA9685Duty(fds , 5 ,  -55);	
 		// 6ポート目が動作不良のため7番を使う
 		setPCA9685Duty(fds , 7 ,  160);	
+		// タイマーはdelayではなく、sleepを使うといいかも
 		setPCA9685Duty(fds , 8 ,  0);	
 	};
 	
@@ -192,6 +193,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 		setPCA9685Duty(fds , 0 ,  90);	// 左腕
 		setPCA9685Duty(fds , 1 ,  -45);	
 		setPCA9685Duty(fds , 2 ,  160);	
+		// タイマーはdelayではなく、sleepを使うといいかも
 		setPCA9685Duty(fds , 3 ,  0);
 	};
 	
