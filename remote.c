@@ -111,7 +111,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 
     v1 = -ps3dat->stick [PAD_LEFT_X];    // 縦軸入力
     v2 = ps3dat->stick [PAD_LEFT_Y];    // 横軸入力
-    ww = -ps3dat->stick [PAD_RIGHT_X];   // 回転入力　この計算はおかしいので修正すること
+    ww = -ps3dat->stick [PAD_RIGHT_X];   // 回転入力
 
     c1 = ( 8 * v1 +  8 * v2 + -6 * -ww ) / 10;   // 左前
     c2 = ( 8 * v1 + -8 * v2 +  6 * ww ) / 10;   // 右前
@@ -170,15 +170,37 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 		softPwmWrite(24,0);
 	};
 
-	setPCA9685Duty(fds , 0 ,  0);	// 左腕
-	setPCA9685Duty(fds , 1 ,  0);
-	setPCA9685Duty(fds , 2 ,  0);
-	setPCA9685Duty(fds , 3 ,  0);	
+
+	if(ps3dat->button[PAD_KEY_R1]) {
+		setPCA9685Duty(fds , 4 ,  90);	// 右腕
+		setPCA9685Duty(fds , 5 ,  -55);	
+		// 6 port 
+		setPCA9685Duty(fds , 7 ,  160);	
+		setPCA9685Duty(fds , 8 ,  0);	
+	};
 	
-	setPCA9685Duty(fds , 4 ,  0);	// 右腕
-	setPCA9685Duty(fds , 5 ,  0);
-	setPCA9685Duty(fds , 6 ,  0);
-	setPCA9685Duty(fds , 7 ,  0);	
+	if(ps3dat->button[PAD_KEY_R2]) {
+		setPCA9685Duty(fds , 4 ,  0);	// 右腕
+		setPCA9685Duty(fds , 5 ,  0);	
+		// 6 port 
+		setPCA9685Duty(fds , 7 ,  0);	
+		setPCA9685Duty(fds , 8 ,  0);	
+	};
+
+
+	if(ps3dat->button[PAD_KEY_L1]) {
+		setPCA9685Duty(fds , 0 ,  90);	// 左腕
+		setPCA9685Duty(fds , 1 ,  -45);	
+		setPCA9685Duty(fds , 2 ,  160);	
+		setPCA9685Duty(fds , 3 ,  0);
+	};
+	
+	if(ps3dat->button[PAD_KEY_L2]) {
+		setPCA9685Duty(fds , 0 ,  0);	// 左腕
+		setPCA9685Duty(fds , 1 ,  0);	
+		setPCA9685Duty(fds , 2 ,  45);	
+		setPCA9685Duty(fds , 3 ,  0);	
+	};
 	
 //	setPCA9685Duty(fds , 0 , ps3dat->stick [PAD_RIGHT_X]);
 //	setPCA9685Duty(fds , 1 , ps3dat->stick [PAD_RIGHT_X]);
@@ -208,20 +230,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 //	if(ps3dat->button[PAD_KEY_UP]) { servo06++; };
 //	if(ps3dat->button[PAD_KEY_DOWN]) { servo06--; };
 //	setPCA9685Duty(fds , 6 , servo06);
-	
-	if(!ps3dat->button[PAD_KEY_L1] && !ps3dat->button[PAD_KEY_L2]) {
-		servo05 = 84 - servo05b; // 999
 		
-	} else if( ps3dat->button[PAD_KEY_L1] && !ps3dat->button[PAD_KEY_L2])	 {
-		servo05++; if(servo05 > +120) servo05 = +120;
-		servo05b = 0;
-	} else if(!ps3dat->button[PAD_KEY_L1] &&  ps3dat->button[PAD_KEY_L2])	 {
-		servo05--; if(servo05 < -80) servo05 = -80;
-		servo05b = +8;//6 old hold power
-		b_mode = 0;
-	};
-	setPCA9685Duty(fds , 5 , servo05);
-	
 
 //	if(ps3dat->button[PAD_KEY_SQUARE]) {softPwmWrite(3,50);} else {softPwmWrite(3,0);}; //beep
 
@@ -294,133 +303,11 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 //	b_btn_r2 = btn_r2;
 
 	
-	if( ps3dat->stick [PAD_R1] > 5 ) {servo04b++;if(servo04b >= 190) servo04b = 190;};//200
-	if( ps3dat->stick [PAD_R2] > 5 ) {servo04b--;if(servo04b <= 20) servo04b = 20;};
-
-	
-	if(b_mode == 1) servo06 = -128;
-	if(b_mode == 0) servo06 = -45;
-	
-	if(a_mode == 0) servo03 = 35;
-	if(a_mode == 1) servo03 = 15;
-	if(a_mode == 2) servo03 = 0;
-	if(a_mode == 3) servo03 = -15;
-	if(a_mode == 4) servo03 = -30;
-	if(a_mode == 5) servo03 = -60;
-	if(a_mode == 6) servo03 = -100;
-	if(a_mode == 7) servo03 = -140;
-	if(a_mode == 8) servo03 = -168;//-160
-//	if(a_mode == 9) a_mode = 10;//10
-//	if(a_mode == 10) {};
-	
-	servo04 = 33 - servo04b;
-
-	setPCA9685Duty(fds , 3 , servo03);
-	setPCA9685Duty(fds , 4 , servo04);
-	setPCA9685Duty(fds , 5 , servo05);
 	
 //	setPCA9685Duty(fds , 5 , ps3dat->stick [PAD_RIGHT_X]); // servo center
 //	printf("XX %4d XX",ps3dat->stick [PAD_RIGHT_X]);
 
 	setPCA9685Duty(fds , 6 , servo06);
-
-	
-	if(mode == 100) {
-		setPCA9685Duty(fds , 0 , -50);//-90
-		//setPCA9685Duty(fds , 0 , -90);
-		
-		mode = 101;
-	};
-	if(mode == 101) {
-	};
-	if(mode == 102) {
-		//setPCA9685Duty(fds , 1 , -90);//-90
-		setPCA9685Duty(fds , 1 , -90);
-		
-		mode = 103;
-	};
-	if(mode == 103) {
-	};
-	if(mode == 104) {
-		setPCA9685Duty(fds , 1 , -90);
-		//setPCA9685Duty(fds , 1 , -90);//-90
-		//setPCA9685Duty(fds , 0 , -90);
-		
-		mode = 2;
-	};
-	if(mode == 0) {
-		setPCA9685Duty(fds , 0 ,  0);
-		setPCA9685Duty(fds , 1 , 10);
-	};
-	if(mode == 1) {
-		setPCA9685Duty(fds , 0 , -90);
-		setPCA9685Duty(fds , 1 , -90);
-		
-		softPwmWrite(28,0);
-		softPwmWrite(29,100);
-		softPwmWrite(24,0);
-		softPwmWrite(25,60);
-		delay(800);
-		softPwmWrite(28,0);
-		softPwmWrite(29,0);
-		
-		softPwmWrite(24,20);
-		softPwmWrite(25,0);
-		delay(300);
-		softPwmWrite(24,0);
-		softPwmWrite(25,0);
-		system("mpg123 /home/pi/Music/gundam_startup.mp3 &");
-		
-		mode = 2;
-	};
-
-	if(mode == 2) {
-	};
-	
-	if(mode == 3) {		
-		mode = 5;
-	};
-	
-	if(mode == 4) {
-	};
-	
-	if(mode == 5) {
-		softPwmWrite(24,10);
-		softPwmWrite(25,0);
-
-
-		for(i=0;i<70;i++) {
-			setPCA9685Duty(fds , 0 , i-70);
-			setPCA9685Duty(fds , 1 , i-80);
-			delay(40);
-		};
-		
-		softPwmWrite(24,0);
-		softPwmWrite(25,0);
-		
-		
-		setPCA9685Duty(fds , 0 ,  0);
-		setPCA9685Duty(fds , 1 , 10);
-		mode = 6;
-	};
-
-	if(mode == 6) {};
-	if(mode == 7) {
-		system("mpg123 /home/pi/Music/arm-action2.mp3 &");
-		setPCA9685Duty(fds , 0 , +126);
-		setPCA9685Duty(fds , 1 , +110);
-		setPCA9685Duty(fds , 2 , +120);
-		mode = 8;
-	};
-	if(mode == 8) {};
-	if(mode == 9) {
-		for (i=0;i<126;i++) {
-			setPCA9685Duty(fds , 0 , 126-i);
-			setPCA9685Duty(fds , 1 , 110-i);
-			delay(20);
-		};
-		mode = 0;
-	};
 
 	if(ps3dat->button[PAD_KEY_START]) {
 		system("mpg123 /home/pi/Music/shuu.mp3 &");
