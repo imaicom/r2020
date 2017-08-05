@@ -170,7 +170,15 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 		softPwmWrite(24,0);
 	};
 
-	setPCA9685Duty(fds , 0 ,  ps3dat->stick [PAD_RIGHT_Y]);
+	setPCA9685Duty(fds , 0 ,  0);	// 左腕
+	setPCA9685Duty(fds , 1 ,  0);
+	setPCA9685Duty(fds , 2 ,  0);
+	setPCA9685Duty(fds , 3 ,  0);	
+	
+	setPCA9685Duty(fds , 4 ,  0);	// 右腕
+	setPCA9685Duty(fds , 5 ,  0);
+	setPCA9685Duty(fds , 6 ,  0);
+	setPCA9685Duty(fds , 7 ,  0);	
 	
 //	setPCA9685Duty(fds , 0 , ps3dat->stick [PAD_RIGHT_X]);
 //	setPCA9685Duty(fds , 1 , ps3dat->stick [PAD_RIGHT_X]);
