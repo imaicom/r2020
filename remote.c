@@ -174,7 +174,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	if(ps3dat->button[PAD_KEY_R1]) {
 		setPCA9685Duty(fds , 4 ,  90);	// 右腕
 		setPCA9685Duty(fds , 5 ,  -55);	
-		// 6 port 
+		// 6ポート目が動作不良のため7番を使う
 		setPCA9685Duty(fds , 7 ,  160);	
 		setPCA9685Duty(fds , 8 ,  0);	
 	};
@@ -182,7 +182,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	if(ps3dat->button[PAD_KEY_R2]) {
 		setPCA9685Duty(fds , 4 ,  0);	// 右腕
 		setPCA9685Duty(fds , 5 ,  0);	
-		// 6 port 
+		// 6ポート目が動作不良のため7番を使う
 		setPCA9685Duty(fds , 7 ,  0);	
 		setPCA9685Duty(fds , 8 ,  0);	
 	};
