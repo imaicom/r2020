@@ -14,7 +14,7 @@
 
 
 struct ps3ctls {
-	
+
 	int fd;
 	unsigned char nr_buttons;	// Max number of Buttons
 	unsigned char nr_sticks;	// Max number of Sticks
