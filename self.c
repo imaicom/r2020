@@ -47,7 +47,7 @@ int rotation = 0;
 int f = 1;
 
 int automatic() {
-	
+
 	if(digitalRead(15)==0) {
 		delay(500);
 		if(digitalRead(15)==0) {f = 0;};
