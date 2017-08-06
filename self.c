@@ -46,40 +46,40 @@ int b_btn_r2 = 0;
 
 int automatic() {
 
+    //system("python /home/pi/r2017/simplebeep.py");
 	if(digitalRead(15)==0) {
 		delay(500);
+        if(digitalRead(15)==0) {  // 長押しの場合は、startxとタイプして、プログラム修正できるようにする。
+            softPwmWrite( 1,0);  // とりあえず、大回転モータを停止しとく
+        };
 		if(digitalRead(15)!=0) {  // 瞬間押しの場合は、自動モードに入る。
 
-			softPwmWrite( 1,30);	// １回転
+			softPwmWrite( 1,30);	// １回転目
+			delay(1000);
+			while(digitalRead(4));
+			softPwmWrite( 1,0);
+			delay(500);  // sleep関数だと、ちゃんとPWMするかも？確認してない
+
+			softPwmWrite( 1,30);	// ２回転目
 			delay(1000);
 			while(digitalRead(4));
 			softPwmWrite( 1,0);
 			delay(500);
 
-			softPwmWrite( 1,30);	// １回転
-			delay(1000);
-			while(digitalRead(4));
-			softPwmWrite( 1,0);
-			delay(500);
-
-			softPwmWrite( 5,50);	// 前進
+			softPwmWrite( 5,50);	// ホイールで前進
 			softPwmWrite(27,50);
 			delay(500);
 			softPwmWrite( 5,0);
 			softPwmWrite(27,0);
 			delay(500);
 
-			softPwmWrite( 6,50);	// 後進
+			softPwmWrite( 6,50);	// ホイールで後進
 			softPwmWrite(26,50);
 			delay(500);
 			softPwmWrite( 6,0);
 			softPwmWrite(26,0);
 			delay(500);
 		};
-
-		//system("python /home/pi/r2017/simplebeep.py");
-	} else {   // 長押しの場合は、startxとタイプして、プログラム修正できるようにする。
-		softPwmWrite( 1,0);
 	};
 }	// automatic()
 
