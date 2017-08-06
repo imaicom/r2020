@@ -228,15 +228,15 @@ void main() {
     softPwmCreate( 1,0,20); // motor-3 20ms   // 大回転モータ
 
     pinMode(23,OUTPUT);	// センササーボ 0:収納 1:出し
-    pinMode(25,OUTPUT);	// ブザー
+    pinMode(25,OUTPUT);	// ブザーを止めてLEDにする。音も小さいから判りにくい
 
-    pinMode(7,INPUT);	// センサ
+    pinMode(7,INPUT);   // 左床センサ
     pinMode(0,INPUT);
     pinMode(2,INPUT);
-    pinMode(3,INPUT);
+    pinMode(3,INPUT);   // 中心床センサ
     pinMode(12,INPUT);
     pinMode(13,INPUT);
-    pinMode(14,INPUT);
+    pinMode(14,INPUT);   // 右床センサ
 
     pinMode(15,INPUT);	// タクトスイッチ
 	pinMode(16,INPUT);	// エンコーダ
