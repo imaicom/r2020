@@ -43,15 +43,12 @@ int b_btn_r1 = 0;
 int btn_r2 = 0;
 int b_btn_r2 = 0;
 
-int rotation = 0;
-int f = 1;
 
 int automatic() {
 
 	if(digitalRead(15)==0) {
 		delay(500);
-		if(digitalRead(15)==0) {f = 0;};
-		if(digitalRead(15)!=0) {
+		if(digitalRead(15)!=0) {  // 瞬間押しの場合は、自動モードに入る。
 
 			softPwmWrite( 1,30);	// １回転
 			delay(1000);
@@ -81,7 +78,7 @@ int automatic() {
 		};
 
 		//system("python /home/pi/r2017/simplebeep.py");
-	} else {
+	} else {   // 長押しの場合は、startxとタイプして、プログラム修正できるようにする。
 		softPwmWrite( 1,0);
 	};
 }	// automatic()
