@@ -64,16 +64,16 @@ int automatic() {
 			while(digitalRead(4));
 			softPwmWrite( 1,0);
 			delay(500);
-		
+
 			softPwmWrite( 5,50);	// 前進
-			softPwmWrite(27,50);		
+			softPwmWrite(27,50);
 			delay(500);
 			softPwmWrite( 5,0);
 			softPwmWrite(27,0);
 			delay(500);
 
 			softPwmWrite( 6,50);	// 後進
-			softPwmWrite(26,50);		
+			softPwmWrite(26,50);
 			delay(500);
 			softPwmWrite( 6,0);
 			softPwmWrite(26,0);
@@ -104,12 +104,12 @@ int ps3c_test(struct ps3ctls *ps3dat) {
     printf(" s16=%3d ",digitalRead(16));   // エンコーダ
     printf(" s1=%4d ",digitalRead(4));   // 大回転センサ
     printf("\n");
-       
+
     automatic();
-    
+
 //	if((digitalRead(4)!=rotation)&&(digitalRead(4)==0)) system("python /home/pi/r2017/simplebeep.py");
 	rotation = digitalRead(4);
-	
+
 
 
     if(ps3dat->button[PAD_KEY_LEFT] ) { digitalWrite(23,1); };
@@ -226,10 +226,10 @@ void main() {
     softPwmCreate(26,0,20); // motor-2 20ms   // 右？モータ
     softPwmCreate(27,0,20); // motor-2 20ms
     softPwmCreate( 1,0,20); // motor-3 20ms   // 大回転モータ
-    
+
     pinMode(23,OUTPUT);	// センササーボ 0:収納 1:出し
     pinMode(25,OUTPUT);	// ブザー
-    
+
     pinMode(7,INPUT);	// センサ
     pinMode(0,INPUT);
     pinMode(2,INPUT);
@@ -237,15 +237,15 @@ void main() {
     pinMode(12,INPUT);
     pinMode(13,INPUT);
     pinMode(14,INPUT);
-    
+
     pinMode(15,INPUT);	// タクトスイッチ
 	pinMode(16,INPUT);	// エンコーダ
 	pinMode(4,INPUT);	// 大回転センサ
- 
-   
+
+
  //   system("mpg123 /home/pi/Music/move_it.mp3 &");
 	system("python /home/pi/r2017/simplebeep.py");
-	
+
     if(!(ps3c_init(&ps3dat, df))) {
 
         do {
