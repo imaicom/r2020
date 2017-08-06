@@ -83,7 +83,7 @@ int setPCA9685Freq(int fd , float freq) {
 int setPCA9685Duty(int fd , int channel , int off) {
 	int channelpos;
 	int on;
-	
+
 	on   = 0;
 	off += 276;
 	channelpos = 0x6 + 4 * channel;
@@ -97,7 +97,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	unsigned char nr_btn = ps3dat->nr_buttons;
 	unsigned char nr_stk = ps3dat->nr_sticks;
 	int xx,yy,x,y,z,v1,v2,ww,c1,c2,c3,c4;
-	
+
 //	printf("%d %d\n",nr_btn,nr_stk);
 
 //  	printf(" 1=%2d ",ps3dat->button[PAD_KEY_LEFT]);
@@ -173,37 +173,37 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 
 	if(ps3dat->button[PAD_KEY_R1]) {
 		setPCA9685Duty(fds , 4 ,  90);	// 右腕
-		setPCA9685Duty(fds , 5 ,  -55);	
+		setPCA9685Duty(fds , 5 ,  -55);
 		// 6ポート目が動作不良のため7番を使う
-		setPCA9685Duty(fds , 7 ,  160);	
+		setPCA9685Duty(fds , 7 ,  160);
 		// タイマーはdelayではなく、sleepを使うといいかも
-		setPCA9685Duty(fds , 8 ,  0);	
+		setPCA9685Duty(fds , 8 ,  0);
 	};
-	
+
 	if(ps3dat->button[PAD_KEY_R2]) {
 		setPCA9685Duty(fds , 4 ,  0);	// 右腕
-		setPCA9685Duty(fds , 5 ,  0);	
+		setPCA9685Duty(fds , 5 ,  0);
 		// 6ポート目が動作不良のため7番を使う
-		setPCA9685Duty(fds , 7 ,  0);	
-		setPCA9685Duty(fds , 8 ,  0);	
+		setPCA9685Duty(fds , 7 ,  0);
+		setPCA9685Duty(fds , 8 ,  0);
 	};
 
 
 	if(ps3dat->button[PAD_KEY_L1]) {
 		setPCA9685Duty(fds , 0 ,  90);	// 左腕
-		setPCA9685Duty(fds , 1 ,  -45);	
-		setPCA9685Duty(fds , 2 ,  160);	
+		setPCA9685Duty(fds , 1 ,  -45);
+		setPCA9685Duty(fds , 2 ,  160);
 		// タイマーはdelayではなく、sleepを使うといいかも
 		setPCA9685Duty(fds , 3 ,  0);
 	};
-	
+
 	if(ps3dat->button[PAD_KEY_L2]) {
 		setPCA9685Duty(fds , 0 ,  0);	// 左腕
-		setPCA9685Duty(fds , 1 ,  0);	
-		setPCA9685Duty(fds , 2 ,  45);	
-		setPCA9685Duty(fds , 3 ,  0);	
+		setPCA9685Duty(fds , 1 ,  0);
+		setPCA9685Duty(fds , 2 ,  45);
+		setPCA9685Duty(fds , 3 ,  0);
 	};
-	
+
 //	setPCA9685Duty(fds , 0 , ps3dat->stick [PAD_RIGHT_X]);
 //	setPCA9685Duty(fds , 1 , ps3dat->stick [PAD_RIGHT_X]);
 
@@ -232,7 +232,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 //	if(ps3dat->button[PAD_KEY_UP]) { servo06++; };
 //	if(ps3dat->button[PAD_KEY_DOWN]) { servo06--; };
 //	setPCA9685Duty(fds , 6 , servo06);
-		
+
 
 //	if(ps3dat->button[PAD_KEY_SQUARE]) {softPwmWrite(3,50);} else {softPwmWrite(3,0);}; //beep
 
@@ -240,7 +240,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	if(!ps3dat->button[PAD_KEY_TRIANGLE]) btn_tri = 0;
 	if(b_btn_tri > btn_tri) {mode++;if(mode > 8) mode = 0;};
 	b_btn_tri = btn_tri;
-	
+
 	if(ps3dat->button[PAD_KEY_SQUARE]) btn_squ++;
 	if(!ps3dat->button[PAD_KEY_SQUARE]) btn_squ = 0;
 	if(b_btn_squ > btn_squ) {
@@ -288,24 +288,24 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 		if(a_mode == 10) system("mpg123 /home/pi/Music/10.mp3 &");
 	};
 	b_btn_down = btn_down;
-	
+
 	if(ps3dat->button[PAD_KEY_CROSS]) btn_cross++;
 	if(!ps3dat->button[PAD_KEY_CROSS]) btn_cross = 0;
 	if(b_btn_cross > btn_cross) {b_mode++;if(b_mode > 1) b_mode = 0;};
 	b_btn_cross = btn_cross;
-	
+
 //	if(ps3dat->button[PAD_KEY_R1]) btn_r1++;
 //	if(!ps3dat->button[PAD_KEY_R1]) btn_r1 = 0;
 //	if(b_btn_r1 > btn_r1) {softPwmWrite(3,50);delay(100);softPwmWrite(3,0);};
 //	b_btn_r1 = btn_r1;
-	
+
 //	if(ps3dat->button[PAD_KEY_R2]) btn_r2++;
 //	if(!ps3dat->button[PAD_KEY_R2]) btn_r2 = 0;
 //	if(b_btn_r2 > btn_r2) {softPwmWrite(3,50);delay(100);softPwmWrite(3,0);};
 //	b_btn_r2 = btn_r2;
 
-	
-	
+
+
 //	setPCA9685Duty(fds , 5 , ps3dat->stick [PAD_RIGHT_X]); // servo center
 //	printf("XX %4d XX",ps3dat->stick [PAD_RIGHT_X]);
 
@@ -398,7 +398,7 @@ int ps3c_init(struct ps3ctls *ps3dat, const char *df) {
 	}
 	ps3dat->button = (short *)p;
 	ps3dat->stick  = (short *)&p[nr_btn * sizeof(short)];
-	
+
 //	for (i = 0; i<nr_btn; i++) ps3dat->button[i] = 0;
 //	for (i = 0; i<nr_stk; i++) ps3dat->stick [i] = 0;
 //	ps3dat->button[PAD_KEY_LEFT]=0;
@@ -448,8 +448,8 @@ void main() {
 		do {
 			if (ps3c_test(&ps3dat) < 0) break;
 		} while (!(ps3c_input(&ps3dat)));
-		
-		ps3c_exit(&ps3dat);		
+
+		ps3c_exit(&ps3dat);
 	}
 }
 
