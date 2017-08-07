@@ -43,6 +43,8 @@ int b_btn_r1 = 0;
 int btn_r2 = 0;
 int b_btn_r2 = 0;
 
+int f = 1; // モニタに戻るフラグ
+
 
 int automatic() {
 
@@ -52,6 +54,7 @@ int automatic() {
 		delay(500);
         if(digitalRead(15)==0) {  // 長押しの場合は、startxとタイプして、プログラム修正できるようにする。
             softPwmWrite( 1,0);  // とりあえず、大回転モータを停止しとく
+            f = 0; // モニタに戻る
         };
 		if(digitalRead(15)!=0) {  // 瞬間押しの場合は、自動モードに入る。
 
@@ -229,7 +232,8 @@ void main() {
     softPwmCreate( 1,0,20); // motor-3 20ms   // 大回転モータ
 
     pinMode(23,OUTPUT);	// センササーボ 0:収納 1:出し
-    pinMode(25,OUTPUT);	// ブザーを止めてLEDにする。音も小さいから判りにくい
+    pinMode(25,OUTPUT);	// ブザーを止めてLEDにする
+    digitalWrite(25,1);
 
     pinMode(7,INPUT);   // 左床センサ
     pinMode(0,INPUT);
@@ -254,6 +258,7 @@ void main() {
         } while (!(ps3c_input(&ps3dat)));
 
         ps3c_exit(&ps3dat);
-    } else while(1) automatic();
+    } else while(f) automatic();
+    digitalWrite(25,0);
 }
 
