@@ -22,26 +22,6 @@ struct ps3ctls {
     short *stick;           // stick[nr_sticks]
 };
 
-int fds;
-int fds2;
-int mode = 10;
-int btn_tri = 0;
-int b_btn_tri = 0;
-int btn_cir = 0;
-int b_btn_cir = 0;
-int btn_squ = 0;
-int b_btn_squ = 0;
-int btn_up = 0;
-int b_btn_up = 0;
-int btn_down = 0;
-int b_btn_down = 0;
-int btn_cross = 0;
-int b_btn_cross = 0;
-
-int btn_r1 = 0;
-int b_btn_r1 = 0;
-int btn_r2 = 0;
-int b_btn_r2 = 0;
 
 int f = 1; // モニタに戻るフラグ
 
@@ -79,13 +59,19 @@ int automatic() {
 			softPwmWrite( 5,0);
 			softPwmWrite(27,0);
 			delay(500);
-
+			
+			while(digitalRead(15)==0);
+			delay(500);
+			while(digitalRead(15)!=0);
+									
 			softPwmWrite( 6,50);	// ホイールで後進
 			softPwmWrite(26,50);
 			delay(500);
 			softPwmWrite( 6,0);
 			softPwmWrite(26,0);
 			delay(500);
+			
+			digitalWrite(23,0);	// センササーボ 0:収納
 		};
 	};
 }	// automatic()
