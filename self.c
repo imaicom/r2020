@@ -40,16 +40,18 @@ int automatic() {
 
 			softPwmWrite( 1,30);	// １回転目
 			delay(1000);
+            softPwmWrite( 1,15);
 			while(digitalRead(4));
 			softPwmWrite( 1,0);
 			delay(500);
 
 			softPwmWrite( 1,30);	// ２回転目
 			delay(1000);
+            softPwmWrite( 1,15);
 			while(digitalRead(4));
 			softPwmWrite( 1,0);
 			delay(500);
-			
+
 			digitalWrite(23,1);	// センササーボ 1:出し
 			delay(500);
 
@@ -59,18 +61,18 @@ int automatic() {
 			softPwmWrite( 5,0);
 			softPwmWrite(27,0);
 			delay(500);
-			
+
 			while(digitalRead(15)==0);
 			delay(500);
 			while(digitalRead(15)!=0);
-									
+
 			softPwmWrite( 6,50);	// ホイールで後進
 			softPwmWrite(26,50);
 			delay(500);
 			softPwmWrite( 6,0);
 			softPwmWrite(26,0);
 			delay(500);
-			
+
 			digitalWrite(23,0);	// センササーボ 0:収納
 		};
 	};
