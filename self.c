@@ -105,7 +105,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
     automatic();
 
 //	if((digitalRead(4)!=rotation)&&(digitalRead(4)==0)) system("python /home/pi/r2017/simplebeep.py");
-	rotation = digitalRead(4);
+//	rotation = digitalRead(4);
 
 
 
@@ -240,8 +240,8 @@ void main() {
 	pinMode(4,INPUT);	// 大回転センサ
 
 
- //   system("mpg123 /home/pi/Music/move_it.mp3 &");
-	system("python /home/pi/r2017/simplebeep.py");
+//	system("mpg123 /home/pi/Music/move_it.mp3 &");
+//	system("python /home/pi/r2017/simplebeep.py");
 
     if(!(ps3c_init(&ps3dat, df))) {
 
@@ -250,6 +250,6 @@ void main() {
         } while (!(ps3c_input(&ps3dat)));
 
         ps3c_exit(&ps3dat);
-    } else while(f) automatic();
+    } else while(1) automatic();
 }
 
