@@ -47,6 +47,7 @@ int b_btn_r2 = 0;
 int automatic() {
 
     //system("python /home/pi/r2017/simplebeep.py");
+    digitalWrite(23,0);	// センササーボ 0:収納
 	if(digitalRead(15)==0) {
 		delay(500);
         if(digitalRead(15)==0) {  // 長押しの場合は、startxとタイプして、プログラム修正できるようにする。
@@ -58,12 +59,15 @@ int automatic() {
 			delay(1000);
 			while(digitalRead(4));
 			softPwmWrite( 1,0);
-			delay(500);  // sleep関数だと、ちゃんとPWMするかも？確認してない
+			delay(500);
 
 			softPwmWrite( 1,30);	// ２回転目
 			delay(1000);
 			while(digitalRead(4));
 			softPwmWrite( 1,0);
+			delay(500);
+			
+			digitalWrite(23,1);	// センササーボ 1:出し
 			delay(500);
 
 			softPwmWrite( 5,50);	// ホイールで前進
