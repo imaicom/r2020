@@ -101,14 +101,27 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 
 //	if((digitalRead(4)!=rotation)&&(digitalRead(4)==0)) system("python /home/pi/r2017/simplebeep.py");
 //	rotation = digitalRead(4);
-
-
-
-    if(ps3dat->button[PAD_KEY_LEFT] )	softPwmWrite( 5,50); else softPwmWrite( 5,0); // 左車輪前
-    if(ps3dat->button[PAD_KEY_RIGHT]) 	softPwmWrite(27,50); else softPwmWrite(27,0); // 右車輪前
-    if(ps3dat->button[PAD_KEY_CIRCLE]) 	{softPwmWrite( 5,50);softPwmWrite(26,50);}else {softPwmWrite( 5,0);softPwmWrite(26,0);}; // 右回転
-    if(ps3dat->button[PAD_KEY_SQUARE]) 	{softPwmWrite( 6,50);softPwmWrite(27,50);}else {softPwmWrite( 6,0);softPwmWrite(27,0);}; // 左回転
-    
+ 
+           if( ps3dat->button[PAD_KEY_LEFT  ])	{
+		softPwmWrite( 5,20); // 左車輪前
+	} 
+	else if( ps3dat->button[PAD_KEY_RIGHT ]) {
+		softPwmWrite(27,20); // 右車輪前
+	}
+	else if( ps3dat->button[PAD_KEY_CIRCLE]) {
+		softPwmWrite( 5,50); // 右回転
+		softPwmWrite(26,50);
+	}
+	else if( ps3dat->button[PAD_KEY_SQUARE]) {
+		softPwmWrite( 6,50); // 左回転
+		softPwmWrite(27,50);
+	}else {
+		softPwmWrite( 5,0); // 停止
+		softPwmWrite( 6,0);
+		softPwmWrite(27,0);
+		softPwmWrite(26,0);
+	};
+       
     if(ps3dat->button[PAD_KEY_UP]   ) digitalWrite(25,1); else digitalWrite(25,0); // Lamp test
 
 
