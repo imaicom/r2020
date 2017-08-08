@@ -85,28 +85,31 @@ int ps3c_test(struct ps3ctls *ps3dat) {
     unsigned char nr_stk = ps3dat->nr_sticks;
     int xx,yy,ph,x,y,z,p,c1,c2,c3,c4,v1,v2,ww;
 
-    printf(" s7=%4d ",digitalRead(7));   // 左床センサ
+    printf(" s7=%4d ",digitalRead(7));   // 左床センサ 白:1 黒:0
     printf(" s0=%4d ",digitalRead(0));
     printf(" s2=%4d ",digitalRead(2));
     printf(" s3=%4d ",digitalRead(3));   // 中心床センサ
     printf(" s12=%3d ",digitalRead(12));
     printf(" s13=%3d ",digitalRead(13));
     printf(" s14=%3d ",digitalRead(14));   // 右床センサ
-    printf(" s15=%3d ",digitalRead(15));   // タクトスイッチ
-    printf(" s16=%3d ",digitalRead(16));   // エンコーダ
-    printf(" s1=%4d ",digitalRead(4));   // 大回転センサ
+    printf(" s15=%3d ",digitalRead(15));   // タクトスイッチ 通常:1 検出時:0
+    printf(" s16=%3d ",digitalRead(16));   // エンコーダ 通常:1 回転時:0
+    printf(" s1=%4d ",digitalRead(4));   // 大回転センサ 通常:1 検出時:0
     printf("\n");
 
-    automatic();
+//    automatic();
 
 //	if((digitalRead(4)!=rotation)&&(digitalRead(4)==0)) system("python /home/pi/r2017/simplebeep.py");
 //	rotation = digitalRead(4);
 
 
 
-    if(ps3dat->button[PAD_KEY_LEFT] ) { digitalWrite(23,1); };
-    if(ps3dat->button[PAD_KEY_RIGHT]) { digitalWrite(23,0); };
-    if(ps3dat->button[PAD_KEY_UP]   ) { digitalWrite(25,1);delay(2);digitalWrite(25,0);delay(2); };
+    if(ps3dat->button[PAD_KEY_LEFT] )	softPwmWrite( 5,50); else softPwmWrite( 5,0); // 左車輪前
+    if(ps3dat->button[PAD_KEY_RIGHT]) 	softPwmWrite(27,50); else softPwmWrite(27,0); // 右車輪前
+    if(ps3dat->button[PAD_KEY_CIRCLE]) 	{softPwmWrite( 5,50);softPwmWrite(26,50);}else {softPwmWrite( 5,0);softPwmWrite(26,0);}; // 右回転
+    if(ps3dat->button[PAD_KEY_SQUARE]) 	{softPwmWrite( 6,50);softPwmWrite(27,50);}else {softPwmWrite( 6,0);softPwmWrite(27,0);}; // 左回転
+    
+    if(ps3dat->button[PAD_KEY_UP]   ) digitalWrite(25,1); else digitalWrite(25,0); // Lamp test
 
 
     if(ps3dat->button[PAD_KEY_START]) {
@@ -240,7 +243,7 @@ void main() {
 //	system("python /home/pi/r2017/simplebeep.py");
 
     if(!(ps3c_init(&ps3dat, df))) {
-
+		f = 0;
         do {
             if (ps3c_test(&ps3dat) < 0) break;
         } while (!(ps3c_input(&ps3dat)));
