@@ -108,6 +108,14 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	else if( ps3dat->button[PAD_KEY_RIGHT ]) {
 		softPwmWrite(27,20); // 右車輪前
 	}
+	else if( ps3dat->button[PAD_KEY_UP]) {
+		softPwmWrite( 5,20); // 左右車輪前
+		softPwmWrite(27,20);
+	}
+	else if( ps3dat->button[PAD_KEY_DOWN]) {
+		softPwmWrite( 6,20); // 左右車輪後
+		softPwmWrite(26,20);
+	}
 	else if( ps3dat->button[PAD_KEY_CIRCLE]) {
 		softPwmWrite( 5,50); // 右回転
 		softPwmWrite(26,50);
@@ -122,7 +130,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 		softPwmWrite(26,0);
 	};
        
-    if(ps3dat->button[PAD_KEY_UP]   ) digitalWrite(25,1); else digitalWrite(25,0); // Lamp test
+    if(ps3dat->button[PAD_KEY_SELECT]   ) digitalWrite(25,1); else digitalWrite(25,0); // Lamp test
 
 
     if(ps3dat->button[PAD_KEY_START]) {
