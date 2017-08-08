@@ -27,6 +27,8 @@ int f = 1; // モニタに戻るフラグ
 
 
 int automatic() {
+	
+	int sensor;
 
     //system("python /home/pi/r2017/simplebeep.py");
     digitalWrite(23,0);	// センササーボ 0:収納
@@ -38,6 +40,9 @@ int automatic() {
         };
 		if(digitalRead(15)!=0) {  // 瞬間押しの場合は、自動モードに入る。
 
+            // センサ 白:1 黒:0 左から右
+			sensor = digitalRead(7)*64+digitalRead(0)*32+digitalRead(2)*16+digitalRead(3)*8+digitalRead(12)*4+igitalRead(13)*2+digitalRead(14);
+			
 			softPwmWrite( 1,30);	// １回転目
 			delay(1000);
             softPwmWrite( 1,15);
@@ -62,7 +67,7 @@ int automatic() {
 			softPwmWrite(27,0);
 			delay(500);
 
-			while(digitalRead(15)==0);
+			while(digitalRead(15)==0);   // スイッチ待ち
 			delay(500);
 			while(digitalRead(15)!=0);
 
