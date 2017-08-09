@@ -45,7 +45,7 @@ int read_file(char fnp[256]) {
 
 void main() {
 	
-	unsigned int timWheel;
+	unsigned int timWheel = 1;
 	long int cntWheel = 0;
 	
 	wiringPiSetup();
