@@ -8,9 +8,6 @@
 
 #include <wiringPi.h>
 
-unsigned int timWheel;
-long int cntWheel = 0;
-
 int write_file(char fnp[256],long int d) {
 	
 	FILE *fp;
@@ -47,6 +44,9 @@ int read_file(char fnp[256]) {
 }
 
 void main() {
+	
+	unsigned int timWheel;
+	long int cntWheel = 0;
 	
 	wiringPiSetup();
 	pinMode(16,INPUT);pullUpDnControl(16,PUD_UP); // cntWheel
