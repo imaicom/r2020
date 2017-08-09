@@ -5,14 +5,11 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <sys/ioctl.h>
-#include <linux/joystick.h>
 
 #include <wiringPi.h>
 
 unsigned int timWheel;
 long int cntWheel = 0;
-unsigned int timBar;
-long int Bar = 0;
 
 int write_file(char fnp[256],long int d) {
 	
@@ -33,7 +30,6 @@ int write_file(char fnp[256],long int d) {
 	fclose(fp);
 }
 
-
 int read_file(char fnp[256]) {
 	
 	FILE *fp;
@@ -52,14 +48,8 @@ int read_file(char fnp[256]) {
 
 void main() {
 	
-	char t[256];
-	char s[256];
-	int tmp;
-	
 	wiringPiSetup();
 	pinMode(16,INPUT);pullUpDnControl(16,PUD_UP); // cntWheel
-
-//	system("sudo /home/pi/r2017/self &");
 	
 	write_file("cntWheel",0 );
 	
@@ -71,8 +61,5 @@ void main() {
 			cntWheel++;
 			write_file("cntWheel",cntWheel );
 		};
-
-
 	};
 }
-
