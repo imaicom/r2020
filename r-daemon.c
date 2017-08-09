@@ -61,7 +61,7 @@ void main() {
 
 //	system("sudo /home/pi/r2017/self &");
 	
-	write_file("cntWheel"		,0 );
+	write_file("cntWheel",0 );
 	
 	while(1) {
 		
@@ -69,7 +69,7 @@ void main() {
 			timWheel = digitalRead(16);
 			cntWheel = read_file("cntWheel");
 			cntWheel++;
-			write_file("cntWheel"		,cntWheel );
+			write_file("cntWheel",cntWheel );
 		};
 
 
