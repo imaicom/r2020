@@ -41,7 +41,7 @@ int automatic() {
 		if(digitalRead(15)!=0) {  // 瞬間押しの場合は、自動モードに入る。
 
             // センサ 白:1 黒:0 左から右
-			sensor = digitalRead(7)*64+digitalRead(0)*32+digitalRead(2)*16+digitalRead(3)*8+digitalRead(12)*4+igitalRead(13)*2+digitalRead(14);
+			sensor = digitalRead(7)*64+digitalRead(0)*32+digitalRead(2)*16+digitalRead(3)*8+digitalRead(12)*4+digitalRead(13)*2+digitalRead(14);
 			
 			softPwmWrite( 1,30);	// １回転目
 			delay(1000);
@@ -153,6 +153,9 @@ int ps3c_test(struct ps3ctls *ps3dat) {
         delay(3000);
         return -1; // end of program
     };
+    
+    if(digitalRead(15)==0) return -1; // end of program
+
 
     return 0;
 }
@@ -184,6 +187,8 @@ int ps3c_input(struct ps3ctls *ps3dat) {
         default:
             break;
     }
+    
+    if(digitalRead(15)==0) return -1; // end of program
 
     return 0;
 }
