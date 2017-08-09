@@ -51,7 +51,7 @@ void main() {
 	wiringPiSetup();
 	pinMode(16,INPUT);pullUpDnControl(16,PUD_UP); // cntWheel
 	
-	write_file("cntWheel",0 );
+	write_file("cntWheel",0);
 	
 	while(1) {
 		
