@@ -1,6 +1,7 @@
 // cc -o self self.c -lwiringPi -lm
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <fcntl.h>
 #include <unistd.h>
 #include <sys/ioctl.h>
@@ -25,6 +26,37 @@ struct ps3ctls {
 
 int f = 1; // モニタに戻るフラグ
 
+int write_file(char fnp[256],long int d) {
+	
+	FILE *fp;
+	char fn[256]="/tmp/";
+
+	strcat(fn,fnp);
+	strcat(fn,".txt");
+	
+	if((fp=fopen(fn,"r+"))==NULL) {
+		fp=fopen(fn,"w+");
+	};
+	
+	fprintf(fp,"%8d",d);
+	fclose(fp);
+}
+
+int read_file(char fnp[256]) {
+	
+	FILE *fp;
+	char fn[256]="/tmp/";
+	long int d;
+
+	strcat(fn,fnp);
+	strcat(fn,".txt");
+	
+	if((fp=fopen(fn,"r"))!=NULL) {
+		fscanf(fp,"%8d",&d);
+		fclose(fp);
+	} else d=0;
+	return d;
+}
 
 int automatic() {
 	
@@ -100,6 +132,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
     printf(" s15=%3d ",digitalRead(15));   // タクトスイッチ 通常:1 検出時:0
     printf(" s16=%3d ",digitalRead(16));   // エンコーダ 通常:1 回転時:0
     printf(" s1=%4d ",digitalRead(4));   // 大回転センサ 通常:1 検出時:0
+	printf(" enc=%4d ",read_file("cntWheel"));   // エンコーダ
     printf("\n");
 
 //    automatic();
@@ -269,7 +302,7 @@ void main() {
 	pinMode(16,INPUT);	// エンコーダ
 	pinMode(4,INPUT);	// 大回転センサ
 
-
+	write_file("cntWheel"		,0 );
 //	system("mpg123 /home/pi/Music/move_it.mp3 &");
 //	system("python /home/pi/r2017/simplebeep.py");
 
