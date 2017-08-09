@@ -4,7 +4,6 @@ dtparam=i2c_baudrate=50000
 ps ax|grep PWM
 sudo rm /tmp/*.txt
 more /tmp/cntWheel.txt
-more /tmp/bar.txt
 more /etc/rc.local
 
 cd Pi-PWM
