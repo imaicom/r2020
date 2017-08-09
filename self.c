@@ -283,10 +283,10 @@ void main() {
     long int i,j;
 
     wiringPiSetup();
-    softPwmCreate( 5,0,20); // motor-1 20ms   // 左？モータ
+    softPwmCreate( 5,0,20); // motor-1 20ms   // 左モータ
     softPwmCreate( 6,0,20); // motor-1 20ms
-    softPwmCreate(26,0,20); // motor-2 20ms   // 右？モータ
-    softPwmCreate(27,0,20); // motor-2 20ms
+    softPwmCreate(27,0,20); // motor-2 20ms   // 右モータ
+    softPwmCreate(26,0,20); // motor-2 20ms
     softPwmCreate( 1,0,20); // motor-3 20ms   // 大回転モータ
 
     pinMode(23,OUTPUT);	// センササーボ 0:収納 1:出し
