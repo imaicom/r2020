@@ -54,12 +54,11 @@ void main() {
 	write_file("cntWheel",0);
 	
 	while(1) {
-		
 		if (timWheel != digitalRead(16)) {
 			timWheel = digitalRead(16);
 			cntWheel = read_file("cntWheel");
 			cntWheel++;
 			write_file("cntWheel",cntWheel );
 		};
-	};
+	}; // while(1)
 }
