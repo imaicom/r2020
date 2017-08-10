@@ -30,7 +30,7 @@ int b_btn_start = 0;
 int btn_start   = 0;
 
 int write_file(char fnp[256],long int d) {
-	
+
 	FILE *fp;
 	char fn[256]="/tmp/";
 	char cn[256]="chmod 666 ";
@@ -38,35 +38,35 @@ int write_file(char fnp[256],long int d) {
 	strcat(fn,fnp);
 	strcat(fn,".txt");
 	strcat(cn,fn);
-	
+
 	if((fp=fopen(fn,"r+"))==NULL) {
 		fp=fopen(fn,"w+");
 		system(cn);
 	};
-	
+
 	fprintf(fp,"%8d",d);
 	fclose(fp);
 }
 
 long int read_file(char fnp[256]) {
-	
+
 	FILE *fp;
 	char fn[256]="/tmp/";
 	long int d;
 
 	strcat(fn,fnp);
 	strcat(fn,".txt");
-	
+
 	if((fp=fopen(fn,"r"))!=NULL) {
 		fscanf(fp,"%8d",&d);
 		fclose(fp);
 	} else d=0;
-	
+
 	return d;
 }
 
 int automatic() {
-	
+
 	int sensor;
 
     //system("python /home/pi/r2017/simplebeep.py");
@@ -81,7 +81,7 @@ int automatic() {
 
             // センサ 白:1 黒:0 左から右
 			sensor = digitalRead(7)*64+digitalRead(0)*32+digitalRead(2)*16+digitalRead(3)*8+digitalRead(12)*4+digitalRead(13)*2+digitalRead(14);
-			
+
 			softPwmWrite( 1,30);	// １回転目
 			delay(1000);
             softPwmWrite( 1,15);
@@ -123,7 +123,7 @@ int automatic() {
 }	// automatic()
 
 int automatic_test() {
-	
+
 	int sensor;
 
     digitalWrite(23,0);	// センササーボ 0:収納
@@ -131,14 +131,14 @@ int automatic_test() {
 	delay(500);
 	softPwmWrite( 6,50); // 左回転
 	softPwmWrite(27,50);
-	while(read_file("cntWheel")<=50);		
+	while(read_file("cntWheel")<=50);
 	softPwmWrite( 6,0);
 	softPwmWrite(27,0);
 	write_file("cntWheel",0);
-	delay(500);		
-	
+	delay(500);
+
 	digitalWrite(23,0);	// センササーボ 0:収納
-	
+
 }	// automatic_test()
 
 int ps3c_test(struct ps3ctls *ps3dat) {
@@ -165,10 +165,10 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 
 //	if((digitalRead(4)!=rotation)&&(digitalRead(4)==0)) system("python /home/pi/r2017/simplebeep.py");
 //	rotation = digitalRead(4);
- 
-           if( ps3dat->button[PAD_KEY_LEFT  ])	{
+
+    if( ps3dat->button[PAD_KEY_LEFT  ])	{
 		softPwmWrite( 5,20); // 左車輪前
-	} 
+	}
 	else if( ps3dat->button[PAD_KEY_RIGHT ]) {
 		softPwmWrite(27,20); // 右車輪前
 	}
@@ -199,7 +199,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 		softPwmWrite(27,0);
 		softPwmWrite(26,0);
 	};
-       
+
  //   if(ps3dat->button[PAD_KEY_SELECT]   ) digitalWrite(25,1); else digitalWrite(25,0); // Lamp test
 
 	if(ps3dat->button[PAD_KEY_START]) btn_start++;
@@ -208,7 +208,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 		automatic_test();
     };
     b_btn_start = btn_start;
-    
+
     if(digitalRead(15)==0) return -1; // end of program
 
 
@@ -242,7 +242,7 @@ int ps3c_input(struct ps3ctls *ps3dat) {
         default:
             break;
     }
-    
+
     if(digitalRead(15)==0) return -1; // end of program
 
     return 0;

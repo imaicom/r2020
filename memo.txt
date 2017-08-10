@@ -32,4 +32,4 @@ sudo chkconfig motd off            #ログイン時に表示するメッセー�
 sudo chkconfig plymouth off        #グラフィカルブートプロセス
 sudo chkconfig dphys-swapfile off  #swapの停止
 sudo chkconfig triggerhappy off    #キーボードのショートカットキー
-sudo chkconfig x11-common off   
+sudo chkconfig x11-common off
