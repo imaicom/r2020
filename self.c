@@ -25,9 +25,9 @@ struct ps3ctls {
 
 
 int f = 1; // モニタに戻るフラグ
-
 int b_btn_start = 0;
 int btn_start   = 0;
+
 
 int write_file(char fnp[256],long int d) {
 
@@ -48,6 +48,7 @@ int write_file(char fnp[256],long int d) {
 	fclose(fp);
 }
 
+
 long int read_file(char fnp[256]) {
 
 	FILE *fp;
@@ -64,6 +65,7 @@ long int read_file(char fnp[256]) {
 
 	return d;
 }
+
 
 int automatic() {
 
@@ -122,6 +124,7 @@ int automatic() {
 	};
 }	// automatic()
 
+
 int automatic_test() {
 
 	int sensor;
@@ -140,6 +143,7 @@ int automatic_test() {
 	digitalWrite(23,0);	// センササーボ 0:収納
 
 }	// automatic_test()
+
 
 int ps3c_test(struct ps3ctls *ps3dat) {
 
@@ -288,6 +292,7 @@ int ps3c_init(struct ps3ctls *ps3dat, const char *df) {
     return 0;
 }
 
+
 void ps3c_exit   (struct ps3ctls *ps3dat) {
 
     free (ps3dat->button);
@@ -339,4 +344,3 @@ void main() {
     } else while(f) automatic();
     digitalWrite(25,0);
 }
-
