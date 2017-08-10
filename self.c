@@ -187,6 +187,12 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	else if( ps3dat->button[PAD_KEY_SQUARE]) {
 		softPwmWrite( 6,50); // 左回転
 		softPwmWrite(27,50);
+	}
+	else if( ps3dat->button[PAD_KEY_TRIANGLE]) {
+		digitalWrite(23,1); // センサ出し
+	}
+	else if( ps3dat->button[PAD_KEY_CROSS]) {
+		digitalWrite(23,0); // センサ収納
 	}else {
 		softPwmWrite( 5,0); // 停止
 		softPwmWrite( 6,0);
