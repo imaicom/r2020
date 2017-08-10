@@ -129,8 +129,10 @@ int automatic_test() {
     digitalWrite(23,0);	// センササーボ 0:収納
 
 	delay(500);
-	softPwmWrite(27,20); // 右車輪前
-	while(read_file("cntWheel")<=10);		
+	softPwmWrite( 6,50); // 左回転
+	softPwmWrite(27,50);
+	while(read_file("cntWheel")<=50);		
+	softPwmWrite( 6,0);
 	softPwmWrite(27,0);
 	write_file("cntWheel",0);
 	delay(500);		
@@ -192,7 +194,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 		softPwmWrite(26,0);
 	};
        
-    if(ps3dat->button[PAD_KEY_SELECT]   ) digitalWrite(25,1); else digitalWrite(25,0); // Lamp test
+ //   if(ps3dat->button[PAD_KEY_SELECT]   ) digitalWrite(25,1); else digitalWrite(25,0); // Lamp test
 
 	if(ps3dat->button[PAD_KEY_START]) btn_start++;
 	if(!ps3dat->button[PAD_KEY_START]) btn_start = 0;
@@ -317,6 +319,7 @@ void main() {
 	pinMode(4,INPUT);	// 大回転センサ
 
 	write_file("cntWheel"		,0 );
+	digitalWrite(25,1); // Lamp ON
 //	system("mpg123 /home/pi/Music/move_it.mp3 &");
 //	system("python /home/pi/r2017/simplebeep.py");
 
