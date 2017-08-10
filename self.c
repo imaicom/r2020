@@ -26,6 +26,9 @@ struct ps3ctls {
 
 int f = 1; // モニタに戻るフラグ
 
+int b_btn_start = 0;
+int btn_start   = 0;
+
 int write_file(char fnp[256],long int d) {
 	
 	FILE *fp;
@@ -126,11 +129,10 @@ int automatic_test() {
     digitalWrite(23,0);	// センササーボ 0:収納
 
 	delay(500);
-	softPwmWrite( 6,50);	// ホイールで後進
-	softPwmWrite(26,50);
-	delay(500);
-	softPwmWrite( 6,0);
-	softPwmWrite(26,0);
+	softPwmWrite(27,20); // 右車輪前
+	while(read_file("cntWheel")<=10);		
+	softPwmWrite(27,0);
+	write_file("cntWheel",0);
 	delay(500);		
 	
 	digitalWrite(23,0);	// センササーボ 0:収納
@@ -192,10 +194,12 @@ int ps3c_test(struct ps3ctls *ps3dat) {
        
     if(ps3dat->button[PAD_KEY_SELECT]   ) digitalWrite(25,1); else digitalWrite(25,0); // Lamp test
 
-
-    if(ps3dat->button[PAD_KEY_START]) {
+	if(ps3dat->button[PAD_KEY_START]) btn_start++;
+	if(!ps3dat->button[PAD_KEY_START]) btn_start = 0;
+	if(b_btn_start > btn_start) {
 		automatic_test();
     };
+    b_btn_start = btn_start;
     
     if(digitalRead(15)==0) return -1; // end of program
 
