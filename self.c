@@ -45,7 +45,7 @@ int write_file(char fnp[256],long int d) {
 	fclose(fp);
 }
 
-int read_file(char fnp[256]) {
+long int read_file(char fnp[256]) {
 	
 	FILE *fp;
 	char fn[256]="/tmp/";
@@ -58,6 +58,7 @@ int read_file(char fnp[256]) {
 		fscanf(fp,"%8d",&d);
 		fclose(fp);
 	} else d=0;
+	
 	return d;
 }
 
