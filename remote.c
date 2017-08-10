@@ -309,7 +309,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 //	setPCA9685Duty(fds , 5 , ps3dat->stick [PAD_RIGHT_X]); // servo center
 //	printf("XX %4d XX",ps3dat->stick [PAD_RIGHT_X]);
 
-	setPCA9685Duty(fds , 6 , servo06);
+//	setPCA9685Duty(fds , 6 , servo06);
 
 	if(ps3dat->button[PAD_KEY_START]) {
 		system("mpg123 /home/pi/Music/shuu.mp3 &");
