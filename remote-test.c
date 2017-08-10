@@ -8,7 +8,7 @@
 #include <math.h>
 
 void main() {
-	
+
    int v1,v2,ww,c1,c2,c3,c4;
 
     v1 = 0;    // 縦軸入力
@@ -27,5 +27,4 @@ void main() {
     printf(" 右後=%4d ",c4);
     printf("\n");
 
-    
 }
