@@ -119,6 +119,24 @@ int automatic() {
 	};
 }	// automatic()
 
+int automatic_test() {
+	
+	int sensor;
+
+    digitalWrite(23,0);	// センササーボ 0:収納
+
+	delay(500);
+	softPwmWrite( 6,50);	// ホイールで後進
+	softPwmWrite(26,50);
+	delay(500);
+	softPwmWrite( 6,0);
+	softPwmWrite(26,0);
+	delay(500);		
+	
+	digitalWrite(23,0);	// センササーボ 0:収納
+	
+}	// automatic_test()
+
 int ps3c_test(struct ps3ctls *ps3dat) {
 
     int i;
@@ -176,19 +194,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 
 
     if(ps3dat->button[PAD_KEY_START]) {
-//        system("mpg123 /home/pi/Music/shuu.mp3 &");
-        softPwmWrite( 5,0);
-        softPwmWrite( 6,0);
-        softPwmWrite(26,0);
-        softPwmWrite(27,0);
-        softPwmWrite(28,0);
-        softPwmWrite(29,0);
-        softPwmWrite(24,0);
-        softPwmWrite(25,0);
-        softPwmWrite(14,0);
-        softPwmWrite(23,0);
-        delay(3000);
-        return -1; // end of program
+		automatic_test();
     };
     
     if(digitalRead(15)==0) return -1; // end of program
