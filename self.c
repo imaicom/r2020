@@ -150,12 +150,16 @@ int automatic_test2() {
 
     digitalWrite(23,1); // センササーボ 1:出し
 
-    // センサ 白:1 黒:0 左から右
-    sensor = digitalRead(7)*64+digitalRead(0)*32+digitalRead(2)*16+digitalRead(3)*8+digitalRead(12)*4+digitalRead(13)*2+digitalRead(14);
 
-    while(read_file("cntWheel")<=100) {
+    while(read_file("cntWheel")<=100) { // 100カウントで自動停止
+
+        // センサ 白:1 黒:0 左から右
+        sensor = digitalRead(7) * 64 + digitalRead(0) * 32 + digitalRead(2) * 16 + digitalRead(3) * 8 +
+                                        digitalRead(12) * 4 + digitalRead(13) * 2 + digitalRead(14);
+
         softPwmWrite( 5,20); // 左車輪前
         softPwmWrite(27,20); // 右車輪前
+
         if(sensor==001) { softPwmWrite( 5,20); softPwmWrite(27,10);};
         if(sensor==002) { softPwmWrite( 5,20); softPwmWrite(27,10);};
         if(sensor==003) { softPwmWrite( 5,20); softPwmWrite(27,10);};
