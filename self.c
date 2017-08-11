@@ -127,22 +127,87 @@ int automatic() {
 
 int automatic_test() {
 
-	int sensor;
+    int sensor;
 
-    digitalWrite(23,0);	// センササーボ 0:収納
+    digitalWrite(23,0); // センササーボ 0:収納
 
-	delay(500);
-	softPwmWrite( 6,50); // 左回転
-	softPwmWrite(27,50);
-	while(read_file("cntWheel")<=50);
-	softPwmWrite( 6,0);
-	softPwmWrite(27,0);
-	write_file("cntWheel",0);
-	delay(500);
+    delay(500);
+    softPwmWrite( 6,50); // 左回転
+    softPwmWrite(27,50);
+    while(read_file("cntWheel")<=50);
+    softPwmWrite( 6,0);
+    softPwmWrite(27,0);
+    write_file("cntWheel",0);
+    delay(500);
 
-	digitalWrite(23,0);	// センササーボ 0:収納
+    digitalWrite(23,0); // センササーボ 0:収納
 
-}	// automatic_test()
+}   // automatic_test()
+
+int automatic_test2() {
+
+    int sensor,a,b,c;
+
+    digitalWrite(23,1); // センササーボ 1:出し
+
+    // センサ 白:1 黒:0 左から右
+    sensor = digitalRead(7)*64+digitalRead(0)*32+digitalRead(2)*16+digitalRead(3)*8+digitalRead(12)*4+digitalRead(13)*2+digitalRead(14);
+
+    while(read_file("cntWheel")<=100) {
+        softPwmWrite( 5,20); // 左車輪前
+        softPwmWrite(27,20); // 右車輪前
+        if(sensor==001) { softPwmWrite( 5,20); softPwmWrite(27,10);};
+        if(sensor==002) { softPwmWrite( 5,20); softPwmWrite(27,10);};
+        if(sensor==003) { softPwmWrite( 5,20); softPwmWrite(27,10);};
+        if(sensor==004) { softPwmWrite( 5,20); softPwmWrite(27,10);};
+        if(sensor==005) { softPwmWrite( 5,20); softPwmWrite(27,10);};
+        if(sensor==006) { softPwmWrite( 5,20); softPwmWrite(27,10);};
+        if(sensor==007) { softPwmWrite( 5,20); softPwmWrite(27,10);};
+        if(sensor==010) { softPwmWrite( 5,20); softPwmWrite(27,10);};
+        if(sensor==011) { softPwmWrite( 5,20); softPwmWrite(27,10);};
+        if(sensor==013) { softPwmWrite( 5,20); softPwmWrite(27,10);};
+        if(sensor==014) { softPwmWrite( 5,20); softPwmWrite(27,10);};
+        if(sensor==016) { softPwmWrite( 5,10); softPwmWrite(27,20);};
+        if(sensor==017) { softPwmWrite( 5,20); softPwmWrite(27,10);};
+        if(sensor==019) { softPwmWrite( 5,20); softPwmWrite(27,10);};
+        if(sensor==024) { softPwmWrite( 5,10); softPwmWrite(27,20);};
+        if(sensor==025) { softPwmWrite( 5,10); softPwmWrite(27,20);};
+        if(sensor==026) { softPwmWrite( 5,10); softPwmWrite(27,20);};
+        if(sensor==032) { softPwmWrite( 5,10); softPwmWrite(27,20);};
+        if(sensor==035) { softPwmWrite( 5,20); softPwmWrite(27,10);};
+        if(sensor==038) { softPwmWrite( 5,20); softPwmWrite(27,10);};
+        if(sensor==040) { softPwmWrite( 5,10); softPwmWrite(27,20);};
+        if(sensor==044) { softPwmWrite( 5,10); softPwmWrite(27,20);};
+        if(sensor==048) { softPwmWrite( 5,10); softPwmWrite(27,20);};
+        if(sensor==049) { softPwmWrite( 5,10); softPwmWrite(27,20);};
+        if(sensor==050) { softPwmWrite( 5,10); softPwmWrite(27,20);};
+        if(sensor==052) { softPwmWrite( 5,10); softPwmWrite(27,20);};
+        if(sensor==056) { softPwmWrite( 5,10); softPwmWrite(27,20);};
+        if(sensor==057) { softPwmWrite( 5,10); softPwmWrite(27,20);};
+        if(sensor==064) { softPwmWrite( 5,10); softPwmWrite(27,20);};
+        if(sensor==068) { softPwmWrite( 5,10); softPwmWrite(27,20);};
+        if(sensor==071) { softPwmWrite( 5,20); softPwmWrite(27,10);};
+        if(sensor==072) { softPwmWrite( 5,10); softPwmWrite(27,20);};
+        if(sensor==078) { softPwmWrite( 5,10); softPwmWrite(27,20);};
+        if(sensor==079) { softPwmWrite( 5,20); softPwmWrite(27,10);};
+        if(sensor==080) { softPwmWrite( 5,10); softPwmWrite(27,20);};
+        if(sensor==088) { softPwmWrite( 5,10); softPwmWrite(27,20);};
+        if(sensor==096) { softPwmWrite( 5,10); softPwmWrite(27,20);};
+        if(sensor==097) { softPwmWrite( 5,10); softPwmWrite(27,20);};
+        if(sensor==098) { softPwmWrite( 5,10); softPwmWrite(27,20);};
+        if(sensor==100) { softPwmWrite( 5,10); softPwmWrite(27,20);};
+        if(sensor==104) { softPwmWrite( 5,10); softPwmWrite(27,20);};
+        if(sensor==112) { softPwmWrite( 5,10); softPwmWrite(27,20);};
+        if(sensor==114) { softPwmWrite( 5,10); softPwmWrite(27,20);};
+        if(sensor==116) { softPwmWrite( 5,10); softPwmWrite(27,20);};
+    }; // while(read_file("cntWheel")
+
+    write_file("cntWheel",0);
+    delay(500);
+
+    digitalWrite(23,0); // センササーボ 0:収納
+
+}   // automatic_test()
 
 
 int ps3c_test(struct ps3ctls *ps3dat) {
@@ -209,7 +274,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	if(ps3dat->button[PAD_KEY_START]) btn_start++;
 	if(!ps3dat->button[PAD_KEY_START]) btn_start = 0;
 	if(b_btn_start > btn_start) {
-		automatic_test();
+		automatic_test2();
     };
     b_btn_start = btn_start;
 
