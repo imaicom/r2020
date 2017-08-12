@@ -70,9 +70,9 @@ long int read_file(char fnp[256]) {
 
 
 int speed(int s1,int s2) {
-	if(s1!=sL) softPwmWrite(5,s1);
+	if(s1!=sL) softPwmWrite(5,s1); // 左車輪前
   	sL = s1;
-  	if(s2!=sR) softPwmWrite(27,s2);
+  	if(s2!=sR) softPwmWrite(27,s2); // 右車輪前
   	sR = s2;
 }
 
@@ -166,62 +166,61 @@ int automatic_test2() {
         if(digitalRead(15)!=0) {  // 瞬間押しの場合は、自動モードに入る。
 
             write_file("cntWheel",0);
-
+            speed(20,20); // 両車輪前
+            
             while(read_file("cntWheel")<=100) { // 100カウントで自動停止
 
                 // センサ 白:1 黒:0 左から右
                 sensor = digitalRead(7) * 64 + digitalRead(0) * 32 + digitalRead(2) * 16 + digitalRead(3) * 8 +
                                                 digitalRead(12) * 4 + digitalRead(13) * 2 + digitalRead(14);
 
-                speed(20,20); // ryou車輪前
-
-                if(sensor==001) speed( 20,10); // WWW W WWB
-                if(sensor==002) speed( 20,10); // WWW W WBW
-                if(sensor==003) speed( 20,10); // WWW W WBB
-                if(sensor==004) { softPwmWrite( 5,20); softPwmWrite(27,10); }; // WWW W BWW
-                if(sensor==005) { softPwmWrite( 5,20); softPwmWrite(27,10); }; // WWW W BWB
-                if(sensor==006) { softPwmWrite( 5,20); softPwmWrite(27,10); }; // WWW W BBW
-                if(sensor==007) { softPwmWrite( 5,20); softPwmWrite(27,10); }; // WWW W BBB
-                if(sensor==010) { softPwmWrite( 5,20); softPwmWrite(27,10); }; // WWW B WBW
-                if(sensor==011) { softPwmWrite( 5,20); softPwmWrite(27,10); }; // WWW B WBB
-                if(sensor==013) { softPwmWrite( 5,20); softPwmWrite(27,10); }; // WWW B BWB
-                if(sensor==014) { softPwmWrite( 5,20); softPwmWrite(27,10); }; // WWW B BBW
-                if(sensor==016) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // WWB W WWW
-                if(sensor==017) { softPwmWrite( 5,20); softPwmWrite(27,10); }; // WWB W WWB
-                if(sensor==019) { softPwmWrite( 5,20); softPwmWrite(27,10); }; // WWB W WBB
-                if(sensor==024) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // WWB B WWW
-                if(sensor==025) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // WWB B WWB
-                if(sensor==026) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // WWB B WBW
-                if(sensor==032) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // WBW W WWW
-                if(sensor==035) { softPwmWrite( 5,20); softPwmWrite(27,10); }; // WBW W WBB
-                if(sensor==038) { softPwmWrite( 5,20); softPwmWrite(27,10); }; // WBW W BBW
-                if(sensor==040) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // WBW B WWW
-                if(sensor==044) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // WBW B BWW
-                if(sensor==048) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // WBB W WWW
-                if(sensor==049) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // WBB W WWB
-                if(sensor==050) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // WBB W WBW
-                if(sensor==052) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // WBB W BWW
-                if(sensor==056) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // WBB B WWW
-                if(sensor==057) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // WBB B WWB
-                if(sensor==064) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // BWW W WWW
-                if(sensor==068) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // BWW W BWW
-                if(sensor==071) { softPwmWrite( 5,20); softPwmWrite(27,10); }; // BWW W BBB
-                if(sensor==072) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // BWW B WWW
-                if(sensor==078) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // BWW B BBW
-                if(sensor==079) { softPwmWrite( 5,20); softPwmWrite(27,10); }; // BWW B BBB
-                if(sensor==080) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // BWB W WWW
-                if(sensor==088) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // BWB B WWW
-                if(sensor==096) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // BBW W WWW
-                if(sensor==097) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // BBW W WWB
-                if(sensor==098) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // BBW W WBW
-                if(sensor==100) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // BBW W BWW
-                if(sensor==104) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // BBW B WWW
-                if(sensor==112) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // BBB W WWW
-                if(sensor==114) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // BBB W WBW
-                if(sensor==116) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // BBB W BWW
+                if(sensor==001) speed(20,10); // WWW W WWB
+                if(sensor==002) speed(20,10); // WWW W WBW
+                if(sensor==003) speed(20,10); // WWW W WBB
+                if(sensor==004) speed(20,10); // WWW W BWW
+                if(sensor==005) speed(20,10); // WWW W BWB
+                if(sensor==006) speed(20,10); // WWW W BBW
+                if(sensor==007) speed(20,10); // WWW W BBB
+                if(sensor==010) speed(20,10); // WWW B WBW
+                if(sensor==011) speed(20,10); // WWW B WBB
+                if(sensor==013) speed(20,10); // WWW B BWB
+                if(sensor==014) speed(20,10); // WWW B BBW
+                if(sensor==016) speed(10,20); // WWB W WWW
+                if(sensor==017) speed(20,10); // WWB W WWB
+                if(sensor==019) speed(20,10); // WWB W WBB
+                if(sensor==024) speed(10,20); // WWB B WWW
+                if(sensor==025) speed(10,20); // WWB B WWB
+                if(sensor==026) speed(10,20); // WWB B WBW
+                if(sensor==032) speed(10,20); // WBW W WWW
+                if(sensor==035) speed(20,10); // WBW W WBB
+                if(sensor==038) speed(20,10); // WBW W BBW
+                if(sensor==040) speed(10,20); // WBW B WWW
+                if(sensor==044) speed(10,20); // WBW B BWW
+                if(sensor==048) speed(10,20); // WBB W WWW
+                if(sensor==049) speed(10,20); // WBB W WWB
+                if(sensor==050) speed(10,20); // WBB W WBW
+                if(sensor==052) speed(10,20); // WBB W BWW
+                if(sensor==056) speed(10,20); // WBB B WWW
+                if(sensor==057) speed(10,20); // WBB B WWB
+                if(sensor==064) speed(10,20); // BWW W WWW
+                if(sensor==068) speed(10,20); // BWW W BWW
+                if(sensor==071) speed(20,10); // BWW W BBB
+                if(sensor==072) speed(10,20); // BWW B WWW
+                if(sensor==078) speed(10,20); // BWW B BBW
+                if(sensor==079) speed(20,10); // BWW B BBB
+                if(sensor==080) speed(10,20); // BWB W WWW
+                if(sensor==088) speed(10,20); // BWB B WWW
+                if(sensor==096) speed(10,20); // BBW W WWW
+                if(sensor==097) speed(10,20); // BBW W WWB
+                if(sensor==098) speed(10,20); // BBW W WBW
+                if(sensor==100) speed(10,20); // BBW W BWW
+                if(sensor==104) speed(10,20); // BBW B WWW
+                if(sensor==112) speed(10,20); // BBB W WWW
+                if(sensor==114) speed(10,20); // BBB W WBW
+                if(sensor==116) speed(10,20); // BBB W BWW
             }; // while(read_file("cntWheel")
 
-            softPwmWrite( 5,0); softPwmWrite(27,0);
+            speed(0,0); 
             write_file("cntWheel",0);
             delay(500);
 
