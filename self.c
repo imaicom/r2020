@@ -212,6 +212,7 @@ int automatic_test2() {
                 if(sensor==116) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // BBB W BWW
             }; // while(read_file("cntWheel")
 
+            softPwmWrite( 5,0); softPwmWrite(27,0);
             write_file("cntWheel",0);
             delay(500);
 
