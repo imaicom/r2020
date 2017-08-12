@@ -25,6 +25,8 @@ struct ps3ctls {
 
 
 int f = 1; // モニタに戻るフラグ
+int sL = 0;
+int sR = 0;
 int b_btn_start = 0;
 int btn_start   = 0;
 
@@ -64,6 +66,14 @@ long int read_file(char fnp[256]) {
 	} else d=0;
 
 	return d;
+}
+
+
+int speed(int s1,int s2) {
+	if(s1!=sL) softPwmWrite(5,s1);
+  	sL = s1;
+  	if(s2!=sR) softPwmWrite(27,s2);
+  	sR = s2;
 }
 
 
@@ -163,12 +173,11 @@ int automatic_test2() {
                 sensor = digitalRead(7) * 64 + digitalRead(0) * 32 + digitalRead(2) * 16 + digitalRead(3) * 8 +
                                                 digitalRead(12) * 4 + digitalRead(13) * 2 + digitalRead(14);
 
-                softPwmWrite( 5,20); // 左車輪前
-                softPwmWrite(27,20); // 右車輪前
+                speed(20,20); // ryou車輪前
 
-                if(sensor==001) { softPwmWrite( 5,20); softPwmWrite(27,10); }; // WWW W WWB
-                if(sensor==002) { softPwmWrite( 5,20); softPwmWrite(27,10); }; // WWW W WBW
-                if(sensor==003) { softPwmWrite( 5,20); softPwmWrite(27,10); }; // WWW W WBB
+                if(sensor==001) speed( 20,10); // WWW W WWB
+                if(sensor==002) speed( 20,10); // WWW W WBW
+                if(sensor==003) speed( 20,10); // WWW W WBB
                 if(sensor==004) { softPwmWrite( 5,20); softPwmWrite(27,10); }; // WWW W BWW
                 if(sensor==005) { softPwmWrite( 5,20); softPwmWrite(27,10); }; // WWW W BWB
                 if(sensor==006) { softPwmWrite( 5,20); softPwmWrite(27,10); }; // WWW W BBW
