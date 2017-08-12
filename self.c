@@ -166,50 +166,50 @@ int automatic_test2() {
                 softPwmWrite( 5,20); // 左車輪前
                 softPwmWrite(27,20); // 右車輪前
 
-                if(sensor==001) { softPwmWrite( 5,20); softPwmWrite(27,10);}; // WWW W WWB
-                if(sensor==002) { softPwmWrite( 5,20); softPwmWrite(27,10);}; // WWW W WBW
-                if(sensor==003) { softPwmWrite( 5,20); softPwmWrite(27,10);}; // WW W W W B B
-                if(sensor==004) { softPwmWrite( 5,20); softPwmWrite(27,10);}; // WW W W B W W
-                if(sensor==005) { softPwmWrite( 5,20); softPwmWrite(27,10);}; // WW W W B W B
-                if(sensor==006) { softPwmWrite( 5,20); softPwmWrite(27,10);}; // WW W W B B W
-                if(sensor==007) { softPwmWrite( 5,20); softPwmWrite(27,10);}; // W  W   W   W   B   B   B
-                if(sensor==010) { softPwmWrite( 5,20); softPwmWrite(27,10);}; // W  W   W   B   W   B   W
-                if(sensor==011) { softPwmWrite( 5,20); softPwmWrite(27,10);}; // W  W   W   B   W   B   B
-                if(sensor==013) { softPwmWrite( 5,20); softPwmWrite(27,10);}; // W  W   W   B   B   W   B
-                if(sensor==014) { softPwmWrite( 5,20); softPwmWrite(27,10);}; // W  W   W   B   B   B   W
-                if(sensor==016) { softPwmWrite( 5,10); softPwmWrite(27,20);}; // W  W   B   W   W   W   W
-                if(sensor==017) { softPwmWrite( 5,20); softPwmWrite(27,10);}; // W  W   B   W   W   W   B
-                if(sensor==019) { softPwmWrite( 5,20); softPwmWrite(27,10);}; // W  W   B   W   W   B   B
-                if(sensor==024) { softPwmWrite( 5,10); softPwmWrite(27,20);}; // W  W   B   B   W   W   W
-                if(sensor==025) { softPwmWrite( 5,10); softPwmWrite(27,20);}; // W  W   B   B   W   W   B
-                if(sensor==026) { softPwmWrite( 5,10); softPwmWrite(27,20);}; // W  W   B   B   W   B   W
-                if(sensor==032) { softPwmWrite( 5,10); softPwmWrite(27,20);}; // W  B   W   W   W   W   W
-                if(sensor==035) { softPwmWrite( 5,20); softPwmWrite(27,10);}; // W  B   W   W   W   B   B
-                if(sensor==038) { softPwmWrite( 5,20); softPwmWrite(27,10);}; // W  B   W   W   B   B   W
-                if(sensor==040) { softPwmWrite( 5,10); softPwmWrite(27,20);}; // W  B   W   B   W   W   W
-                if(sensor==044) { softPwmWrite( 5,10); softPwmWrite(27,20);}; // W  B   W   B   B   W   W
-                if(sensor==048) { softPwmWrite( 5,10); softPwmWrite(27,20);}; // W  B   B   W   W   W   W
-                if(sensor==049) { softPwmWrite( 5,10); softPwmWrite(27,20);}; // W  B   B   W   W   W   B
-                if(sensor==050) { softPwmWrite( 5,10); softPwmWrite(27,20);}; // W  B   B   W   W   B   W
-                if(sensor==052) { softPwmWrite( 5,10); softPwmWrite(27,20);}; // W  B   B   W   B   W   W
-                if(sensor==056) { softPwmWrite( 5,10); softPwmWrite(27,20);}; // W  B   B   B   W   W   W
-                if(sensor==057) { softPwmWrite( 5,10); softPwmWrite(27,20);}; // W  B   B   B   W   W   B
-                if(sensor==064) { softPwmWrite( 5,10); softPwmWrite(27,20);}; // B  W   W   W   W   W   W
-                if(sensor==068) { softPwmWrite( 5,10); softPwmWrite(27,20);}; // B  W   W   W   B   W   W
-                if(sensor==071) { softPwmWrite( 5,20); softPwmWrite(27,10);}; // B  W   W   W   B   B   B
-                if(sensor==072) { softPwmWrite( 5,10); softPwmWrite(27,20);}; // B  W   W   B   W   W   W
-                if(sensor==078) { softPwmWrite( 5,10); softPwmWrite(27,20);}; // B  W   W   B   B   B   W
-                if(sensor==079) { softPwmWrite( 5,20); softPwmWrite(27,10);}; // B  W   W   B   B   B   B
-                if(sensor==080) { softPwmWrite( 5,10); softPwmWrite(27,20);}; // B  W   B   W   W   W   W
-                if(sensor==088) { softPwmWrite( 5,10); softPwmWrite(27,20);}; // B  W   B   B   W   W   W
-                if(sensor==096) { softPwmWrite( 5,10); softPwmWrite(27,20);}; // B  B   W   W   W   W   W
-                if(sensor==097) { softPwmWrite( 5,10); softPwmWrite(27,20);}; // B  B   W   W   W   W   B
-                if(sensor==098) { softPwmWrite( 5,10); softPwmWrite(27,20);}; // B  B   W   W   W   B   W
-                if(sensor==100) { softPwmWrite( 5,10); softPwmWrite(27,20);}; // B  B   W   W   B   W   W
-                if(sensor==104) { softPwmWrite( 5,10); softPwmWrite(27,20);}; // B  B   W   B   W   W   W
-                if(sensor==112) { softPwmWrite( 5,10); softPwmWrite(27,20);}; // B  B   B   W   W   W   W
-                if(sensor==114) { softPwmWrite( 5,10); softPwmWrite(27,20);}; // B  B   B   W   W   B   W
-                if(sensor==116) { softPwmWrite( 5,10); softPwmWrite(27,20);}; // B  B   B   W   B   W   W
+                if(sensor==001) { softPwmWrite( 5,20); softPwmWrite(27,10); }; // WWW W WWB
+                if(sensor==002) { softPwmWrite( 5,20); softPwmWrite(27,10); }; // WWW W WBW
+                if(sensor==003) { softPwmWrite( 5,20); softPwmWrite(27,10); }; // WWW W WBB
+                if(sensor==004) { softPwmWrite( 5,20); softPwmWrite(27,10); }; // WWW W BWW
+                if(sensor==005) { softPwmWrite( 5,20); softPwmWrite(27,10); }; // WWW W BWB
+                if(sensor==006) { softPwmWrite( 5,20); softPwmWrite(27,10); }; // WWW W BBW
+                if(sensor==007) { softPwmWrite( 5,20); softPwmWrite(27,10); }; // WWW W BBB
+                if(sensor==010) { softPwmWrite( 5,20); softPwmWrite(27,10); }; // WWW B WBW
+                if(sensor==011) { softPwmWrite( 5,20); softPwmWrite(27,10); }; // WWW B WBB
+                if(sensor==013) { softPwmWrite( 5,20); softPwmWrite(27,10); }; // WWW B BWB
+                if(sensor==014) { softPwmWrite( 5,20); softPwmWrite(27,10); }; // WWW B BBW
+                if(sensor==016) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // WWB W WWW
+                if(sensor==017) { softPwmWrite( 5,20); softPwmWrite(27,10); }; // WWB W WWB
+                if(sensor==019) { softPwmWrite( 5,20); softPwmWrite(27,10); }; // WWB W WBB
+                if(sensor==024) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // WWB B WWW
+                if(sensor==025) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // WWB B WWB
+                if(sensor==026) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // WWB B WBW
+                if(sensor==032) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // WBW W WWW
+                if(sensor==035) { softPwmWrite( 5,20); softPwmWrite(27,10); }; // WBW W WBB
+                if(sensor==038) { softPwmWrite( 5,20); softPwmWrite(27,10); }; // WBW W BBW
+                if(sensor==040) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // WBW B WWW
+                if(sensor==044) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // WBW B BWW
+                if(sensor==048) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // WBB W WWW
+                if(sensor==049) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // WBB W WWB
+                if(sensor==050) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // WBB W WBW
+                if(sensor==052) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // WBB W BWW
+                if(sensor==056) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // WBB B WWW
+                if(sensor==057) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // WBB B WWB
+                if(sensor==064) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // BWW W WWW
+                if(sensor==068) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // BWW W BWW
+                if(sensor==071) { softPwmWrite( 5,20); softPwmWrite(27,10); }; // BWW W BBB
+                if(sensor==072) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // BWW B WWW
+                if(sensor==078) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // BWW B BBW
+                if(sensor==079) { softPwmWrite( 5,20); softPwmWrite(27,10); }; // BWW B BBB
+                if(sensor==080) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // BWB W WWW
+                if(sensor==088) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // BWB B WWW
+                if(sensor==096) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // BBW W WWW
+                if(sensor==097) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // BBW W WWB
+                if(sensor==098) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // BBW W WBW
+                if(sensor==100) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // BBW W BWW
+                if(sensor==104) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // BBW B WWW
+                if(sensor==112) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // BBB W WWW
+                if(sensor==114) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // BBB W WBW
+                if(sensor==116) { softPwmWrite( 5,10); softPwmWrite(27,20); }; // BBB W BWW
             }; // while(read_file("cntWheel")
 
             write_file("cntWheel",0);
