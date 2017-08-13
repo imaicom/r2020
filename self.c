@@ -206,7 +206,7 @@ int automatic_test2() {
                 if(sensor== 68) speed(10,20); // BWW W BWW
                 if(sensor== 71) speed(20,10); // BWW W BBB
                 if(sensor== 72) speed(10,20); // BWW B WWW
-                if(sensor== 78) speed(10,20); // BWW B BBW
+                if(sensor== 78) speed(20,10); // BWW B BBW
                 if(sensor== 79) speed(20,10); // BWW B BBB
                 if(sensor== 80) speed(10,20); // BWB W WWW
                 if(sensor== 88) speed(10,20); // BWB B WWW
