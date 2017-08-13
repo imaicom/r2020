@@ -195,7 +195,7 @@ int automatic_test2() {
                 if(sensor== 35) speed(20,10); // WBW W WBB
                 if(sensor== 38) speed(20,10); // WBW W BBW
                 if(sensor== 40) speed(10,20); // WBW B WWW
-                if(sensor== 44) speed(10,20); // WBW B BWW
+                if(sensor== 44) speed(20,10); // WBW B BWW
                 if(sensor== 48) speed(10,20); // WBB W WWW
                 if(sensor== 49) speed(10,20); // WBB W WWB
                 if(sensor== 50) speed(10,20); // WBB W WBW
