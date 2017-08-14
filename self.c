@@ -248,49 +248,49 @@ int automatic_test3() {
                                                 digitalRead(12) * 4 + digitalRead(13) * 2 + digitalRead(14);
 
                 if(sensor==  1) speed(20, 0); // WWW W WWB
-                if(sensor==  2) speed(20,10); // WWW W WBW
-                if(sensor==  3) speed(20,10); // WWW W WBB
-                if(sensor==  4) speed(20,10); // WWW W BWW
-                if(sensor==  5) speed(20,10); // WWW W BWB
-                if(sensor==  6) speed(20,10); // WWW W BBW
-                if(sensor==  7) speed(20,10); // WWW W BBB
-                if(sensor== 10) speed(20,10); // WWW B WBW
-                if(sensor== 11) speed(20,10); // WWW B WBB
-                if(sensor== 13) speed(20,10); // WWW B BWB
-                if(sensor== 14) speed(20,10); // WWW B BBW
-                if(sensor== 16) speed(10,20); // WWB W WWW
-                if(sensor== 17) speed(20,10); // WWB W WWB
-                if(sensor== 19) speed(20,10); // WWB W WBB
-                if(sensor== 24) speed(10,20); // WWB B WWW
-                if(sensor== 25) speed(10,20); // WWB B WWB
-                if(sensor== 26) speed(10,20); // WWB B WBW
-                if(sensor== 32) speed(10,20); // WBW W WWW
-                if(sensor== 35) speed(20,10); // WBW W WBB
-                if(sensor== 38) speed(20,10); // WBW W BBW
-                if(sensor== 40) speed(10,20); // WBW B WWW
-                if(sensor== 44) speed(20,10); // WBW B BWW
-                if(sensor== 48) speed(10,20); // WBB W WWW
-                if(sensor== 49) speed(10,20); // WBB W WWB
-                if(sensor== 50) speed(10,20); // WBB W WBW
-                if(sensor== 52) speed(10,20); // WBB W BWW
-                if(sensor== 56) speed(10,20); // WBB B WWW
-                if(sensor== 57) speed(10,20); // WBB B WWB
-                if(sensor== 64) speed(10,20); // BWW W WWW
-                if(sensor== 68) speed(10,20); // BWW W BWW
-                if(sensor== 71) speed(20,10); // BWW W BBB
-                if(sensor== 72) speed(10,20); // BWW B WWW
-                if(sensor== 78) speed(20,10); // BWW B BBW
+                if(sensor==  2) speed(20, 0); // WWW W WBW
+                if(sensor==  3) speed(20, 0); // WWW W WBB
+                if(sensor==  4) speed(20, 0); // WWW W BWW
+                if(sensor==  5) speed(20, 0); // WWW W BWB
+                if(sensor==  6) speed(20, 0); // WWW W BBW
+                if(sensor==  7) speed(20, 0); // WWW W BBB
+                if(sensor== 10) speed(20,0); // WWW B WBW
+                if(sensor== 11) speed(20,0); // WWW B WBB
+                if(sensor== 13) speed(20,0); // WWW B BWB
+                if(sensor== 14) speed(20,0); // WWW B BBW
+                if(sensor== 16) speed(0,20); // WWB W WWW
+                if(sensor== 17) speed(20,0); // WWB W WWB
+                if(sensor== 19) speed(20,0); // WWB W WBB
+                if(sensor== 24) speed(0,20); // WWB B WWW
+                if(sensor== 25) speed(0,20); // WWB B WWB
+                if(sensor== 26) speed(0,20); // WWB B WBW
+                if(sensor== 32) speed(0,20); // WBW W WWW
+                if(sensor== 35) speed(20,0); // WBW W WBB
+                if(sensor== 38) speed(20,0); // WBW W BBW
+                if(sensor== 40) speed(0,20); // WBW B WWW
+                if(sensor== 44) speed(20,0); // WBW B BWW
+                if(sensor== 48) speed(0,20); // WBB W WWW
+                if(sensor== 49) speed(0,20); // WBB W WWB
+                if(sensor== 50) speed(0,20); // WBB W WBW
+                if(sensor== 52) speed(0,20); // WBB W BWW
+                if(sensor== 56) speed(0,20); // WBB B WWW
+                if(sensor== 57) speed(0,20); // WBB B WWB
+                if(sensor== 64) speed(0,20); // BWW W WWW
+                if(sensor== 68) speed(0,20); // BWW W BWW
+                if(sensor== 71) speed(20,0); // BWW W BBB
+                if(sensor== 72) speed(0,20); // BWW B WWW
+                if(sensor== 78) speed(20,0); // BWW B BBW
                 if(sensor== 79) speed(20,10); // BWW B BBB
-                if(sensor== 80) speed(10,20); // BWB W WWW
-                if(sensor== 88) speed(10,20); // BWB B WWW
-                if(sensor== 96) speed(10,20); // BBW W WWW
-                if(sensor== 97) speed(10,20); // BBW W WWB
-                if(sensor== 98) speed(10,20); // BBW W WBW
-                if(sensor==100) speed(10,20); // BBW W BWW
-                if(sensor==104) speed(10,20); // BBW B WWW
-                if(sensor==112) speed(10,20); // BBB W WWW
-                if(sensor==114) speed(10,20); // BBB W WBW
-                if(sensor==116) speed(10,20); // BBB W BWW
+                if(sensor== 80) speed(0,20); // BWB W WWW
+                if(sensor== 88) speed(0,20); // BWB B WWW
+                if(sensor== 96) speed(0,20); // BBW W WWW
+                if(sensor== 97) speed(0,20); // BBW W WWB
+                if(sensor== 98) speed(0,20); // BBW W WBW
+                if(sensor==100) speed(0,20); // BBW W BWW
+                if(sensor==104) speed(0,20); // BBW B WWW
+                if(sensor==112) speed(0,20); // BBB W WWW
+                if(sensor==114) speed(0,20); // BBB W WBW
+                if(sensor==116) speed(0,20); // BBB W BWW
             }; // while(read_file("cntWheel")
 
             speed(0,0); 
