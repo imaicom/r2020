@@ -166,7 +166,7 @@ int automatic_test2() {
         if(digitalRead(15)!=0) {  // 瞬間押しの場合は、自動モードに入る。
 
             write_file("cntWheel",0);
-            
+
             while(read_file("cntWheel")<=100) { // 100カウントで自動停止
 
                 // センサ 白:1 黒:0 左から右
@@ -220,7 +220,7 @@ int automatic_test2() {
                 if(sensor==116) speed(0,20); // BBB W BWW
             }; // while(read_file("cntWheel")
 
-            speed(0,0); 
+            speed(0,0);
             write_file("cntWheel",0);
             delay(500);
 
@@ -239,7 +239,7 @@ int automatic_test3() {
     digitalWrite(23,1); // センササーボ 1:出し
 
             write_file("cntWheel",0);
-            
+
             while(read_file("cntWheel")<=100) { // 100カウントで自動停止
 
                 // センサ 白:1 黒:0 左から右
@@ -293,7 +293,7 @@ int automatic_test3() {
                 if(sensor==116) speed(0,20); // BBB W BWW
             }; // while(read_file("cntWheel")
 
-            speed(0,0); 
+            speed(0,0);
             write_file("cntWheel",0);
             delay(500);
 
