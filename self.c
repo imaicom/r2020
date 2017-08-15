@@ -240,7 +240,7 @@ int automatic_test3() {
 
             write_file("cntWheel",0);
 
-            while(read_file("cntWheel")<=100) { // 100カウントで自動停止
+            while(read_file("cntWheel")<=100) { // 100カウントで自動停止.
 
                 // センサ 白:1 黒:0 左から右
                 sensor = digitalRead(7) * 64 + digitalRead(0) * 32 + digitalRead(2) * 16 + digitalRead(3) * 8 +
