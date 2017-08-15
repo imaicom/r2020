@@ -141,7 +141,7 @@ int automatic() {
 			// 2回転目
 			 softPwmWrite( 1,30); delay(600);	// 安定系
 			 while(digitalRead(4));
-			 softPwmWrite( 1,0 if(digitalRead(10)==0) goto restart; delay(1000);
+			 softPwmWrite( 1,0); if(digitalRead(10)==0) goto restart; delay(1000);
 			 
 			 softPwmWrite( 1,30); delay(600);	// 正立
 			 while(digitalRead(4));
