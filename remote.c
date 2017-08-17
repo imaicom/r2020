@@ -168,19 +168,34 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	if(ps3dat->button[PAD_KEY_L1]) btn_l1++;
 	if(!ps3dat->button[PAD_KEY_L1]) btn_l1 = 0;
 	if(b_btn_l1 > btn_l1) {
-		l_mode++; if (l_mode > 4) l_mode = 0;
+		l_mode++; if (l_mode > 9) l_mode = 0;
 		if(l_mode == 0 ) system("mpg123 /home/pi/Music/fire.mp3 &");
 		if(l_mode == 1 ) system("mpg123 /home/pi/Music/01.mp3 &");
 		if(l_mode == 2 ) system("mpg123 /home/pi/Music/02.mp3 &");
 		if(l_mode == 3 ) system("mpg123 /home/pi/Music/03.mp3 &");
 		if(l_mode == 4 ) system("mpg123 /home/pi/Music/04.mp3 &");
+		if(l_mode == 5 ) system("mpg123 /home/pi/Music/05.mp3 &");
+		if(l_mode == 6 ) system("mpg123 /home/pi/Music/06.mp3 &");
+		if(l_mode == 7 ) system("mpg123 /home/pi/Music/07.mp3 &");
+		if(l_mode == 8 ) system("mpg123 /home/pi/Music/08.mp3 &");
+		if(l_mode == 9 ) system("mpg123 /home/pi/Music/09.mp3 &");
 	};
 	b_btn_l1 = btn_l1;
 
 	if(ps3dat->button[PAD_KEY_L2]) btn_l2++;
 	if(!ps3dat->button[PAD_KEY_L2]) btn_l2 = 0;
 	if(b_btn_l2 > btn_l2) {
-		l_mode--; if (l_mode < 0) l_mode = 4;
+		l_mode--; if (l_mode < 0) l_mode = 9;
+		if(l_mode == 0 ) system("mpg123 /home/pi/Music/fire.mp3 &");
+		if(l_mode == 1 ) system("mpg123 /home/pi/Music/01.mp3 &");
+		if(l_mode == 2 ) system("mpg123 /home/pi/Music/02.mp3 &");
+		if(l_mode == 3 ) system("mpg123 /home/pi/Music/03.mp3 &");
+		if(l_mode == 4 ) system("mpg123 /home/pi/Music/04.mp3 &");
+		if(l_mode == 5 ) system("mpg123 /home/pi/Music/05.mp3 &");
+		if(l_mode == 6 ) system("mpg123 /home/pi/Music/06.mp3 &");
+		if(l_mode == 7 ) system("mpg123 /home/pi/Music/07.mp3 &");
+		if(l_mode == 8 ) system("mpg123 /home/pi/Music/08.mp3 &");
+		if(l_mode == 9 ) system("mpg123 /home/pi/Music/09.mp3 &");
 	};
 	b_btn_l2 = btn_l2;
 
@@ -192,35 +207,48 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	b_btn_up = btn_up;
 	setPCA9685Duty(fds , 3 ,  l_mode_a);
 	
-	if(l_mode == 0) {
-		setPCA9685Duty(fds , 0 ,  0);	// 左腕 立てる
-		setPCA9685Duty(fds , 1 ,  0);
-		setPCA9685Duty(fds , 2 ,  100);
+	if(l_mode == -3) {
+		setPCA9685Duty(fds , 0 ,  -60);	// 右腕　格納
+		setPCA9685Duty(fds , 1 ,  -60);
+		setPCA9685Duty(fds , 2 ,  -160);
 	};
 
-	if(l_mode == 1) {
+	if(l_mode == -2) {
+		setPCA9685Duty(fds , 0 ,  0);	// 左腕 格納直前
+		setPCA9685Duty(fds , 1 ,  0);
+		setPCA9685Duty(fds , 2 ,  -160);
+	};
+
+	if(l_mode == -1) {
+		setPCA9685Duty(fds , 0 ,  0);	// 左腕 垂直
+		setPCA9685Duty(fds , 1 ,  0);
+		setPCA9685Duty(fds , 2 ,  0);
+	};
+
+	if(l_mode == 2) {
 		setPCA9685Duty(fds , 0 ,  100);	// 左腕　すくう
 		setPCA9685Duty(fds , 1 ,  -70);
 		setPCA9685Duty(fds , 2 ,  180);
 	};
 	
-	if(l_mode == 2) {
-		setPCA9685Duty(fds , 0 ,  0);	// 左腕　ちょい持ち上げ
+	if(l_mode == 3) {
+		setPCA9685Duty(fds , 0 ,  -20);	// 左腕　ちょい持ち上げ
 		setPCA9685Duty(fds , 1 ,  -70);
-		setPCA9685Duty(fds , 2 ,  150);
+		setPCA9685Duty(fds , 2 ,  180);
 	};
 
-	if(l_mode == 3) {
-		setPCA9685Duty(fds , 0 ,  -30);	// 左腕　置く
+	if(l_mode == 4) {
+		setPCA9685Duty(fds , 0 ,  -22);	// 左腕　置く 電圧が下がったら-24 上がったら-35という変な設定
+		setPCA9685Duty(fds , 1 ,  30);
+		setPCA9685Duty(fds , 2 ,  90);
+	};
+
+	if(l_mode == 5) {
+		setPCA9685Duty(fds , 0 ,  10);	// 左腕　ゆっくり離す
 		setPCA9685Duty(fds , 1 ,  30);
 		setPCA9685Duty(fds , 2 ,  90);
 	};
 	
-	if(l_mode == 4) {
-		setPCA9685Duty(fds , 0 ,  -30);	// 左腕　置く
-		setPCA9685Duty(fds , 1 ,  30);
-		setPCA9685Duty(fds , 2 ,  90);
-	};
 // *************************************************************************** //	
 	if(ps3dat->button[PAD_KEY_R1]) btn_r1++;
 	if(!ps3dat->button[PAD_KEY_R1]) btn_r1 = 0;
