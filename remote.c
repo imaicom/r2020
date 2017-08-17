@@ -264,11 +264,11 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	b_btn_r2 = btn_r2;
 
 	if(ps3dat->button[PAD_KEY_TRIANGLE]) {
-		setPCA9685Duty(fds , 3+4 ,  -30);
+		setPCA9685Duty(fds , 3+4 ,  -20);
 	};
 	
 	if(ps3dat->button[PAD_KEY_CROSS]) {
-		setPCA9685Duty(fds , 3+4 ,  60);
+		setPCA9685Duty(fds , 3+4 ,  70);
 	};
 
 	if(r_mode == 0) {
@@ -290,8 +290,8 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	};
 
 	if(r_mode == 3) {
-		setPCA9685Duty(fds , 0+4 ,  -30);	// 右腕
-		setPCA9685Duty(fds , 1+4 ,  30);
+		setPCA9685Duty(fds , 0+4 ,  -10);	// 右腕
+		setPCA9685Duty(fds , 1+4 ,  60);
 		setPCA9685Duty(fds , 2+4 ,  90);
 	};
 	
