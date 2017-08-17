@@ -47,6 +47,7 @@ int btn_l2 = 0;
 int b_btn_l2 = 0;
 
 int l_mode = 0;
+int l_mode_a = 160;
 int r_mode = 0;
 int a_mode = 0;
 int b_mode = 0;
@@ -197,47 +198,50 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	if(ps3dat->button[PAD_KEY_L1]) btn_l1++;
 	if(!ps3dat->button[PAD_KEY_L1]) btn_l1 = 0;
 	if(b_btn_l1 > btn_l1) {
-		l_mode++; if (l_mode > 3) l_mode = 0;
+		l_mode++; if (l_mode > 4) l_mode = 0;
+		if(l_mode == 1 ) system("mpg123 /home/pi/Music/01.mp3 &");
+		if(l_mode == 2 ) system("mpg123 /home/pi/Music/02.mp3 &");
+		if(l_mode == 3 ) system("mpg123 /home/pi/Music/03.mp3 &");
 	};
 	b_btn_l1 = btn_l1;
 
 	if(ps3dat->button[PAD_KEY_L2]) btn_l2++;
 	if(!ps3dat->button[PAD_KEY_L2]) btn_l2 = 0;
 	if(b_btn_l2 > btn_l2) {
-		l_mode--; if (l_mode < 0) l_mode = 2;
+		l_mode--; if (l_mode < 0) l_mode = 3;
 	};
 	b_btn_l2 = btn_l2;
 
 	if(ps3dat->button[PAD_KEY_UP]) {
-		setPCA9685Duty(fds , 3 ,  -35);
+		l_mode_a = 150;
 	};
 	
 	if(ps3dat->button[PAD_KEY_DOWN]) {
-		setPCA9685Duty(fds , 3 ,  60);
+		l_mode_a = 170;
 	};
 
 	if(l_mode == 0) {
 		setPCA9685Duty(fds , 0 ,  0);	// 左腕
 		setPCA9685Duty(fds , 1 ,  0);
-		setPCA9685Duty(fds , 2 ,  160);
+		setPCA9685Duty(fds , 2 ,  l_mode_a);
 	};
 
 	if(l_mode == 1) {
 		setPCA9685Duty(fds , 0 ,  90);	// 左腕
 		setPCA9685Duty(fds , 1 ,  -70);
-		setPCA9685Duty(fds , 2 ,  160);
+		setPCA9685Duty(fds , 2 ,  l_mode_a);
 	};
 	
 	if(l_mode == 2) {
 		setPCA9685Duty(fds , 0 ,  0);	// 左腕
 		setPCA9685Duty(fds , 1 ,  -70);
-		setPCA9685Duty(fds , 2 ,  160);
+		setPCA9685Duty(fds , 2 ,  l_mode_a);
 	};
 
 	if(l_mode == 3) {
-		setPCA9685Duty(fds , 0 ,  -30);	// 左腕
-		setPCA9685Duty(fds , 1 ,  0);
-		setPCA9685Duty(fds , 2 ,  160);
+		setPCA9685Duty(fds , 0 ,  -60);	// 左腕
+		setPCA9685Duty(fds , 1 ,  -100);
+		setPCA9685Duty(fds , 2 ,  l_mode_a);
 	};
 	
 
