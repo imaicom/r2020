@@ -213,13 +213,13 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	};
 	b_btn_l2 = btn_l2;
 
-//	if(ps3dat->button[PAD_KEY_UP]) {
-//		l_mode_a = 150;
-//	};
+	if(ps3dat->button[PAD_KEY_UP]) {
+		setPCA9685Duty(fds , 3 ,  -30);
+	};
 	
-//	if(ps3dat->button[PAD_KEY_DOWN]) {
-//		l_mode_a = 180;
-//	};
+	if(ps3dat->button[PAD_KEY_DOWN]) {
+		setPCA9685Duty(fds , 3 ,  60);
+	};
 
 	if(l_mode == 0) {
 		setPCA9685Duty(fds , 0 ,  0);	// 左腕
@@ -230,7 +230,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	if(l_mode == 1) {
 		setPCA9685Duty(fds , 0 ,  100);	// 左腕
 		setPCA9685Duty(fds , 1 ,  -70);
-		setPCA9685Duty(fds , 2 ,  150);
+		setPCA9685Duty(fds , 2 ,  180);
 	};
 	
 	if(l_mode == 2) {
@@ -241,8 +241,8 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 
 	if(l_mode == 3) {
 		setPCA9685Duty(fds , 0 ,  -30);	// 左腕
-		setPCA9685Duty(fds , 1 ,  20);
-		setPCA9685Duty(fds , 2 ,  100);
+		setPCA9685Duty(fds , 1 ,  30);
+		setPCA9685Duty(fds , 2 ,  90);
 	};
 	
 
