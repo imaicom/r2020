@@ -61,6 +61,7 @@ int r_mode = 0;
 int r_mode_a = 70;
 int t_mode = 6;
 int h_mode = 2;
+int d_mode = 0;
 
 
 int resetPCA9685(int fd) {
@@ -118,6 +119,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
     v1 = -ps3dat->stick [PAD_LEFT_X];    // 縦軸入力
     v2 = ps3dat->stick [PAD_LEFT_Y];    // 横軸入力
     ww = -ps3dat->stick [PAD_RIGHT_X];   // 回転入力
+    if((-40<=ww)&&(ww<=+40)) ww = 0;
 
     c1 = ( 8 * v1 +  8 * v2 + -6 * -ww ) / 10;   // 左前
     c2 = ( 8 * v1 + -8 * v2 +  6 * ww ) / 10;   // 右前
@@ -129,6 +131,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
     printf("\n");
     printf(" 左後=%4d ",c3);
     printf(" 右後=%4d ",c4);
+    printf(" d_mode=%4d ",d_mode);
     printf("\n");
     printf("\n");
 
@@ -176,6 +179,10 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 		softPwmWrite(24,0);
 	};
 
+    if(ps3dat->stick [PAD_RIGHT_Y] > +40) {d_mode++; if(d_mode > +100) d_mode = +100; };
+    if(ps3dat->stick [PAD_RIGHT_Y] < -40) {d_mode--; if(d_mode < -100) d_mode = -100; };
+	setPCA9685Duty(fds , 11 ,  d_mode);
+	
 	if(ps3dat->button[PAD_KEY_CROSS]) btn_cross++;	// 握る・離す
 	if(!ps3dat->button[PAD_KEY_CROSS]) btn_cross = 0;
 	if(b_btn_cross > btn_cross) {
