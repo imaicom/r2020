@@ -58,7 +58,7 @@ int l_mode = 0;
 int l_mode_a = 55;
 int l_mode_b = -30;
 int r_mode = 0;
-int r_mode_a = 70;
+int r_mode_a = 72 ;
 int r_mode_b = -30;
 int t_mode = 6;
 int h_mode = 2;
@@ -434,8 +434,8 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	if(ps3dat->button[PAD_KEY_TRIANGLE]) btn_tri++;	// 握る・離す
 	if(!ps3dat->button[PAD_KEY_TRIANGLE]) btn_tri = 0;
 	if(b_btn_tri > btn_tri) {
-		if(r_mode_a == 70) r_mode_a = -20; else r_mode_a = 70;
-		if(r_mode_a == 70 )  system("mpg123 /home/pi/Music/Close_my_right_hand.mp3 &");
+		if(r_mode_a == 72) r_mode_a = -20; else r_mode_a = 72;
+		if(r_mode_a == 72 )  system("mpg123 /home/pi/Music/Close_my_right_hand.mp3 &");
 		if(r_mode_a == -20 ) system("mpg123 /home/pi/Music/Open_my_right_hand.mp3 &");
 	};
 	b_btn_tri = btn_tri;
