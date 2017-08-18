@@ -444,43 +444,43 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	if(r_mode == 0) {
 		setPCA9685Duty(fds , 0+4 ,  0);//0	// 右腕　立てる
 		setPCA9685Duty(fds , 1+4 ,  0);
-		setPCA9685Duty(fds , 2+4 ,  100);//100
+		setPCA9685Duty(fds , 2+4 ,  0);//100
 	};
 
 	if(r_mode == 1) {
-		setPCA9685Duty(fds , 0+4 ,  -70);//0	// 右腕　立てる
-		setPCA9685Duty(fds , 1+4 ,  -100);
-		setPCA9685Duty(fds , 2+4 ,  100);//100
+		setPCA9685Duty(fds , 0+4 ,  0);//0	// 右腕　立てる
+		setPCA9685Duty(fds , 1+4 ,  0);
+		setPCA9685Duty(fds , 2+4 ,  0);//100
 	};
 	
 	if(r_mode == 2) {
-		setPCA9685Duty(fds , 0+4 ,  -70);//0	// 右腕　立てる
-		setPCA9685Duty(fds , 1+4 ,  -100);
-		setPCA9685Duty(fds , 2+4 ,  -100);//100
+		setPCA9685Duty(fds , 0+4 ,  0);//0	// 右腕　立てる
+		setPCA9685Duty(fds , 1+4 ,  0);
+		setPCA9685Duty(fds , 2+4 ,  0);//100
 	};
 
 	if(r_mode == 4) {
-		setPCA9685Duty(fds , 0+4 ,  110);	// 右腕　すくう
-		setPCA9685Duty(fds , 1+4 ,  -50);
-		setPCA9685Duty(fds , 2+4 ,  180);
+		setPCA9685Duty(fds , 0+4 ,  0);	// 右腕　すくう
+		setPCA9685Duty(fds , 1+4 ,  0);
+		setPCA9685Duty(fds , 2+4 ,  0);
 	};
 	
 	if(r_mode == 5) {
 		setPCA9685Duty(fds , 0+4 ,  0);	// 右腕　ちょい持ち上げ
-		setPCA9685Duty(fds , 1+4 ,  -70);
-		setPCA9685Duty(fds , 2+4 ,  150);
+		setPCA9685Duty(fds , 1+4 ,  0);
+		setPCA9685Duty(fds , 2+4 ,  0);
 	};
 
 	if(r_mode == 6) {
-		setPCA9685Duty(fds , 0+4 ,  -12);	// 右腕　置く
-		setPCA9685Duty(fds , 1+4 ,  60);
-		setPCA9685Duty(fds , 2+4 ,  90);
+		setPCA9685Duty(fds , 0+4 ,  0);	// 右腕　置く
+		setPCA9685Duty(fds , 1+4 ,  0);
+		setPCA9685Duty(fds , 2+4 ,  0);
 	};
 
 	if(r_mode == 7) {
-		setPCA9685Duty(fds , 0+4 ,  -12);	// 右腕　置く
-		setPCA9685Duty(fds , 1+4 ,  60);
-		setPCA9685Duty(fds , 2+4 ,  90);
+		setPCA9685Duty(fds , 0+4 ,  0);	// 右腕　置く
+		setPCA9685Duty(fds , 1+4 ,  0);
+		setPCA9685Duty(fds , 2+4 ,  0);
 	};
 
 	return 0;
