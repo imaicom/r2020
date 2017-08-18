@@ -59,9 +59,10 @@ int l_mode_a = 55;
 int l_mode_b = -30;
 int r_mode = 0;
 int r_mode_a = 70;
+int r_mode_b = -30;
 int t_mode = 6;
 int h_mode = 2;
-int d_mode = 0;
+int d_mode = 100;
 
 
 int resetPCA9685(int fd) {
@@ -119,7 +120,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
     v1 = -ps3dat->stick [PAD_LEFT_X];    // 縦軸入力
     v2 = ps3dat->stick [PAD_LEFT_Y];    // 横軸入力
     ww = -ps3dat->stick [PAD_RIGHT_X];   // 回転入力
-    if((-40<=ww)&&(ww<=+40)) ww = 0;
+    if((-60<=ww)&&(ww<=+60)) ww = 0;
 
     c1 = ( 8 * v1 +  8 * v2 + -6 * -ww ) / 10;   // 左前
     c2 = ( 8 * v1 + -8 * v2 +  6 * ww ) / 10;   // 右前
@@ -193,6 +194,17 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	};
 	b_btn_cross = btn_cross;
 	setPCA9685Duty(fds , 10 ,  l_mode_b);
+
+	if(ps3dat->button[PAD_KEY_CIRCLE]) btn_circle++;	// 握る・離す
+	if(!ps3dat->button[PAD_KEY_CIRCLE]) btn_circle = 0;
+	if(b_btn_circle > btn_circle) {
+		if(r_mode_b == -30) r_mode_b = -70; else r_mode_b = -30;
+		if(r_mode_b == -30 )   system("mpg123 /home/pi/Music/Close_my_right_tray.mp3 &");
+		if(r_mode_b == -70 ) system("mpg123 /home/pi/Music/Open_my_right_tray.mp3 &");
+
+	};
+	b_btn_circle = btn_circle;
+	setPCA9685Duty(fds , 12 ,  r_mode_b);
 	
 	
 	if(ps3dat->button[PAD_KEY_LEFT]) btn_left++;
