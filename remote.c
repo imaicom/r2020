@@ -367,8 +367,8 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	};
 
 	if(l_mode == 2) {
-		setPCA9685Duty(fds , 0 ,  100);	// 左腕　すくう
-		setPCA9685Duty(fds , 1 ,  -70);
+		setPCA9685Duty(fds , 0 ,  106);//102	// 左腕　すくう
+		setPCA9685Duty(fds , 1 ,  -60);//70
 		setPCA9685Duty(fds , 2 ,  180);
 	};
 	
@@ -454,9 +454,9 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	};
 	
 	if(r_mode == 2) {
-		setPCA9685Duty(fds , 0+4 ,  100);//0	// 右腕　立てる
-		setPCA9685Duty(fds , 1+4 ,  -70);
-		setPCA9685Duty(fds , 2+4 ,  180);//100
+		setPCA9685Duty(fds , 0+4 ,  104);//102	// 右腕　ゲットボトル
+		setPCA9685Duty(fds , 1+4 ,  -60);//-70
+		setPCA9685Duty(fds , 2+4 ,  170);//180
 	};
 	
 	if(r_mode == 3) {
