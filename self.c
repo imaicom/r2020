@@ -132,7 +132,7 @@ int automatic() {
 }	// automatic()
 
 
-int automatic_test() {
+int automatic_test0() {
 
     int sensor;
 
@@ -155,7 +155,6 @@ int automatic_test2() {
 
     int sensor;
 
-    digitalWrite(23,1); // センササーボ 1:出し
 
     if(digitalRead(15)==0) {
         delay(500);
@@ -165,9 +164,10 @@ int automatic_test2() {
         };
         if(digitalRead(15)!=0) {  // 瞬間押しの場合は、自動モードに入る.
 
+			digitalWrite(23,1); // センササーボ 1:出し
             write_file("cntWheel",0);
 
-            while(read_file("cntWheel")<=100) { // 100カウントで自動停止.
+            while(read_file("cntWheel")<=150) { // 100カウントで自動停止.
 
                 // センサ 白:1 黒:0 左から右
                 sensor = digitalRead(7) * 64 + digitalRead(0) * 32 + digitalRead(2) * 16 + digitalRead(3) * 8 +
@@ -225,6 +225,46 @@ int automatic_test2() {
             delay(500);
 
             digitalWrite(23,0); // センササーボ 0:収納
+			speed(20,20); // 両車輪前
+			delay(2000);
+            speed(0,0);
+
+			softPwmWrite( 1,30);	// １回転目
+			delay(1000);
+            softPwmWrite( 1,15);
+			while(digitalRead(4));
+			softPwmWrite( 1,0);
+			delay(2000);
+
+			softPwmWrite( 1,15);	// ２回転目
+			delay(1000);
+            softPwmWrite( 1,15);
+			while(digitalRead(4));
+			digitalWrite(23,1);	// センササーボ 1:出し
+			softPwmWrite( 1,0);
+			delay(500);
+
+			delay(500);
+
+			softPwmWrite( 5,50);	// ホイールで前進
+			softPwmWrite(27,50);
+			delay(500);
+			softPwmWrite( 5,0);
+			softPwmWrite(27,0);
+			delay(500);
+
+			while(digitalRead(15)==0);   // スイッチ待ち
+			delay(500);
+			while(digitalRead(15)!=0);
+
+			softPwmWrite( 6,50);	// ホイールで後進
+			softPwmWrite(26,50);
+			delay(500);
+			softPwmWrite( 6,0);
+			softPwmWrite(26,0);
+			delay(500);
+
+			digitalWrite(23,0);	// センササーボ 0:収納
 
         }; // if(digitalRead(15)!=0)
 
@@ -232,7 +272,7 @@ int automatic_test2() {
 
 }   // automatic_test2()
 
-int automatic_test3() {
+int automatic_test4() {
 
     int sensor;
 
@@ -240,7 +280,7 @@ int automatic_test3() {
 
             write_file("cntWheel",0);
 
-            while(read_file("cntWheel")<=100) { // 100カウントで自動停止.
+            while(read_file("cntWheel")<=200) { // 100カウントで自動停止.
 
                 // センサ 白:1 黒:0 左から右
                 sensor = digitalRead(7) * 64 + digitalRead(0) * 32 + digitalRead(2) * 16 + digitalRead(3) * 8 +
@@ -367,7 +407,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	if(ps3dat->button[PAD_KEY_START]) btn_start++;
 	if(!ps3dat->button[PAD_KEY_START]) btn_start = 0;
 	if(b_btn_start > btn_start) {
-		automatic_test3();
+		automatic_test2();
     };
     b_btn_start = btn_start;
 
@@ -493,7 +533,7 @@ void main() {
 //	system("mpg123 /home/pi/Music/move_it.mp3 &");
 //	system("python /home/pi/r2017/simplebeep.py");
 
-    if(!(ps3c_init(&ps3dat, df))) {
+ /*   if(!(ps3c_init(&ps3dat, df))) {
 
 		f = 0; // モニタに戻らないようにしとく
 
@@ -504,6 +544,7 @@ void main() {
         ps3c_exit(&ps3dat);
 
     } else // if(!(ps3c_init(&ps3dat, df)))
+ */
         while(f) automatic_test2();
 
     digitalWrite(25,0); // 動作中LED消灯
