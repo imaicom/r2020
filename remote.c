@@ -517,7 +517,7 @@ int ps3c_input(struct ps3ctls *ps3dat) {
 			break;
 	}
 
-	return 0;
+	return 0; 
 }
 
 
