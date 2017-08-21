@@ -367,9 +367,9 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	};
 
 	if(l_mode == 2) {
-		setPCA9685Duty(fds , 0 ,  106);//102	// 左腕　すくう
-		setPCA9685Duty(fds , 1 ,  -60);//70
-		setPCA9685Duty(fds , 2 ,  180);
+		setPCA9685Duty(fds , 0 ,  112);//106	// 左腕　すくう
+		setPCA9685Duty(fds , 1 ,  -55);//-60
+		setPCA9685Duty(fds , 2 ,  170);//180
 	};
 	
 	if(l_mode == 3) {
@@ -466,7 +466,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	};
 
 	if(r_mode == 4) {
-		setPCA9685Duty(fds , 0+4 ,  -26);	// 置く 電圧が下がったら-20 上がったら-30という変な設定
+		setPCA9685Duty(fds , 0+4 ,  -20);	// 置く 電圧が下がったら-20 上がったら-30という変な設定
 		setPCA9685Duty(fds , 1+4 ,  30);
 		setPCA9685Duty(fds , 2+4 ,  110);
 	};
