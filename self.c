@@ -77,85 +77,21 @@ int speed(int s1,int s2) {
 }
 
 
-int automatic() {
-
-	int sensor;
-
-    //system("python /home/pi/r2017/simplebeep.py");
-    digitalWrite(23,0);	// センササーボ 0:収納
-	if(digitalRead(15)==0) {
-		delay(500);
-        if(digitalRead(15)==0) {  // 長押しの場合は、startxとタイプして、プログラム修正できるようにする。
-            softPwmWrite( 1,0);  // とりあえず、大回転モータを停止しとく
-            f = 0; // モニタに戻る
-        };
-		if(digitalRead(15)!=0) {  // 瞬間押しの場合は、自動モードに入る。
-
-			softPwmWrite( 1,30);	// １回転目
-			delay(1000);
-            softPwmWrite( 1,15);
-			while(digitalRead(4));
-			softPwmWrite( 1,0);
-			delay(500);
-
-			softPwmWrite( 1,30);	// ２回転目
-			delay(1000);
-            softPwmWrite( 1,15);
-			while(digitalRead(4));
-			softPwmWrite( 1,0);
-			delay(500);
-
-			digitalWrite(23,1);	// センササーボ 1:出し
-			delay(500);
-
-			softPwmWrite( 5,50);	// ホイールで前進
-			softPwmWrite(27,50);
-			delay(500);
-			softPwmWrite( 5,0);
-			softPwmWrite(27,0);
-			delay(500);
-
-			while(digitalRead(15)==0);   // スイッチ待ち
-			delay(500);
-			while(digitalRead(15)!=0);
-
-			softPwmWrite( 6,50);	// ホイールで後進
-			softPwmWrite(26,50);
-			delay(500);
-			softPwmWrite( 6,0);
-			softPwmWrite(26,0);
-			delay(500);
-
-			digitalWrite(23,0);	// センササーボ 0:収納
-		}; // if(digitalRead(15)!=0)
-	}; // if(digitalRead(15)==0)
-}	// automatic()
-
-
-int automatic_test0() {
-
-    int sensor;
-
-    digitalWrite(23,0); // センササーボ 0:収納
-
-    delay(500);
-    softPwmWrite( 6,50); // 左回転
-    softPwmWrite(27,50);
-    while(read_file("cntWheel")<=50);
-    softPwmWrite( 6,0);
-    softPwmWrite(27,0);
-    write_file("cntWheel",0);
-    delay(500);
-
-    digitalWrite(23,0); // センササーボ 0:収納
-
-}   // automatic_test()
-
 int automatic_test2() {
 
     int sensor;
+    
 
-
+//	digitalWrite(24,0);	// beep
+//	sleep(1);
+//	digitalWrite(24,0);
+	
+	if(digitalRead(10)==0) {	// white sw
+		softPwmWrite( 1,20);
+	} else {
+		softPwmWrite( 1,0);
+	};
+	
     if(digitalRead(15)==0) {
         delay(500);
         if(digitalRead(15)==0) {  // 長押しの場合は、startxとタイプして、プログラム修正できるようにする。
@@ -229,12 +165,12 @@ int automatic_test2() {
 			delay(2000);
             speed(0,0);
 
-			softPwmWrite( 1,30);	// １回転目
+			softPwmWrite( 1,20);	// １回転目
 			delay(1000);
             softPwmWrite( 1,15);
 			while(digitalRead(4));
 			softPwmWrite( 1,0);
-			delay(2000);
+			delay(1500);
 
 			softPwmWrite( 1,15);	// ２回転目
 			delay(1000);
@@ -271,76 +207,6 @@ int automatic_test2() {
     }; // if(digitalRead(15)==0)
 
 }   // automatic_test2()
-
-int automatic_test4() {
-
-    int sensor;
-
-    digitalWrite(23,1); // センササーボ 1:出し
-
-            write_file("cntWheel",0);
-
-            while(read_file("cntWheel")<=200) { // 100カウントで自動停止.
-
-                // センサ 白:1 黒:0 左から右
-                sensor = digitalRead(7) * 64 + digitalRead(0) * 32 + digitalRead(2) * 16 + digitalRead(3) * 8 +
-                                                digitalRead(12) * 4 + digitalRead(13) * 2 + digitalRead(14);
-
-				speed(20,20); // 両車輪前
-				if(sensor==  1) speed(20, 0); // WWW W WWB
-                if(sensor==  2) speed(20, 0); // WWW W WBW
-                if(sensor==  3) speed(20, 0); // WWW W WBB
-                if(sensor==  4) speed(20, 0); // WWW W BWW
-                if(sensor==  5) speed(20, 0); // WWW W BWB
-                if(sensor==  6) speed(20, 0); // WWW W BBW
-                if(sensor==  7) speed(20, 0); // WWW W BBB
-                if(sensor== 10) speed(20,0); // WWW B WBW
-                if(sensor== 11) speed(20,0); // WWW B WBB
-                if(sensor== 13) speed(20,0); // WWW B BWB
-                if(sensor== 14) speed(20,0); // WWW B BBW
-                if(sensor== 16) speed(0,20); // WWB W WWW
-                if(sensor== 17) speed(20,0); // WWB W WWB
-                if(sensor== 19) speed(20,0); // WWB W WBB
-                if(sensor== 24) speed(0,20); // WWB B WWW
-                if(sensor== 25) speed(0,20); // WWB B WWB
-                if(sensor== 26) speed(0,20); // WWB B WBW
-                if(sensor== 32) speed(0,20); // WBW W WWW
-                if(sensor== 35) speed(20,0); // WBW W WBB
-                if(sensor== 38) speed(20,0); // WBW W BBW
-                if(sensor== 40) speed(0,20); // WBW B WWW
-                if(sensor== 44) speed(20,0); // WBW B BWW
-                if(sensor== 48) speed(0,20); // WBB W WWW
-                if(sensor== 49) speed(0,20); // WBB W WWB
-                if(sensor== 50) speed(0,20); // WBB W WBW
-                if(sensor== 52) speed(0,20); // WBB W BWW
-                if(sensor== 56) speed(0,20); // WBB B WWW
-                if(sensor== 57) speed(0,20); // WBB B WWB
-                if(sensor== 64) speed(0,20); // BWW W WWW
-                if(sensor== 68) speed(0,20); // BWW W BWW
-                if(sensor== 71) speed(20,0); // BWW W BBB
-                if(sensor== 72) speed(0,20); // BWW B WWW
-                if(sensor== 78) speed(20,0); // BWW B BBW
-                if(sensor== 79) speed(20,10); // BWW B BBB
-                if(sensor== 80) speed(0,20); // BWB W WWW
-                if(sensor== 88) speed(0,20); // BWB B WWW
-                if(sensor== 96) speed(0,20); // BBW W WWW
-                if(sensor== 97) speed(0,20); // BBW W WWB
-                if(sensor== 98) speed(0,20); // BBW W WBW
-                if(sensor==100) speed(0,20); // BBW W BWW
-                if(sensor==104) speed(0,20); // BBW B WWW
-                if(sensor==112) speed(0,20); // BBB W WWW
-                if(sensor==114) speed(0,20); // BBB W WBW
-                if(sensor==116) speed(0,20); // BBB W BWW
-            }; // while(read_file("cntWheel")
-
-            speed(0,0);
-            write_file("cntWheel",0);
-            delay(500);
-
-            digitalWrite(23,0); // センササーボ 0:収納
-
-}   // automatic_test3()
-
 
 
 int ps3c_test(struct ps3ctls *ps3dat) {
@@ -512,7 +378,8 @@ void main() {
     softPwmCreate( 1,0,20); // motor-3 20ms   // 大回転モータ
 
     pinMode(23,OUTPUT);	// センササーボ 0:収納 1:出し
-    pinMode(25,OUTPUT);	// ブザーを止めてLEDにする
+    pinMode(24,OUTPUT);	// beeper
+    pinMode(25,OUTPUT);	// LED
     digitalWrite(25,1); // 動作中LED点灯
 
     pinMode(7,INPUT);   // 左床センサ
@@ -523,7 +390,8 @@ void main() {
     pinMode(13,INPUT);
     pinMode(14,INPUT);   // 右床センサ
 
-    pinMode(15,INPUT);	// タクトスイッチ
+    pinMode(15,INPUT);	// 赤タクトスイッチ
+    pinMode(10,INPUT);	// 白タクトスイッチ
 	pinMode(16,INPUT);	// エンコーダ
 	pinMode(4,INPUT);	// 大回転センサ
 
