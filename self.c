@@ -85,9 +85,14 @@ int automatic() {
 //	digitalWrite(24,0);	// beep
 //	sleep(1);
 //	digitalWrite(24,0);
+
+	restart:
+	
+	speed(0,0);
+	softPwmWrite( 1,0);
 	
 	if(digitalRead(10)==0) {	// white sw
-		softPwmWrite( 1,20);
+		softPwmWrite( 1,8);
 	} else {
 		softPwmWrite( 1,0);
 	};
@@ -104,6 +109,8 @@ int automatic() {
             write_file("cntWheel",0);
 
             while(read_file("cntWheel")<=150) { // 100カウントで自動停止.
+				
+				if(digitalRead(10)==0) goto restart;
 
                 // センサ 白:1 黒:0 左から右
                 sensor = digitalRead(7) * 64 + digitalRead(0) * 32 + digitalRead(2) * 16 + digitalRead(3) * 8 +
@@ -158,47 +165,48 @@ int automatic() {
 
             speed(0,0);
             write_file("cntWheel",0);
-            delay(500);
+			if(digitalRead(10)==0) goto restart; delay(500);
 
             digitalWrite(23,0); // センササーボ 0:収納
 			speed(20,20); // 両車輪前
-			delay(2000);
+			if(digitalRead(10)==0) goto restart; delay(2000);
             speed(0,0);
+            
 
 			softPwmWrite( 1,20);	// １回転目
-			delay(1000);
+			if(digitalRead(10)==0) goto restart; delay(1000);
             softPwmWrite( 1,15);
 			while(digitalRead(4));
 			softPwmWrite( 1,0);
-			delay(1500);
+			if(digitalRead(10)==0) goto restart; delay(1500);
 
 			softPwmWrite( 1,15);	// ２回転目
-			delay(1000);
+			if(digitalRead(10)==0) goto restart; delay(1000);
             softPwmWrite( 1,15);
 			while(digitalRead(4));
 			digitalWrite(23,1);	// センササーボ 1:出し
 			softPwmWrite( 1,0);
-			delay(500);
+			if(digitalRead(10)==0) goto restart; delay(500);
 
-			delay(500);
+			if(digitalRead(10)==0) goto restart; delay(500);
 
 			softPwmWrite( 5,50);	// ホイールで前進
 			softPwmWrite(27,50);
-			delay(500);
+			if(digitalRead(10)==0) goto restart; delay(500);
 			softPwmWrite( 5,0);
 			softPwmWrite(27,0);
-			delay(500);
+			if(digitalRead(10)==0) goto restart; delay(500);
 
 			while(digitalRead(15)==0);   // スイッチ待ち
-			delay(500);
+			if(digitalRead(10)==0) goto restart; delay(500);
 			while(digitalRead(15)!=0);
 
 			softPwmWrite( 6,50);	// ホイールで後進
 			softPwmWrite(26,50);
-			delay(500);
+			if(digitalRead(10)==0) goto restart; delay(500);
 			softPwmWrite( 6,0);
 			softPwmWrite(26,0);
-			delay(500);
+			if(digitalRead(10)==0) goto restart; delay(500);
 
 			digitalWrite(23,0);	// センササーボ 0:収納
 
@@ -206,7 +214,7 @@ int automatic() {
 
     }; // if(digitalRead(15)==0)
 
-}   // automatic_test2()
+}   // automatic()
 
 
 int ps3c_test(struct ps3ctls *ps3dat) {
