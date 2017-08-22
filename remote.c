@@ -367,9 +367,9 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	};
 
 	if(l_mode == 2) {
-		setPCA9685Duty(fds , 0 ,  112);//106	// 左腕　すくう
-		setPCA9685Duty(fds , 1 ,  -55);//-60
-		setPCA9685Duty(fds , 2 ,  170);//180
+		setPCA9685Duty(fds , 0 ,  106);//106	// 左腕　すくう
+		setPCA9685Duty(fds , 1 ,  -60);//-60
+		setPCA9685Duty(fds , 2 ,  160);//180
 	};
 	
 	if(l_mode == 3) {
