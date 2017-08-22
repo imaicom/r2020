@@ -77,7 +77,7 @@ int speed(int s1,int s2) {
 }
 
 
-int automatic_test2() {
+int automatic() {
 
     int sensor;
     
@@ -273,7 +273,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	if(ps3dat->button[PAD_KEY_START]) btn_start++;
 	if(!ps3dat->button[PAD_KEY_START]) btn_start = 0;
 	if(b_btn_start > btn_start) {
-		automatic_test2();
+		automatic();
     };
     b_btn_start = btn_start;
 
@@ -413,7 +413,7 @@ void main() {
 
     } else // if(!(ps3c_init(&ps3dat, df)))
  */
-        while(f) automatic_test2();
+        while(f) automatic();
 
     digitalWrite(25,0); // 動作中LED消灯
 }
