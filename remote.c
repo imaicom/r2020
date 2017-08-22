@@ -56,10 +56,10 @@ int b_btn_l2 = 0;
 
 int l_mode = 3;
 int l_mode_a = 55;
-int l_mode_b = -30;
+int l_mode_b = -80;
 int r_mode = 3;
 int r_mode_a = 72 ;
-int r_mode_b = -30;
+int r_mode_b = +90;
 int t_mode = 6;
 int h_mode = 2;
 int d_mode = 100;
@@ -187,9 +187,9 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	if(ps3dat->button[PAD_KEY_CROSS]) btn_cross++;	// 皿の握る・離す
 	if(!ps3dat->button[PAD_KEY_CROSS]) btn_cross = 0;
 	if(b_btn_cross > btn_cross) {
-		if(l_mode_b == -30) l_mode_b = -70; else l_mode_b = -30;
-		if(l_mode_b == -30 )   system("mpg123 /home/pi/Music/Close_my_left_tray.mp3 &");
-		if(l_mode_b == -70 ) system("mpg123 /home/pi/Music/Open_my_left_tray.mp3 &");
+		if(l_mode_b == 100) l_mode_b = -80; else l_mode_b = 100;
+		if(l_mode_b == 100 )   system("mpg123 /home/pi/Music/Open_my_left_tray.mp3 &");
+		if(l_mode_b == -80 ) system("mpg123 /home/pi/Music/Close_my_left_tray.mp3 &");
 
 	};
 	b_btn_cross = btn_cross;
@@ -198,9 +198,9 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	if(ps3dat->button[PAD_KEY_CIRCLE]) btn_circle++;	// 皿の握る・離す
 	if(!ps3dat->button[PAD_KEY_CIRCLE]) btn_circle = 0;
 	if(b_btn_circle > btn_circle) {
-		if(r_mode_b == -30) r_mode_b = -70; else r_mode_b = -30;
-		if(r_mode_b == -30 )   system("mpg123 /home/pi/Music/Close_my_right_tray.mp3 &");
-		if(r_mode_b == -70 ) system("mpg123 /home/pi/Music/Open_my_right_tray.mp3 &");
+		if(r_mode_b == +90) r_mode_b = -80; else r_mode_b = +90;
+		if(r_mode_b == +90 )   system("mpg123 /home/pi/Music/Close_my_right_tray.mp3 &");
+		if(r_mode_b == -80 ) system("mpg123 /home/pi/Music/Open_my_right_tray.mp3 &");
 
 	};
 	b_btn_circle = btn_circle;
