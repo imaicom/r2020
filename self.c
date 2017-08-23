@@ -108,7 +108,7 @@ int automatic() {
 			digitalWrite(23,1); // センササーボ 1:出し
             write_file("cntWheel",0);
 
-            while(read_file("cntWheel")<=150) { // 100カウントで自動停止.
+            while(read_file("cntWheel")<=130) { // 130カウントでセンサ検出走行終了
 				
 				if(digitalRead(10)==0) goto restart;
 
