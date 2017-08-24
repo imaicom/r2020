@@ -161,7 +161,7 @@ int automatic() {
                 if(sensor==112) speed(-10,20); // BBB W WWW
                 if(sensor==114) speed(-10,20); // BBB W WBW
                 if(sensor==116) speed(-10,20); // BBB W BWW
-            }; // while(read_file("cntWheel")
+            }; // while(read_file("cntWheel");
 
             speed(0,0);
             write_file("cntWheel",0);
