@@ -173,21 +173,40 @@ int automatic() {
             speed(0,0);
             
 
-			softPwmWrite( 1,20);	// １回転目
-			if(digitalRead(10)==0) goto restart; delay(1000);
+			// １回転目
+			if(digitalRead(10)==0) goto restart;
+			softPwmWrite( 1,20); delay(200); softPwmWrite( 1,0); delay(1000);
+			if(digitalRead(10)==0) goto restart;
+			softPwmWrite( 1,20); delay(200); softPwmWrite( 1,0); delay(1000);
+			if(digitalRead(10)==0) goto restart;
+			softPwmWrite( 1,20); delay(200); softPwmWrite( 1,0); delay(1000);
+			if(digitalRead(10)==0) goto restart;
+			softPwmWrite( 1,20); delay(200); softPwmWrite( 1,0); delay(1000);
+			if(digitalRead(10)==0) goto restart;
+			softPwmWrite( 1,20); delay(200); softPwmWrite( 1,0); delay(1000);
+
             softPwmWrite( 1,15);
 			while(digitalRead(4));
 			softPwmWrite( 1,0);
 			if(digitalRead(10)==0) goto restart; delay(1500);
 
-			softPwmWrite( 1,15);	// ２回転目
-			if(digitalRead(10)==0) goto restart; delay(1000);
-            softPwmWrite( 1,15);
+			// ２回転目
+ 			if(digitalRead(10)==0) goto restart;
+			softPwmWrite( 1,20);delay(200); softPwmWrite( 1,0); delay(1000);
+			if(digitalRead(10)==0) goto restart;
+			softPwmWrite( 1,20);delay(200); softPwmWrite( 1,0); delay(1000);
+			if(digitalRead(10)==0) goto restart;
+			softPwmWrite( 1,20);delay(200); softPwmWrite( 1,0); delay(1000);
+			if(digitalRead(10)==0) goto restart;
+			softPwmWrite( 1,20);delay(200); softPwmWrite( 1,0); delay(1000);
+			if(digitalRead(10)==0) goto restart;
+			softPwmWrite( 1,20);delay(200); softPwmWrite( 1,0); delay(1000);
+
+			softPwmWrite( 1,15);
 			while(digitalRead(4));
 			digitalWrite(23,1);	// センササーボ 1:出し
 			softPwmWrite( 1,0);
-			if(digitalRead(10)==0) goto restart; delay(500);
-
+			
 			if(digitalRead(10)==0) goto restart; delay(500);
 
 			softPwmWrite( 5,50);	// ホイールで前進
