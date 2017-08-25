@@ -468,33 +468,6 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	};
 	b_btn_l1 = btn_l1;
 
-//	if(ps3dat->button[PAD_KEY_L2]) btn_l2++;
-//	if(!ps3dat->button[PAD_KEY_L2]) btn_l2 = 0;
-	if(b_btn_l2 > btn_l2) {
-		l_mode--; if (l_mode < 0) l_mode = 9;
-		if(l_mode == 0 ) system("mpg123 /home/pi/Music/fire.mp3 &");
-		if(l_mode == 1 ) system("mpg123 /home/pi/Music/01.mp3 &");
-		if(l_mode == 2 ) system("mpg123 /home/pi/Music/Lower_my_left_arm.mp3 &");
-		if(l_mode == 3 ) system("mpg123 /home/pi/Music/Raise_my_left_arm.mp3 &");
-		if(l_mode == 4 ) system("mpg123 /home/pi/Music/Posted_on_my_left_arm.mp3 &");
-		if(l_mode == 5 ) system("mpg123 /home/pi/Music/Release_my_left_arm.mp3 &");
-		if(l_mode == 6 ) system("mpg123 /home/pi/Music/06.mp3 &");
-		if(l_mode == 7 ) system("mpg123 /home/pi/Music/07.mp3 &");
-		if(l_mode == 8 ) system("mpg123 /home/pi/Music/08.mp3 &");
-		if(l_mode == 9 ) system("mpg123 /home/pi/Music/09.mp3 &");
-	};
-	b_btn_l2 = btn_l2;
-
-	if(ps3dat->button[PAD_KEY_SQUARE]) btn_square++;	// 握る・離す
-	if(!ps3dat->button[PAD_KEY_SQUARE]) btn_square = 0;
-	if(b_btn_square > btn_square) {
-		if(l_mode_a == 55) l_mode_a = -25; else l_mode_a = 55;
-		if(l_mode_a == 55 )  system("mpg123 /home/pi/Music/Close_my_left_hand.mp3 &");
-		if(l_mode_a == -25 ) system("mpg123 /home/pi/Music/Open_my_left_hand.mp3 &");
-
-	};
-	b_btn_square = btn_square;
-	setPCA9685Duty(fds , 3 ,  l_mode_a);
 	
 	if(l_mode == -3) {
 		setPCA9685Duty(fds , 0 ,  -60);	// 右腕　格納
@@ -579,15 +552,6 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	};
 	b_btn_r2 = btn_r2;
 
-	if(ps3dat->button[PAD_KEY_TRIANGLE]) btn_tri++;	// 握る・離す
-	if(!ps3dat->button[PAD_KEY_TRIANGLE]) btn_tri = 0;
-	if(b_btn_tri > btn_tri) {
-		if(r_mode_a == 72) r_mode_a = -20; else r_mode_a = 72;
-		if(r_mode_a == 72 )  system("mpg123 /home/pi/Music/Close_my_right_hand.mp3 &");
-		if(r_mode_a == -20 ) system("mpg123 /home/pi/Music/Open_my_right_hand.mp3 &");
-	};
-	b_btn_tri = btn_tri;
-	setPCA9685Duty(fds , 3+4 ,  r_mode_a);
 
 	if(r_mode == -2) {
 		setPCA9685Duty(fds , 0+4 ,  0);//0	// 右腕　?
@@ -634,6 +598,30 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 		setPCA9685Duty(fds , 1+4 ,  30);
 		setPCA9685Duty(fds , 2+4 ,  110);
 	};
+
+
+	if(ps3dat->button[PAD_KEY_SQUARE]) btn_square++;	// 握る・離す
+	if(!ps3dat->button[PAD_KEY_SQUARE]) btn_square = 0;
+	if(b_btn_square > btn_square) {
+		if(l_mode_a == 55) l_mode_a = -25; else l_mode_a = 55;
+		if(l_mode_a == 55 )  system("mpg123 /home/pi/Music/Close_my_left_hand.mp3 &");
+		if(l_mode_a == -25 ) system("mpg123 /home/pi/Music/Open_my_left_hand.mp3 &");
+
+	};
+	b_btn_square = btn_square;
+	setPCA9685Duty(fds , 3 ,  l_mode_a);
+
+
+	if(ps3dat->button[PAD_KEY_TRIANGLE]) btn_tri++;	// 握る・離す
+	if(!ps3dat->button[PAD_KEY_TRIANGLE]) btn_tri = 0;
+	if(b_btn_tri > btn_tri) {
+		if(r_mode_a == 72) r_mode_a = -20; else r_mode_a = 72;
+		if(r_mode_a == 72 )  system("mpg123 /home/pi/Music/Close_my_right_hand.mp3 &");
+		if(r_mode_a == -20 ) system("mpg123 /home/pi/Music/Open_my_right_hand.mp3 &");
+	};
+	b_btn_tri = btn_tri;
+	setPCA9685Duty(fds , 3+4 ,  r_mode_a);
+
 
 	if(ps3dat->button[PAD_KEY_START]) {
 		system("mpg123 /home/pi/Music/Moves_to_programming_mode.mp3 &");
