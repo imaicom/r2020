@@ -92,7 +92,7 @@ int automatic() {
 	softPwmWrite( 1,0);
 	
 	if(digitalRead(10)==0) {	// white sw
-		softPwmWrite( 1,8);
+		softPwmWrite( 1,20);
 	} else {
 		softPwmWrite( 1,0);
 	};
@@ -175,34 +175,30 @@ int automatic() {
 
 			// １回転目
 			if(digitalRead(10)==0) goto restart;
-			softPwmWrite( 1,20); delay(200); softPwmWrite( 1,0); delay(1000);
+			softPwmWrite( 1,60); delay(400); softPwmWrite( 1,0); delay(500);
 			if(digitalRead(10)==0) goto restart;
-			softPwmWrite( 1,20); delay(200); softPwmWrite( 1,0); delay(1000);
+			softPwmWrite( 1,60); delay(600); softPwmWrite( 1,0); delay(500);
 			if(digitalRead(10)==0) goto restart;
-			softPwmWrite( 1,20); delay(200); softPwmWrite( 1,0); delay(1000);
+			softPwmWrite( 1,60); delay(600); softPwmWrite( 1,0); delay(500);
 			if(digitalRead(10)==0) goto restart;
-			softPwmWrite( 1,20); delay(200); softPwmWrite( 1,0); delay(1000);
-			if(digitalRead(10)==0) goto restart;
-			softPwmWrite( 1,20); delay(200); softPwmWrite( 1,0); delay(1000);
+			softPwmWrite( 1,60); delay(600); softPwmWrite( 1,0); delay(500);
 
-            softPwmWrite( 1,15);
+            softPwmWrite( 1,60);
 			while(digitalRead(4));
 			softPwmWrite( 1,0);
 			if(digitalRead(10)==0) goto restart; delay(1500);
 
 			// ２回転目
  			if(digitalRead(10)==0) goto restart;
-			softPwmWrite( 1,20);delay(200); softPwmWrite( 1,0); delay(1000);
+			softPwmWrite( 1,60);delay(400); softPwmWrite( 1,0); delay(500);
 			if(digitalRead(10)==0) goto restart;
-			softPwmWrite( 1,20);delay(200); softPwmWrite( 1,0); delay(1000);
+			softPwmWrite( 1,60);delay(600); softPwmWrite( 1,0); delay(500);
 			if(digitalRead(10)==0) goto restart;
-			softPwmWrite( 1,20);delay(200); softPwmWrite( 1,0); delay(1000);
+			softPwmWrite( 1,60);delay(600); softPwmWrite( 1,0); delay(500);
 			if(digitalRead(10)==0) goto restart;
-			softPwmWrite( 1,20);delay(200); softPwmWrite( 1,0); delay(1000);
-			if(digitalRead(10)==0) goto restart;
-			softPwmWrite( 1,20);delay(200); softPwmWrite( 1,0); delay(1000);
+			softPwmWrite( 1,60);delay(600); softPwmWrite( 1,0); delay(500);
 
-			softPwmWrite( 1,15);
+			softPwmWrite( 1,60);
 			while(digitalRead(4));
 			digitalWrite(23,1);	// センササーボ 1:出し
 			softPwmWrite( 1,0);
@@ -402,7 +398,8 @@ void main() {
     softPwmCreate( 6,0,20); // motor-1 20ms
     softPwmCreate(27,0,20); // motor-2 20ms   // 右モータ
     softPwmCreate(26,0,20); // motor-2 20ms
-    softPwmCreate( 1,0,20); // motor-3 20ms   // 大回転モータ
+    softPwmCreate( 1,0,20); // motor-3 20ms   // 大回転モータseiten
+    softPwmCreate(29,0,20); // motor-3 20ms   // 大回転モータgyakuten
 
     pinMode(23,OUTPUT);	// センササーボ 0:収納 1:出し
     pinMode(24,OUTPUT);	// beeper
