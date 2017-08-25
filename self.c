@@ -90,6 +90,7 @@ int automatic() {
 	
 	speed(0,0);
 	softPwmWrite( 1,0);
+	softPwmWrite(29,0);
 	
 	if(digitalRead(10)==0) {	// white sw
 		softPwmWrite( 1,20);
@@ -105,6 +106,69 @@ int automatic() {
         };
         if(digitalRead(15)!=0) {  // 瞬間押しの場合は、自動モードに入る.
 
+			 digitalWrite(25,0); delay(100); // LED点滅
+			 digitalWrite(25,1); delay(100);
+			 digitalWrite(25,0); delay(100);
+			 digitalWrite(25,1); delay(100);
+			 digitalWrite(25,0); delay(100);
+			 digitalWrite(25,1); delay(100);
+			 digitalWrite(25,0); delay(100);
+			 digitalWrite(25,1); delay(100);
+			 digitalWrite(25,0); delay(100);
+			 digitalWrite(25,1); delay(100);
+			 
+//			softPwmWrite( 6,50); // 左回転
+//			softPwmWrite(27,50);
+			
+			// １回転目
+			if(digitalRead(10)==0) goto restart;
+			softPwmWrite( 1,30); delay(600); softPwmWrite( 1,0); delay(1000);
+			if(digitalRead(10)==0) goto restart;
+			softPwmWrite( 1,30); delay(300); softPwmWrite( 1,0); delay(1000);
+			if(digitalRead(10)==0) goto restart;
+			softPwmWrite( 1,30); delay(300); softPwmWrite( 1,0); delay(1000);
+			if(digitalRead(10)==0) goto restart;
+			softPwmWrite( 1,30); delay(300); softPwmWrite( 1,0); delay(1000);
+			if(digitalRead(10)==0) goto restart;
+			softPwmWrite( 1,30); delay(300); softPwmWrite( 1,0);
+			if(digitalRead(10)==0) goto restart;
+			softPwmWrite( 1,30); delay(300); softPwmWrite( 1,0); delay(1000);
+
+            softPwmWrite( 1,30);
+			while(digitalRead(4));
+			softPwmWrite( 1,0);
+			if(digitalRead(10)==0) goto restart; delay(1500);
+
+			softPwmWrite( 5,50); // 右回転
+			softPwmWrite(26,50);
+			
+			delay(1800);
+
+			softPwmWrite( 5,0); // 停止
+			softPwmWrite( 6,0);
+			softPwmWrite(27,0);
+			softPwmWrite(26,0);
+
+			// １回転目
+			if(digitalRead(10)==0) goto restart;
+			softPwmWrite( 1,30); delay(600); softPwmWrite( 1,0); delay(1000);
+			if(digitalRead(10)==0) goto restart;
+			softPwmWrite( 1,30); delay(300); softPwmWrite( 1,0); delay(1000);
+			if(digitalRead(10)==0) goto restart;
+			softPwmWrite( 1,30); delay(300); softPwmWrite( 1,0); delay(1000);
+			if(digitalRead(10)==0) goto restart;
+			softPwmWrite( 1,30); delay(300); softPwmWrite( 1,0); delay(1000);
+			if(digitalRead(10)==0) goto restart;
+			softPwmWrite( 1,30); delay(300); softPwmWrite( 1,0);
+			if(digitalRead(10)==0) goto restart;
+			softPwmWrite( 1,30); delay(300); softPwmWrite( 1,0); delay(1000);
+
+            softPwmWrite( 1,30);
+			while(digitalRead(4));
+			softPwmWrite( 1,0);
+			if(digitalRead(10)==0) goto restart; delay(1500);
+
+/*
 			digitalWrite(23,1); // センササーボ 1:出し
             write_file("cntWheel",0);
 
@@ -167,6 +231,7 @@ int automatic() {
             write_file("cntWheel",0);
 			if(digitalRead(10)==0) goto restart; delay(500);
 
+			// pushing wall
             digitalWrite(23,0); // センササーボ 0:収納
 			speed(20,20); // 両車輪前
 			if(digitalRead(10)==0) goto restart; delay(2000);
@@ -232,6 +297,9 @@ int automatic() {
 			if(digitalRead(10)==0) goto restart; delay(500);
 
 			digitalWrite(23,0);	// センササーボ 0:収納
+*/
+
+
 
         }; // if(digitalRead(15)!=0)
 
