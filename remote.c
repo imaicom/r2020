@@ -22,6 +22,7 @@ struct ps3ctls {
 	short *stick;			// stick[nr_sticks]
 };
 
+
 int fds;
 int mode = 10;
 int btn_tri = 0;
@@ -73,6 +74,7 @@ int resetPCA9685(int fd) {
 	wiringPiI2CWriteReg8(fd,0,0);
 }
 
+
 int setPCA9685Freq(int fd , float freq) {
 	float prescaleval;
 	int prescale , oldmode , newmode;
@@ -103,13 +105,13 @@ int setPCA9685Duty(int fd , int channel , int off) {
 	wiringPiI2CWriteReg16(fd , channelpos+2 , off & 0x0FFF);
 }
 
+
 int ps3c_test(struct ps3ctls *ps3dat) {
 
 	int i;
 	unsigned char nr_btn = ps3dat->nr_buttons;
 	unsigned char nr_stk = ps3dat->nr_sticks;
 	int xx,yy,x,y,z,v1,v2,ww,c1,c2,c3,c4;
-
 
     v1 = (-ps3dat->stick [PAD_LEFT_X])*(1-ps3dat->button[PAD_KEY_L_JOYSTICK]);    // 横軸入力
     v2 = ps3dat->stick [PAD_LEFT_Y];    // 縦軸入力
@@ -171,11 +173,11 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 		softPwmWrite(25,abs(c4)); softPwmWrite(24,0);
 	};
 
-// *************************************************************************** //	
 
 	if(ps3dat->button[PAD_KEY_L1]) btn_l1++;
 	if(!ps3dat->button[PAD_KEY_L1]) btn_l1 = 0;
 	if(b_btn_l1 > btn_l1) {
+
 		l_mode++; if (l_mode > 9) l_mode = 0;
 		if(l_mode == 0 ) system("mpg123 /home/pi/Music/21.mp3 &");
 		if(l_mode == 1 ) system("mpg123 /home/pi/Music/22.mp3 &");
@@ -189,7 +191,6 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 		if(l_mode == 9 ) system("mpg123 /home/pi/Music/30.mp3 &");
 	};
 
-	
 	if(l_mode == -3) {
 		setPCA9685Duty(fds , 0 ,  -60);	// 右腕　格納
 		setPCA9685Duty(fds , 1 ,  -60);
@@ -240,11 +241,11 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	
 	b_btn_l1 = btn_l1;
 
-// *************************************************************************** //	
 
 	if(ps3dat->button[PAD_KEY_R1]) btn_r1++;
 	if(!ps3dat->button[PAD_KEY_R1]) btn_r1 = 0;
 	if(b_btn_r1 > btn_r1) {
+
 		r_mode++; if (r_mode > 9) r_mode = 0;
 		if(r_mode == 0 ) system("mpg123 /home/pi/Music/10.mp3 &");
 		if(r_mode == 1 ) system("mpg123 /home/pi/Music/11.mp3 &");
@@ -257,7 +258,6 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 		if(r_mode == 8 ) system("mpg123 /home/pi/Music/18.mp3 &");
 		if(r_mode == 9 ) system("mpg123 /home/pi/Music/19.mp3 &");
 	};
-
 
 	if(r_mode == -2) {
 		setPCA9685Duty(fds , 0+4 ,  0);//0	// 右腕　?
@@ -307,8 +307,6 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 
 	b_btn_r1 = btn_r1;
 
-
-// *************************************************************************** //	
 
 	if(ps3dat->button[PAD_KEY_SQUARE]) btn_square++;	// 左手を握る・離す
 	if(!ps3dat->button[PAD_KEY_SQUARE]) btn_square = 0;
