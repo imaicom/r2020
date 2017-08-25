@@ -59,10 +59,10 @@ int b_btn_l1 = 0;
 int btn_l2 = 0;
 int b_btn_l2 = 0;
 
-int l_mode = 3;
+int l_mode = 2;
 int l_mode_a = 55;
 int l_mode_b = -80;
-int r_mode = 3;
+int r_mode = 2;
 int r_mode_a = 72 ;
 int r_mode_b = +90;
 int t_mode = 11;
