@@ -725,7 +725,10 @@ void main() {
 	fds = wiringPiI2CSetup(0x40);	// PCA9685
 	resetPCA9685(fds);
 	setPCA9685Freq(fds,50);
-	system("mpg123 /home/pi/Music/Main_system_startup.mp3 &");
+	system("mpg123 /home/pi/Music/Main_system_startup.mp3");
+	delay(200);
+	system("mpg123 /home/pi/Music/Press_the_PS_button.mp3");
+	
 
 	if(!(ps3c_init(&ps3dat, df))) {
 
