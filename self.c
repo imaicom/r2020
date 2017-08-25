@@ -183,7 +183,7 @@ int automatic() {
 			if(digitalRead(10)==0) goto restart;
 			softPwmWrite( 1,30); delay(300); softPwmWrite( 1,0); delay(1000);
 			if(digitalRead(10)==0) goto restart;
-			softPwmWrite( 1,30); delay(300); softPwmWrite( 1,0); delay(1000);
+			softPwmWrite( 1,30); delay(300); softPwmWrite( 1,0);
 			if(digitalRead(10)==0) goto restart;
 			softPwmWrite( 1,30); delay(300); softPwmWrite( 1,0); delay(1000);
 
@@ -202,7 +202,7 @@ int automatic() {
 			if(digitalRead(10)==0) goto restart;
 			softPwmWrite( 1,30);delay(300); softPwmWrite( 1,0); delay(1000);
 			if(digitalRead(10)==0) goto restart;
-			softPwmWrite( 1,30);delay(300); softPwmWrite( 1,0); delay(1000);
+			softPwmWrite( 1,30);delay(300); softPwmWrite( 1,0);
 			if(digitalRead(10)==0) goto restart;
 			softPwmWrite( 1,30);delay(300); softPwmWrite( 1,0); delay(1000);
 
