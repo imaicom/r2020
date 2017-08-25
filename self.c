@@ -402,9 +402,23 @@ void main() {
     softPwmCreate(29,0,20); // motor-3 20ms   // 大回転モータgyakuten
 
     pinMode(23,OUTPUT);	// センササーボ 0:収納 1:出し
-    pinMode(24,OUTPUT);	// beeper
+    pinMode(24,OUTPUT);	// pull servo
+    pinMode(28,OUTPUT);	// pull servo
     pinMode(25,OUTPUT);	// LED
+    
     digitalWrite(25,1); // 動作中LED点灯
+    
+    digitalWrite(24,0); // pull servo	// up
+    digitalWrite(28,0); // pull servo
+    
+ //   digitalWrite(24,0); // pull servo	// small up
+ //   digitalWrite(28,1); // pull servo
+    
+ //   digitalWrite(24,1); // pull servo	// horizon
+ //   digitalWrite(28,0); // pull servo
+    
+ //   digitalWrite(24,1); // pull servo	// small down
+ //   digitalWrite(28,1); // pull servo
 
     pinMode(7,INPUT);   // 左床センサ
     pinMode(0,INPUT);
