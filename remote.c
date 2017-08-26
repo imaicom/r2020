@@ -59,14 +59,14 @@ int b_btn_l1 = 0;
 int btn_l2 = 0;
 int b_btn_l2 = 0;
 
-int l_mode = 2;
+int l_mode = 3;
 int l_mode_a = 55;
 int l_mode_b = -80;
-int r_mode = 2;
+int r_mode = 3;
 int r_mode_a = 72 ;
 int r_mode_b = +90;
 int t_mode = 11;
-int h_mode = 2;
+int h_mode = 12;
 int d_mode = 1;
 
 
@@ -210,8 +210,8 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	};
 
 	if((l_mode == 2)) {
-		setPCA9685Duty(fds , 0 ,  106);//106	// 左腕　すくう
-		setPCA9685Duty(fds , 1 ,  -60);//-60
+		setPCA9685Duty(fds , 0 ,  95);//106	// 左腕　すくう
+		setPCA9685Duty(fds , 1 ,  -55);//-60
 		setPCA9685Duty(fds , 2 ,  160 + ps3dat->stick [PAD_RIGHT_Y]/10);//180
 	};
 	
@@ -273,7 +273,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	
 	if((r_mode == 2)) {
 		setPCA9685Duty(fds , 0+4 ,  102);//102	// 右腕　ゲットボトル
-		setPCA9685Duty(fds , 1+4 ,  -70);//-70
+		setPCA9685Duty(fds , 1+4 ,  -60);//-70
 		setPCA9685Duty(fds , 2+4 ,  170 + ps3dat->stick [PAD_RIGHT_Y]/10);//180
 	};
 	
