@@ -192,7 +192,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	};
 
 	if(l_mode == -3) {
-		setPCA9685Duty(fds , 0 ,  -60);	// 右腕　格納
+		setPCA9685Duty(fds , 0 ,  -60);	// 左腕
 		setPCA9685Duty(fds , 1 ,  -60);
 		setPCA9685Duty(fds , 2 ,  -160);
 	};
@@ -209,9 +209,9 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 		setPCA9685Duty(fds , 2 ,  0);
 	};
 
-	if((l_mode == 2)) {
-		setPCA9685Duty(fds , 0 ,  95);//106	// 左腕　すくう
-		setPCA9685Duty(fds , 1 ,  -55);//-60
+	if(l_mode == 2) {
+		setPCA9685Duty(fds , 0 ,  106);//106	// 左腕　すくう
+		setPCA9685Duty(fds , 1 ,  -60);//-60
 		setPCA9685Duty(fds , 2 ,  160 + ps3dat->stick [PAD_RIGHT_Y]/10);//180
 	};
 	
@@ -221,10 +221,10 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 		setPCA9685Duty(fds , 2 ,  180);
 	};
 
-	if((l_mode == 4)) {
+	if(l_mode == 4) {
 		setPCA9685Duty(fds , 0 ,  -35);	// 左腕　置く 電圧が下がったら-24 上がったら-35という変な設定
 		setPCA9685Duty(fds , 1 ,  30);
-		setPCA9685Duty(fds , 2 ,  70 + ps3dat->stick [PAD_RIGHT_Y]/10);//90
+		setPCA9685Duty(fds , 2 ,  90 + ps3dat->stick [PAD_RIGHT_Y]/10);
 	};
 
 	if((l_mode == 5)&&(b_btn_l1 > btn_l1)) {
@@ -260,36 +260,36 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	};
 
 	if(r_mode == -2) {
-		setPCA9685Duty(fds , 0+4 ,  0);//0	// 右腕　?
+		setPCA9685Duty(fds , 0+4 ,  0);//0	// 右腕
 		setPCA9685Duty(fds , 1+4 ,  0);
 		setPCA9685Duty(fds , 2+4 ,  0);//100
 	};
 
 	if(r_mode == -1) {
-		setPCA9685Duty(fds , 0+4 ,  0);//0	// 右腕　?
+		setPCA9685Duty(fds , 0+4 ,  0);//0	// 右腕
 		setPCA9685Duty(fds , 1+4 ,  0);
 		setPCA9685Duty(fds , 2+4 ,  0);//100
 	};
 	
-	if((r_mode == 2)) {
+	if(r_mode == 2) {
 		setPCA9685Duty(fds , 0+4 ,  102);//102	// 右腕　ゲットボトル
-		setPCA9685Duty(fds , 1+4 ,  -60);//-70
+		setPCA9685Duty(fds , 1+4 ,  -70);//-70
 		setPCA9685Duty(fds , 2+4 ,  170 + ps3dat->stick [PAD_RIGHT_Y]/10);//180
 	};
 	
-	if((r_mode == 3)) {
+	if((r_mode == 3)&&(b_btn_r1 > btn_r1)) {
 		setPCA9685Duty(fds , 0+4 ,  -20);	// 右腕　ちょい持ち上げ
 		setPCA9685Duty(fds , 1+4 ,  -70);
 		setPCA9685Duty(fds , 2+4 ,  180);
 	};
 
-	if((r_mode == 4)) {
-		setPCA9685Duty(fds , 0+4 ,  -0);//-20	// 置く 電圧が下がったら-20 上がったら-30という変な設定
-		setPCA9685Duty(fds , 1+4 ,  10);//30
-		setPCA9685Duty(fds , 2+4 ,  70 + ps3dat->stick [PAD_RIGHT_Y]/10);//90
+	if(r_mode == 4) {
+		setPCA9685Duty(fds , 0+4 ,  -20);	// 置く 電圧が下がったら-20 上がったら-30という変な設定
+		setPCA9685Duty(fds , 1+4 ,  30);
+		setPCA9685Duty(fds , 2+4 ,  110 + ps3dat->stick [PAD_RIGHT_Y]/10);
 	};
 	
-	if((r_mode == 5)) {
+	if(r_mode == 5) {
 		setPCA9685Duty(fds , 2+4 ,  90 + ps3dat->stick [PAD_RIGHT_Y]/10);
 	};
 
@@ -300,7 +300,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	};
 
 	if((r_mode == 7)&&(b_btn_r1 > btn_r1)) {
-		setPCA9685Duty(fds , 0+4 ,  30);	// 左腕　ちょい持ち上げ
+		setPCA9685Duty(fds , 0+4 ,  30);	// 右腕　ちょい持ち上げ
 		setPCA9685Duty(fds , 1+4 ,  30);
 		setPCA9685Duty(fds , 2+4 ,  110);
 	};
