@@ -203,18 +203,6 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 		if(l_mode == 9 ) system("mpg123 /home/pi/Music/30.mp3 &");
 	};
 
-	if(l_mode == -3) {
-		setPCA9685Duty(fds , 0 ,  -20);	// 左腕　収納３
-		setPCA9685Duty(fds , 1 ,  -70);
-		setPCA9685Duty(fds , 2 ,  180);
-	};
-
-	if(l_mode == -2) {
-		setPCA9685Duty(fds , 0 ,  -20);	// 左腕　収納２
-		setPCA9685Duty(fds , 1 ,  -70);
-		setPCA9685Duty(fds , 2 ,  180);
-	};
-
 	if(l_mode == -1) {
 		setPCA9685Duty(fds , 0 ,  -50);//-20	// 左腕　収納１
 		setPCA9685Duty(fds , 1 ,  -100);//-70
@@ -271,18 +259,6 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 		if(r_mode == 9 ) system("mpg123 /home/pi/Music/19.mp3 &");
 	};
 
-	if(r_mode == -3) {
-		setPCA9685Duty(fds , 0+4 ,  -20);	// 右腕　収納３
-		setPCA9685Duty(fds , 1+4 ,  -70);
-		setPCA9685Duty(fds , 2+4 ,  180);
-	};
-	
-	if(r_mode == -2) {
-		setPCA9685Duty(fds , 0+4 ,  -20);	// 右腕　収納２
-		setPCA9685Duty(fds , 1+4 ,  -70);
-		setPCA9685Duty(fds , 2+4 ,  180);
-	};
-
 	if(r_mode == -1) {
 		setPCA9685Duty(fds , 0+4 ,  -50);//-20	// 右腕　収納１
 		setPCA9685Duty(fds , 1+4 ,  -100);//-70
@@ -290,9 +266,9 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	};
 	
 	if(r_mode == 2) {
-		setPCA9685Duty(fds , 0+4 ,  95);//102	// 右腕　ゲットボトル
-		setPCA9685Duty(fds , 1+4 ,  -55);//-70
-		setPCA9685Duty(fds , 2+4 ,  170 + ps3dat->stick [PAD_RIGHT_Y]/10);//180
+		setPCA9685Duty(fds , 0+4 ,  102);//102	// 右腕　ゲットボトル
+		setPCA9685Duty(fds , 1+4 ,  -50);//-70
+		setPCA9685Duty(fds , 2+4 ,  170 + ps3dat->stick [PAD_RIGHT_Y]/10)+40;//180
 	};
 	
 	if((r_mode == 3)&&(b_btn_r1 > btn_r1)) {
@@ -557,7 +533,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 
 
 	if(ps3dat->button[PAD_KEY_START]) {
-		system("mpg123 /home/pi/Music/Moves_to_programming_mode.mp3 &");
+		system("mpg123 /home/pi/Music/Programming_mode.mp3 &");
 		softPwmWrite(5,0); // motor-1 10ms
 		softPwmWrite(6,0); // motor-1 10ms
 		softPwmWrite(26,0); // motor-2 10ms
