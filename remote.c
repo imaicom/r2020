@@ -181,9 +181,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	if(b_btn_select > btn_select) {
 	
 		if((l_mode == 3)&&(r_mode == 3)) {l_mode = -1; r_mode = -1;} 
-		else if((l_mode == -1)&&(r_mode == -1))  {l_mode = -2; r_mode = -2;}
-		else if((l_mode == -2)&&(r_mode == -2))  {l_mode = -3; r_mode = -3;}
-		else if((l_mode == -3)&&(r_mode == -3))  {l_mode = 3; r_mode = 3;};
+		else if((l_mode == -1)&&(r_mode == -1))  {l_mode = 3; r_mode = 3;}
 	};
 	b_btn_select = btn_select;
 
@@ -218,9 +216,9 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	};
 
 	if(l_mode == -1) {
-		setPCA9685Duty(fds , 0 ,  -30);//-20	// 左腕　収納１
-		setPCA9685Duty(fds , 1 ,  -70);//-70
-		setPCA9685Duty(fds , 2 ,  150);//180
+		setPCA9685Duty(fds , 0 ,  -50);//-20	// 左腕　収納１
+		setPCA9685Duty(fds , 1 ,  -100);//-70
+		setPCA9685Duty(fds , 2 ,  -100);//180
 	};
 
 	if(l_mode == 2) {
@@ -286,9 +284,9 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	};
 
 	if(r_mode == -1) {
-		setPCA9685Duty(fds , 0+4 ,  -40);//-20	// 右腕　収納１
-		setPCA9685Duty(fds , 1+4 ,  -70);//-70
-		setPCA9685Duty(fds , 2+4 ,  150);//180
+		setPCA9685Duty(fds , 0+4 ,  -50);//-20	// 右腕　収納１
+		setPCA9685Duty(fds , 1+4 ,  -100);//-70
+		setPCA9685Duty(fds , 2+4 ,  -100);//180
 	};
 	
 	if(r_mode == 2) {
