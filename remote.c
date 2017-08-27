@@ -62,7 +62,7 @@ int btn_l2 = 0;
 int b_btn_l2 = 0;
 
 int l_mode = 3;
-int l_mode_a = 55;
+int l_mode_a = 60;//55
 int l_mode_b = -80;
 int r_mode = 3;
 int r_mode_a = 72 ;
@@ -332,10 +332,10 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	if(!ps3dat->button[PAD_KEY_SQUARE]) btn_square = 0;
 	if(b_btn_square > btn_square) {
 
-		if(l_mode_a == 55) l_mode_a = -25; 
+		if(l_mode_a == 60) l_mode_a = -25; 
 		else if (l_mode_a == -25) l_mode_a = 40; 
-		else l_mode_a = 55;
-		if(l_mode_a == 55 ) system("mpg123 /home/pi/Music/Close_my_left_hand.mp3 &");
+		else l_mode_a = 60;
+		if(l_mode_a == 60 ) system("mpg123 /home/pi/Music/Close_my_left_hand.mp3 &");
 		if(l_mode_a == 40 ) system("mpg123 /home/pi/Music/A_little_hold.mp3 &");
 		if(l_mode_a == -25 ) system("mpg123 /home/pi/Music/Open_my_left_hand.mp3 &");
 		setPCA9685Duty(fds , 3 ,  l_mode_a);
