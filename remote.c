@@ -51,6 +51,12 @@ int btn_square = 0;
 int b_btn_square = 0;
 int btn_circle = 0;
 int b_btn_circle = 0;
+int btn_ps = 0;
+int b_btn_ps = 0;
+int btn_ljoy = 0;
+int b_btn_ljoy = 0;
+int btn_rjoy = 0;
+int b_btn_rjoy = 0;
 
 int btn_r1 = 0;
 int b_btn_r1 = 0;
@@ -70,6 +76,7 @@ int r_mode_b = +90;
 int t_mode = 11;
 int h_mode = 12;
 int d_mode = 1;
+int lock = 0;
 
 
 int resetPCA9685(int fd) {
@@ -207,15 +214,25 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 		setPCA9685Duty(fds , 0 ,  -50);//-20	// 左腕　収納１
 		setPCA9685Duty(fds , 1 ,  -100);//-70
 		setPCA9685Duty(fds , 2 ,  -100);//180
+		lock = 0;
 	};
 
 	if(l_mode == 2) {
 		setPCA9685Duty(fds , 0 ,  106);	// 左腕　すくう
 		setPCA9685Duty(fds , 1 ,  -60);
-		setPCA9685Duty(fds , 2 ,  160 + ps3dat->stick [PAD_RIGHT_Y]/10);//180
+		
+		if(ps3dat->button[PAD_KEY_R_JOYSTICK]) btn_rjoy++;
+		if(!ps3dat->button[PAD_KEY_R_JOYSTICK]) btn_rjoy = 0;
+		if(b_btn_rjoy > btn_rjoy) {
+			 lock = 1;
+			 system("mpg123 /home/pi/Music/lock.mp3 &");
+		};
+		if(!lock) setPCA9685Duty(fds , 2 ,  160 + ps3dat->stick [PAD_RIGHT_Y]/5);//180
+		b_btn_rjoy = btn_rjoy;
 	};
 	
 	if((l_mode == 3)&&(b_btn_l1 > btn_l1)) {
+		lock = 0;
 		setPCA9685Duty(fds , 0 ,  -20);	// 左腕　ちょい持ち上げ
 		setPCA9685Duty(fds , 1 ,  -70);
 		setPCA9685Duty(fds , 2 ,  180);
@@ -224,7 +241,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	if(l_mode == 4) {
 		setPCA9685Duty(fds , 0 ,  -35);	// 左腕　置く 電圧が下がったら-24 上がったら-35という変な設定
 		setPCA9685Duty(fds , 1 ,  30);
-		setPCA9685Duty(fds , 2 ,  90 + ps3dat->stick [PAD_RIGHT_Y]/10);
+		setPCA9685Duty(fds , 2 ,  90 + ps3dat->stick [PAD_RIGHT_Y]/5);
 	};
 
 	if((l_mode == 5)&&(b_btn_l1 > btn_l1)) {
@@ -263,15 +280,25 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 		setPCA9685Duty(fds , 0+4 ,  -50);//-20	// 右腕　収納１
 		setPCA9685Duty(fds , 1+4 ,  -100);//-70
 		setPCA9685Duty(fds , 2+4 ,  -100);//180
+		lock = 0;
 	};
 	
 	if(r_mode == 2) {
 		setPCA9685Duty(fds , 0+4 ,  102);//102	// 右腕　ゲットボトル
 		setPCA9685Duty(fds , 1+4 ,  -50);//-70
-		setPCA9685Duty(fds , 2+4 ,  170 + ps3dat->stick [PAD_RIGHT_Y]/10)+40;//180
+		
+		if(ps3dat->button[PAD_KEY_R_JOYSTICK]) btn_rjoy++;
+		if(!ps3dat->button[PAD_KEY_R_JOYSTICK]) btn_rjoy = 0;
+		if(b_btn_rjoy > btn_rjoy) {
+			 lock = 1;
+			 system("mpg123 /home/pi/Music/lock.mp3 &");
+		};
+		if(!lock) setPCA9685Duty(fds , 2+4 ,  170 + ps3dat->stick [PAD_RIGHT_Y]/5)+40;//180
+		b_btn_rjoy = btn_rjoy;
 	};
 	
 	if((r_mode == 3)&&(b_btn_r1 > btn_r1)) {
+		lock = 0;
 		setPCA9685Duty(fds , 0+4 ,  -20);	// 右腕　ちょい持ち上げ
 		setPCA9685Duty(fds , 1+4 ,  -70);
 		setPCA9685Duty(fds , 2+4 ,  180);
@@ -279,12 +306,12 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 
 	if(r_mode == 4) {
 		setPCA9685Duty(fds , 0+4 ,  -20);	// 置く 電圧が下がったら-20 上がったら-30という変な設定
-		setPCA9685Duty(fds , 1+4 ,  30);
-		setPCA9685Duty(fds , 2+4 ,  110 + ps3dat->stick [PAD_RIGHT_Y]/10);
+		setPCA9685Duty(fds , 1+4 ,  30);//30
+		setPCA9685Duty(fds , 2+4 ,  110 + ps3dat->stick [PAD_RIGHT_Y]/5);
 	};
 	
 	if(r_mode == 5) {
-		setPCA9685Duty(fds , 2+4 ,  90 + ps3dat->stick [PAD_RIGHT_Y]/10);
+		setPCA9685Duty(fds , 2+4 ,  90 + ps3dat->stick [PAD_RIGHT_Y]/5);
 	};
 
 	if((r_mode == 6)&&(b_btn_r1 > btn_r1)) {
@@ -446,6 +473,15 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 		else if(ps3dat->button[PAD_KEY_DOWN]) setPCA9685Duty(fds , 9 , -60);
 		else setPCA9685Duty(fds , 9 , 10);
 	};
+	
+//	if(ps3dat->button[PAD_KEY_PS]) btn_ps++;
+//	if(!ps3dat->button[PAD_KEY_PS]) btn_ps = 0;
+//	if(b_btn_ps > btn_ps) {
+
+	if((ps3dat->button[PAD_KEY_PS])&&(!ps3dat->button[PAD_KEY_L2])) setPCA9685Duty(fds , 9 , -60);
+	else if((ps3dat->button[PAD_KEY_PS])&&(ps3dat->button[PAD_KEY_L2])) setPCA9685Duty(fds , 9 , +60);
+//	};
+//	b_btn_ps = btn_ps;
 
 	if(ps3dat->button[PAD_KEY_LEFT]) btn_left++;
 	if(!ps3dat->button[PAD_KEY_LEFT]) btn_left = 0;
@@ -533,7 +569,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 
 
 	if(ps3dat->button[PAD_KEY_START]) {
-		system("mpg123 /home/pi/Music/Programming_mode.mp3 &");
+		system("mpg123 /home/pi/Music/Safe_mode.mp3 &");
 		softPwmWrite(5,0); // motor-1 10ms
 		softPwmWrite(6,0); // motor-1 10ms
 		softPwmWrite(26,0); // motor-2 10ms
