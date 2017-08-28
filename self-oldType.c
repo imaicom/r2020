@@ -364,18 +364,18 @@ int ps3c_test(struct ps3ctls *ps3dat) {
     unsigned char nr_stk = ps3dat->nr_sticks;
     int xx,yy,ph,x,y,z,p,c1,c2,c3,c4,v1,v2,ww;
 
-//    printf(" s7=%4d ",digitalRead(7));   // 左床センサ 白:1 黒:0
-//    printf(" s0=%4d ",digitalRead(0));
-//    printf(" s2=%4d ",digitalRead(2));
-//    printf(" s3=%4d ",digitalRead(3));   // 中心床センサ
-//    printf(" s12=%3d ",digitalRead(12));
-//    printf(" s13=%3d ",digitalRead(13));
-//    printf(" s14=%3d ",digitalRead(14));   // 右床センサ
-//    printf(" s15=%3d ",digitalRead(15));   // タクトスイッチ 通常:1 検出時:0
-//    printf(" s16=%3d ",digitalRead(16));   // エンコーダ 通常:1 回転時:0
-//    printf(" s1=%4d ",digitalRead(4));   // 大回転センサ 通常:1 検出時:0
-//    printf(" enc=%4d ",read_file("cntWheel"));   // エンコーダ
-//    printf("\n");
+    printf(" s7=%4d ",digitalRead(7));   // 左床センサ 白:1 黒:0
+    printf(" s0=%4d ",digitalRead(0));
+    printf(" s2=%4d ",digitalRead(2));
+    printf(" s3=%4d ",digitalRead(3));   // 中心床センサ
+    printf(" s12=%3d ",digitalRead(12));
+    printf(" s13=%3d ",digitalRead(13));
+    printf(" s14=%3d ",digitalRead(14));   // 右床センサ
+    printf(" s15=%3d ",digitalRead(15));   // タクトスイッチ 通常:1 検出時:0
+    printf(" s16=%3d ",digitalRead(16));   // エンコーダ 通常:1 回転時:0
+    printf(" s1=%4d ",digitalRead(4));   // 大回転センサ 通常:1 検出時:0
+	printf(" enc=%4d ",read_file("cntWheel"));   // エンコーダ
+    printf("\n");
 
 //    automatic();
 
@@ -545,18 +545,17 @@ void main() {
  //   digitalWrite(24,1); // pull servo	// small down
  //   digitalWrite(28,1); // pull servo
 
-    //未使用センサをOUTPUTで止めとく、本来INPUT
-    pinMode(7,OUTPUT);   // 左床センサ
-    pinMode(0,OUTPUT);
-    pinMode(2,OUTPUT);
-    pinMode(3,OUTPUT);   // 中心床センサ
-    pinMode(12,OUTPUT);
-    pinMode(13,OUTPUT);
-    pinMode(14,OUTPUT);   // 右床センサ
+    pinMode(7,INPUT);   // 左床センサ
+    pinMode(0,INPUT);
+    pinMode(2,INPUT);
+    pinMode(3,INPUT);   // 中心床センサ
+    pinMode(12,INPUT);
+    pinMode(13,INPUT);
+    pinMode(14,INPUT);   // 右床センサ
 
     pinMode(15,INPUT);	// 赤タクトスイッチ
     pinMode(10,INPUT);	// 白タクトスイッチ
-	pinMode(16,OUTPUT);	// エンコーダ
+	pinMode(16,INPUT);	// エンコーダ
 	pinMode(4,INPUT);	// 大回転センサ
 
 	write_file("cntWheel"		,0 );
