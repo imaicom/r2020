@@ -197,7 +197,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	if(!ps3dat->button[PAD_KEY_L1]) btn_l1 = 0;
 	if(b_btn_l1 > btn_l1) {
 
-		l_mode++; if (l_mode > 9) l_mode = 0;
+		l_mode++; if (l_mode > 6) l_mode = 1;
 		if(l_mode == 0 ) system("mpg123 /home/pi/Music/21.mp3 &");
 		if(l_mode == 1 ) system("mpg123 /home/pi/Music/22.mp3 &");
 		if(l_mode == 2 ) system("mpg123 /home/pi/Music/23.mp3 &");
@@ -263,7 +263,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	if(!ps3dat->button[PAD_KEY_R1]) btn_r1 = 0;
 	if(b_btn_r1 > btn_r1) {
 
-		r_mode++; if (r_mode > 9) r_mode = 0;
+		r_mode++; if (r_mode > 7) r_mode = 1;
 		if(r_mode == 0 ) system("mpg123 /home/pi/Music/10.mp3 &");
 		if(r_mode == 1 ) system("mpg123 /home/pi/Music/11.mp3 &");
 		if(r_mode == 2 ) system("mpg123 /home/pi/Music/12.mp3 &");
@@ -441,7 +441,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 
 	if((b_btn_upd > btn_upd)||(b_btn_downd > btn_downd)) {
 
-		if(d_mode == 1 ) setPCA9685Duty(fds , 11 ,  90);
+		if(d_mode == 1 ) setPCA9685Duty(fds , 11 ,  80);
 		if(d_mode == 2 ) setPCA9685Duty(fds , 11 ,  80);
 		if(d_mode == 3 ) setPCA9685Duty(fds , 11 ,  70);
 		if(d_mode == 4 ) setPCA9685Duty(fds , 11 ,  60);
@@ -471,7 +471,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	if(!ps3dat->button[PAD_KEY_L2]) {
 		if(ps3dat->button[PAD_KEY_UP]) setPCA9685Duty(fds , 9 , 60); 
 		else if(ps3dat->button[PAD_KEY_DOWN]) setPCA9685Duty(fds , 9 , -60);
-		else setPCA9685Duty(fds , 9 , 10);
+		else setPCA9685Duty(fds , 9 , 9);//10 // 静止
 	};
 	
 //	if(ps3dat->button[PAD_KEY_PS]) btn_ps++;
