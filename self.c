@@ -134,7 +134,7 @@ int automatic() {
 			softPwmWrite( 1,30); delay(600);	// 安定系
 			while(digitalRead(4));
 			softPwmWrite( 1,0); delay(1000); if(digitalRead(10)==0) goto restart;
-			softPwmWrite( 1,10); delay(600);	// 正立
+			softPwmWrite( 1,10); delay(1001);	// 正立
 			while(digitalRead(4));
 			softPwmWrite( 1,0); delay(1000);	if(digitalRead(10)==0) goto restart;
 			
@@ -145,7 +145,7 @@ int automatic() {
 			softPwmWrite( 1,30); delay(600);	// 安定系
 			while(digitalRead(4));
 			softPwmWrite( 1,0); delay(1000);	if(digitalRead(10)==0) goto restart;
-			softPwmWrite( 1,10); delay(600);	// 正立
+			softPwmWrite( 1,10); delay(1001);	// 正立
 			while(digitalRead(4));
 			softPwmWrite( 1,0); delay(1000); if(digitalRead(10)==0) goto restart;
 			
@@ -172,7 +172,7 @@ int automatic() {
 			softPwmWrite( 1,30); delay(600);	// 安定系
 			while(digitalRead(4));
 			softPwmWrite( 1,0); delay(1000); if(digitalRead(10)==0) goto restart;
-			softPwmWrite( 1,10); delay(600);	// 正立
+			softPwmWrite( 1,10); delay(1001);	// 正立
 			while(digitalRead(4));
 			softPwmWrite( 1,0); delay(1000); if(digitalRead(10)==0) goto restart;		 
 			
@@ -199,7 +199,7 @@ int automatic() {
 			softPwmWrite( 1,30); delay(600);	// 安定系
 			while(digitalRead(4));
 			softPwmWrite( 1,0); delay(1000); if(digitalRead(10)==0) goto restart;
-			softPwmWrite( 1,10); delay(600);	// 正立
+			softPwmWrite( 1,10); delay(1001);	// 正立
 			while(digitalRead(4));
 			softPwmWrite( 1,0); delay(1000);	 if(digitalRead(10)==0) goto restart;	 
 
@@ -208,7 +208,7 @@ int automatic() {
 			softPwmWrite( 1,30); delay(600);	// 安定系
 			while(digitalRead(4));
 			softPwmWrite( 1,0); delay(1000); if(digitalRead(10)==0) goto restart;
-			softPwmWrite( 1,10); delay(600);	// 正立
+			softPwmWrite( 1,10); delay(1001);	// 正立
 			while(digitalRead(4));
 			softPwmWrite( 1,0); delay(1000);	 if(digitalRead(10)==0) goto restart;
 
