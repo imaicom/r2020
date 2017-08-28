@@ -117,18 +117,19 @@ int automatic() {
 			digitalWrite(25,0); delay(100);
 			digitalWrite(25,1); delay(100);
 
+
 			delay(10000); // 10秒タイマ
-			 
+			
+
 			softPwmWrite( 5,20); // 左右車輪前
-			softPwmWrite(27,20);
-			 
+			softPwmWrite(27,20); 
 			delay(4000);
-			 
 			softPwmWrite( 5,0); // 停止
 			softPwmWrite( 6,0);
 			softPwmWrite(27,0);
 			softPwmWrite(26,0);
-			 			
+			
+
 			// 1回転目
 			softPwmWrite( 1,20); delay(600);	// 安定系
 			while(digitalRead(4));
@@ -148,6 +149,7 @@ int automatic() {
 			 
 
 			goto restart;
+
 
 			// 2回転目
 			softPwmWrite( 1,20); delay(600);	// 安定系
@@ -194,8 +196,8 @@ int automatic() {
 			softPwmWrite(26,0);
 
 
-			softPwmWrite( 5,50); // 右回転
-			softPwmWrite(26,50);
+			softPwmWrite( 6,50); // 左回転
+			softPwmWrite(27,50);
 			delay(1800); if(digitalRead(10)==0) goto restart;
 			softPwmWrite( 5,0); // 停止
 			softPwmWrite( 6,0);
