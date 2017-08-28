@@ -121,7 +121,7 @@ int automatic() {
 			delay(10000); // 10秒タイマ
 			
 
-			softPwmWrite( 5,20); // 左右車輪前
+			softPwmWrite( 5,20); // 前進
 			softPwmWrite(27,20); 
 			delay(4000);
 			softPwmWrite( 5,0); // 停止
@@ -187,7 +187,7 @@ int automatic() {
 			softPwmWrite( 1,0); delay(1000); if(digitalRead(10)==0) goto restart;		 
 			
 			
-			softPwmWrite( 6,20); // 左右車輪後
+			softPwmWrite( 6,20); // 後進
 			softPwmWrite(26,20);
 			delay(600); if(digitalRead(10)==0) goto restart;
 			softPwmWrite( 5,0); // 停止
