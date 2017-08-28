@@ -138,7 +138,7 @@ int automatic() {
 			while(digitalRead(4));
 			softPwmWrite( 1,0); delay(1000);	if(digitalRead(10)==0) goto restart;
 			
-			goto restart;
+//			goto restart;
 
 
 			// 2回転目
