@@ -357,9 +357,9 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	b_btn_circle = btn_circle;
 
 	if(ps3dat->button[PAD_KEY_UP])
-		 setPCA9685Duty(fds , t_mode ,  -60);
-	else if(ps3dat->button[PAD_KEY_DOWN])
 		 setPCA9685Duty(fds , t_mode ,  +60);
+	else if(ps3dat->button[PAD_KEY_DOWN])
+		 setPCA9685Duty(fds , t_mode ,  -60);
 	else setPCA9685Duty(fds , t_mode ,  0);
 
 
@@ -466,14 +466,14 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 		if(t_mode == 10 ) system("mpg123 /home/pi/Music/servo-10.mp3 &");
 		if(t_mode == 11 ) system("mpg123 /home/pi/Music/servo-11.mp3 &");
 		if(t_mode == 12 ) system("mpg123 /home/pi/Music/servo-12.mp3 &");
-		if(t_mode == 13 ) system("mpg123 /home/pi/Music/servo-13.mp3 &");
+//		if(t_mode == 13 ) system("mpg123 /home/pi/Music/servo-13.mp3 &");
 	};
 
 	if(ps3dat->button[PAD_KEY_RIGHT]) btn_right++;
 	if(!ps3dat->button[PAD_KEY_RIGHT]) btn_right = 0;
 	if(b_btn_right > btn_right) {
 
-		t_mode++; if (t_mode > 13) t_mode = 13;
+		t_mode++; if (t_mode > 12) t_mode = 12;
 		if(t_mode == 0 ) system("mpg123 /home/pi/Music/servo-0.mp3 &");
 		if(t_mode == 1 ) system("mpg123 /home/pi/Music/servo-1.mp3 &");
 		if(t_mode == 2 ) system("mpg123 /home/pi/Music/servo-2.mp3 &");
@@ -487,7 +487,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 		if(t_mode == 10 ) system("mpg123 /home/pi/Music/servo-10.mp3 &");
 		if(t_mode == 11 ) system("mpg123 /home/pi/Music/servo-11.mp3 &");
 		if(t_mode == 12 ) system("mpg123 /home/pi/Music/servo-12.mp3 &");
-		if(t_mode == 13 ) system("mpg123 /home/pi/Music/servo-13.mp3 &");
+//		if(t_mode == 13 ) system("mpg123 /home/pi/Music/servo-13.mp3 &");
 	};
 
 	if((b_btn_left > btn_left)||(b_btn_right > btn_right)) {
