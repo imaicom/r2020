@@ -205,6 +205,9 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	};
 	b_btn_cross = btn_cross;
 
+	if(ps3dat->button[PAD_KEY_CIRCLE]) {
+		setPCA9685Duty(fds , 12 , -60);
+	};
 
 	if(ps3dat->button[PAD_KEY_CROSS]) {
 		setPCA9685Duty(fds , 0 ,  0);
@@ -215,7 +218,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 		setPCA9685Duty(fds , 5 ,  0);
 		setPCA9685Duty(fds , 6 ,  +20);
 		setPCA9685Duty(fds , 7 ,  0);
-		setPCA9685Duty(fds , 8 ,  0);
+		setPCA9685Duty(fds , 8 ,  +20);
 		setPCA9685Duty(fds , 9 ,  0);
 		setPCA9685Duty(fds , 10 ,  0);
 		setPCA9685Duty(fds , 11 ,  0);
@@ -232,7 +235,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	b_btn_circle = btn_circle;
 
 	if(ps3dat->button[PAD_KEY_UP]) {
-		 if(t_mode == 6) setPCA9685Duty(fds , t_mode ,  +80);
+		 if(t_mode == 6) setPCA9685Duty(fds , t_mode ,  +75);
 		 else setPCA9685Duty(fds , t_mode ,  +60);
 	}
 	else if(ps3dat->button[PAD_KEY_DOWN]) {
@@ -451,7 +454,7 @@ void main() {
 		setPCA9685Duty(fds , 5 ,  0);
 		setPCA9685Duty(fds , 6 ,  +20);
 		setPCA9685Duty(fds , 7 ,  0);
-		setPCA9685Duty(fds , 8 ,  0);
+		setPCA9685Duty(fds , 8 ,  +20);
 		setPCA9685Duty(fds , 9 ,  0);
 		setPCA9685Duty(fds , 10 ,  0);
 		setPCA9685Duty(fds , 11 ,  0);
