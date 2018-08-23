@@ -356,12 +356,17 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	};
 	b_btn_circle = btn_circle;
 
-	if(ps3dat->button[PAD_KEY_UP])
-		 setPCA9685Duty(fds , t_mode ,  +60);
-	else if(ps3dat->button[PAD_KEY_DOWN])
-		 setPCA9685Duty(fds , t_mode ,  -60);
-	else setPCA9685Duty(fds , t_mode ,  0);
-
+	if(ps3dat->button[PAD_KEY_UP]) {
+		 if(t_mode == 6) setPCA9685Duty(fds , t_mode ,  +80);
+		 else setPCA9685Duty(fds , t_mode ,  +60);
+	}
+	else if(ps3dat->button[PAD_KEY_DOWN]) {
+		 if(t_mode != 6) setPCA9685Duty(fds , t_mode ,  -60);
+	}
+	else { 
+		if(t_mode == 6) setPCA9685Duty(fds , t_mode ,  +20);
+		else setPCA9685Duty(fds , t_mode ,  0);
+	};
 
 	if((ps3dat->button[PAD_KEY_UP])&&(ps3dat->button[PAD_KEY_L2])) btn_upd++;
 	if((!ps3dat->button[PAD_KEY_UP])&&(ps3dat->button[PAD_KEY_L2])) btn_upd = 0;
