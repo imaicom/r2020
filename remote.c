@@ -122,38 +122,42 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	unsigned char nr_stk = ps3dat->nr_sticks;
 	int xx,yy,x,y,z,v1,v2,ww,c1,c2,c3,c4;
 
-    v1 = (-ps3dat->stick [PAD_LEFT_X])*(1-ps3dat->button[PAD_KEY_R2]);    // 横軸入力
-    v2 = ps3dat->stick [PAD_LEFT_Y];    // 縦軸入力
-    ww = (-ps3dat->stick [PAD_LEFT_X])*(ps3dat->button[PAD_KEY_R2]);   // 回転入力
-
-    c1 = ( 8 * v1 +  8 * v2 + -6 * -ww ) / 10;   // 左前
-    c2 = ( 8 * v1 + -8 * v2 +  6 * ww ) / 10;   // 右前
-    c3 = ( 8 * v1 + -8 * v2 +  6 * -ww ) / 10;   // 左後
-    c4 = ( 8 * v1 +  8 * v2 + -6 * ww ) / 10;   // 右後
+//    v1 = (-ps3dat->stick [PAD_LEFT_X])*(1-ps3dat->button[PAD_KEY_R2]);    // 横軸入力
+//    v2 = ps3dat->stick [PAD_LEFT_Y];    // 縦軸入力
+//    ww = (-ps3dat->stick [PAD_LEFT_X])*(ps3dat->button[PAD_KEY_R2]);   // 回転入力
+//
+//    c1 = ( 8 * v1 +  8 * v2 + -6 * -ww ) / 10;   // 左前
+//    c2 = ( 8 * v1 + -8 * v2 +  6 * ww ) / 10;   // 右前
+//    c3 = ( 8 * v1 + -8 * v2 +  6 * -ww ) / 10;   // 左後
+//    c4 = ( 8 * v1 +  8 * v2 + -6 * ww ) / 10;   // 右後
+    
+    c2 = (ps3dat->stick[PAD_LEFT_Y] )*(1-ps3dat->button[PAD_KEY_R2]);
+    c4 = (ps3dat->stick[PAD_RIGHT_Y])*(1-ps3dat->button[PAD_KEY_R2]);
     
     if (1 - ps3dat->button[PAD_KEY_L2]) {	// ゆっくり動く
-		c1 = c1 / 15; c2 = c2 / 15; c3 = c3 / 15; c4 = c4 / 15;
+		c2 = c2 / 15;
+		c4 = c4 / 15;
 	};
 
 
-    printf(" 左前=%4d ",c1);
-    printf(" 右前=%4d ",c2);
-    printf("\n");
-    printf(" 左後=%4d ",c3);
-    printf(" 右後=%4d ",c4);
+//    printf(" 左前=%4d ",c1);
+    printf(" 左=%4d ",c2);
+//    printf("\n");
+//    printf(" 左後=%4d ",c3);
+    printf(" 右=%4d ",c4);
     printf(" d_mode=%4d ",d_mode);
     printf(" L_JOYSTICK=%4d ",ps3dat->button[PAD_KEY_L_JOYSTICK]);
     printf("\n");
     printf("\n");
 
 
-	if(abs(c1) < 5) {   // 左前
-		softPwmWrite(27,0); softPwmWrite(26,0);
-	} else if(c1 > 0) {
-		softPwmWrite(27,0); softPwmWrite(26,abs(c1));
-	} else {
-		softPwmWrite(27,abs(c1)); softPwmWrite(26,0);
-	};
+//	if(abs(c1) < 5) {   // 左前
+//		softPwmWrite(27,0); softPwmWrite(26,0);
+//	} else if(c1 > 0) {
+//		softPwmWrite(27,0); softPwmWrite(26,abs(c1));
+//	} else {
+//		softPwmWrite(27,abs(c1)); softPwmWrite(26,0);
+//	};
 
 
 	if(abs(c2) < 5) {   // 右前
@@ -165,13 +169,13 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	};
 
 
-	if(abs(c3) < 5) {   // 左後
-		softPwmWrite(5,0); softPwmWrite(6,0);
-	} else if(c3 > 0) {
-		softPwmWrite(5,0); softPwmWrite(6,abs(c3));
-	} else {
-		softPwmWrite(5,abs(c3)); softPwmWrite(6,0);
-	};
+//	if(abs(c3) < 5) {   // 左後
+//		softPwmWrite(5,0); softPwmWrite(6,0);
+//	} else if(c3 > 0) {
+//		softPwmWrite(5,0); softPwmWrite(6,abs(c3));
+//	} else {
+//		softPwmWrite(5,abs(c3)); softPwmWrite(6,0);
+//	};
 
 
 	if(abs(c4) < 5) {   // 右後
