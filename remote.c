@@ -345,6 +345,24 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	b_btn_cross = btn_cross;
 
 
+	if(ps3dat->button[PAD_KEY_CROSS]) {
+		setPCA9685Duty(fds , 0 ,  0);
+		setPCA9685Duty(fds , 1 ,  0);
+		setPCA9685Duty(fds , 2 ,  0);
+		setPCA9685Duty(fds , 3 ,  0);
+		setPCA9685Duty(fds , 4 ,  0);
+		setPCA9685Duty(fds , 5 ,  0);
+		setPCA9685Duty(fds , 6 ,  +20);
+		setPCA9685Duty(fds , 7 ,  0);
+		setPCA9685Duty(fds , 8 ,  0);
+		setPCA9685Duty(fds , 9 ,  0);
+		setPCA9685Duty(fds , 10 ,  0);
+		setPCA9685Duty(fds , 11 ,  0);
+		setPCA9685Duty(fds , 12 ,  0);
+		setPCA9685Duty(fds , 13 ,  0);
+	};
+
+	
 	if(ps3dat->button[PAD_KEY_CIRCLE]) btn_circle++;	// 右皿の握る・離す
 	if(!ps3dat->button[PAD_KEY_CIRCLE]) btn_circle = 0;
 	if(b_btn_circle > btn_circle) {
@@ -657,7 +675,7 @@ void main() {
 		setPCA9685Duty(fds , 3 ,  0);
 		setPCA9685Duty(fds , 4 ,  0);
 		setPCA9685Duty(fds , 5 ,  0);
-		setPCA9685Duty(fds , 6 ,  0);
+		setPCA9685Duty(fds , 6 ,  +20);
 		setPCA9685Duty(fds , 7 ,  0);
 		setPCA9685Duty(fds , 8 ,  0);
 		setPCA9685Duty(fds , 9 ,  0);
