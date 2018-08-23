@@ -73,7 +73,7 @@ int l_mode_b = -80;
 int r_mode = 3;
 int r_mode_a = 72 ;
 int r_mode_b = +90;
-int t_mode = 11;
+int t_mode = 0;
 int h_mode = 12;
 int d_mode = 1;
 int lock = 0;
@@ -139,7 +139,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
     printf("\n");
 
 
-	if(abs(c2) < 5) {   // 右前
+	if(abs(c2) < 5) {   // 右
 		softPwmWrite(29,0); softPwmWrite(28,0);
 	} else if(c2 > 0) {
 		softPwmWrite(29,0); softPwmWrite(28,abs(c2));
@@ -148,7 +148,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	};
 
 
-	if(abs(c4) < 5) {   // 右後
+	if(abs(c4) < 5) {   // 左
 		softPwmWrite(25,0); softPwmWrite(24,0);
 	} else if(c4 > 0) {
 		softPwmWrite(25,0); softPwmWrite(24,abs(c4));
@@ -356,6 +356,12 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	};
 	b_btn_circle = btn_circle;
 
+	if(ps3dat->button[PAD_KEY_UP])
+		 setPCA9685Duty(fds , t_mode ,  -60);
+	else if(ps3dat->button[PAD_KEY_DOWN])
+		 setPCA9685Duty(fds , t_mode ,  +60);
+	else setPCA9685Duty(fds , t_mode ,  0);
+
 
 	if((ps3dat->button[PAD_KEY_UP])&&(ps3dat->button[PAD_KEY_L2])) btn_upd++;
 	if((!ps3dat->button[PAD_KEY_UP])&&(ps3dat->button[PAD_KEY_L2])) btn_upd = 0;
@@ -446,56 +452,42 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	if(!ps3dat->button[PAD_KEY_LEFT]) btn_left = 0;
 	if(b_btn_left > btn_left) {
 		
-//		t_mode--; if (t_mode < 1) t_mode = 1;
-//		if(t_mode == 1 ) system("mpg123 /home/pi/Music/tray_number_1.mp3 &");
-//		if(t_mode == 2 ) system("mpg123 /home/pi/Music/tray_number_2.mp3 &");
-//		if(t_mode == 3 ) system("mpg123 /home/pi/Music/tray_number_3.mp3 &");
-//		if(t_mode == 4 ) system("mpg123 /home/pi/Music/tray_number_4.mp3 &");
-//		if(t_mode == 5 ) system("mpg123 /home/pi/Music/tray_number_5.mp3 &");
-//		if(t_mode == 6 ) system("mpg123 /home/pi/Music/tray_number_6.mp3 &");
-//		if(t_mode == 7 ) system("mpg123 /home/pi/Music/tray_number_7.mp3 &");
-//		if(t_mode == 8 ) system("mpg123 /home/pi/Music/tray_number_8.mp3 &");
-//		if(t_mode == 9 ) system("mpg123 /home/pi/Music/tray_number_9.mp3 &");
-//		if(t_mode == 10 ) system("mpg123 /home/pi/Music/tray_number_10.mp3 &");
-//		if(t_mode == 11 ) system("mpg123 /home/pi/Music/tray_number_11.mp3 &");
-//		if(t_mode == 12 ) system("mpg123 /home/pi/Music/tray_number_12.mp3 &");
-//		if(t_mode == 13 ) system("mpg123 /home/pi/Music/tray_number_13.mp3 &");
-//		if(t_mode == 14 ) system("mpg123 /home/pi/Music/tray_number_14.mp3 &");
-//		if(t_mode == 15 ) system("mpg123 /home/pi/Music/tray_number_15.mp3 &");
-//		if(t_mode == 16 ) system("mpg123 /home/pi/Music/tray_number_16.mp3 &");
-//		if(t_mode == 17 ) system("mpg123 /home/pi/Music/tray_number_17.mp3 &");
-//		if(t_mode == 18 ) system("mpg123 /home/pi/Music/tray_number_18.mp3 &");
-//		if(t_mode == 19 ) system("mpg123 /home/pi/Music/tray_number_19.mp3 &");
-//		if(t_mode == 20 ) system("mpg123 /home/pi/Music/tray_number_20.mp3 &");
-//		if(t_mode == 21 ) system("mpg123 /home/pi/Music/tray_number_21.mp3 &");
+		t_mode--; if (t_mode < 0) t_mode = 0;
+		if(t_mode == 0 ) system("mpg123 /home/pi/Music/servo-0.mp3 &");
+		if(t_mode == 1 ) system("mpg123 /home/pi/Music/servo-1.mp3 &");
+		if(t_mode == 2 ) system("mpg123 /home/pi/Music/servo-2.mp3 &");
+		if(t_mode == 3 ) system("mpg123 /home/pi/Music/servo-3.mp3 &");
+		if(t_mode == 4 ) system("mpg123 /home/pi/Music/servo-4.mp3 &");
+		if(t_mode == 5 ) system("mpg123 /home/pi/Music/servo-5.mp3 &");
+		if(t_mode == 6 ) system("mpg123 /home/pi/Music/servo-6.mp3 &");
+		if(t_mode == 7 ) system("mpg123 /home/pi/Music/servo-7.mp3 &");
+		if(t_mode == 8 ) system("mpg123 /home/pi/Music/servo-8.mp3 &");
+		if(t_mode == 9 ) system("mpg123 /home/pi/Music/servo-9.mp3 &");
+		if(t_mode == 10 ) system("mpg123 /home/pi/Music/servo-10.mp3 &");
+		if(t_mode == 11 ) system("mpg123 /home/pi/Music/servo-11.mp3 &");
+		if(t_mode == 12 ) system("mpg123 /home/pi/Music/servo-12.mp3 &");
+		if(t_mode == 13 ) system("mpg123 /home/pi/Music/servo-13.mp3 &");
 	};
 
 	if(ps3dat->button[PAD_KEY_RIGHT]) btn_right++;
 	if(!ps3dat->button[PAD_KEY_RIGHT]) btn_right = 0;
 	if(b_btn_right > btn_right) {
 
-//		t_mode++; if (t_mode > 21) t_mode = 21;
-//		if(t_mode == 1 ) system("mpg123 /home/pi/Music/tray_number_1.mp3 &");
-//		if(t_mode == 2 ) system("mpg123 /home/pi/Music/tray_number_2.mp3 &");
-//		if(t_mode == 3 ) system("mpg123 /home/pi/Music/tray_number_3.mp3 &");
-//		if(t_mode == 4 ) system("mpg123 /home/pi/Music/tray_number_4.mp3 &");
-//		if(t_mode == 5 ) system("mpg123 /home/pi/Music/tray_number_5.mp3 &");
-//		if(t_mode == 6 ) system("mpg123 /home/pi/Music/tray_number_6.mp3 &");
-//		if(t_mode == 7 ) system("mpg123 /home/pi/Music/tray_number_7.mp3 &");
-//		if(t_mode == 8 ) system("mpg123 /home/pi/Music/tray_number_8.mp3 &");
-//		if(t_mode == 9 ) system("mpg123 /home/pi/Music/tray_number_9.mp3 &");
-//		if(t_mode == 10 ) system("mpg123 /home/pi/Music/tray_number_10.mp3 &");
-//		if(t_mode == 11 ) system("mpg123 /home/pi/Music/tray_number_11.mp3 &");
-//		if(t_mode == 12 ) system("mpg123 /home/pi/Music/tray_number_12.mp3 &");
-//		if(t_mode == 13 ) system("mpg123 /home/pi/Music/tray_number_13.mp3 &");
-//		if(t_mode == 14 ) system("mpg123 /home/pi/Music/tray_number_14.mp3 &");
-//		if(t_mode == 15 ) system("mpg123 /home/pi/Music/tray_number_15.mp3 &");
-//		if(t_mode == 16 ) system("mpg123 /home/pi/Music/tray_number_16.mp3 &");
-//		if(t_mode == 17 ) system("mpg123 /home/pi/Music/tray_number_17.mp3 &");
-//		if(t_mode == 18 ) system("mpg123 /home/pi/Music/tray_number_18.mp3 &");
-//		if(t_mode == 19 ) system("mpg123 /home/pi/Music/tray_number_19.mp3 &");
-//		if(t_mode == 20 ) system("mpg123 /home/pi/Music/tray_number_20.mp3 &");
-//		if(t_mode == 21 ) system("mpg123 /home/pi/Music/tray_number_21.mp3 &");
+		t_mode++; if (t_mode > 13) t_mode = 13;
+		if(t_mode == 0 ) system("mpg123 /home/pi/Music/servo-0.mp3 &");
+		if(t_mode == 1 ) system("mpg123 /home/pi/Music/servo-1.mp3 &");
+		if(t_mode == 2 ) system("mpg123 /home/pi/Music/servo-2.mp3 &");
+		if(t_mode == 3 ) system("mpg123 /home/pi/Music/servo-3.mp3 &");
+		if(t_mode == 4 ) system("mpg123 /home/pi/Music/servo-4.mp3 &");
+		if(t_mode == 5 ) system("mpg123 /home/pi/Music/servo-5.mp3 &");
+		if(t_mode == 6 ) system("mpg123 /home/pi/Music/servo-6.mp3 &");
+		if(t_mode == 7 ) system("mpg123 /home/pi/Music/servo-7.mp3 &");
+		if(t_mode == 8 ) system("mpg123 /home/pi/Music/servo-8.mp3 &");
+		if(t_mode == 9 ) system("mpg123 /home/pi/Music/servo-9.mp3 &");
+		if(t_mode == 10 ) system("mpg123 /home/pi/Music/servo-10.mp3 &");
+		if(t_mode == 11 ) system("mpg123 /home/pi/Music/servo-11.mp3 &");
+		if(t_mode == 12 ) system("mpg123 /home/pi/Music/servo-12.mp3 &");
+		if(t_mode == 13 ) system("mpg123 /home/pi/Music/servo-13.mp3 &");
 	};
 
 	if((b_btn_left > btn_left)||(b_btn_right > btn_right)) {
@@ -644,7 +636,7 @@ void main() {
 	softPwmCreate(23,0,20); // motor-5 10ms // NC
 	softPwmCreate(3,0,20); // beep
 
-	fds = wiringPiI2CSetup(0x40);	// PCA9685
+	fds = wiringPiI2CSetup(0x41);	// PCA9685
 	resetPCA9685(fds);
 	setPCA9685Freq(fds,50);
 	system("mpg123 /home/pi/Music/Main_system_startup.mp3");
@@ -653,6 +645,21 @@ void main() {
 	
 
 	if(!(ps3c_init(&ps3dat, df))) {
+		
+		setPCA9685Duty(fds , 0 ,  0);
+		setPCA9685Duty(fds , 1 ,  0);
+		setPCA9685Duty(fds , 2 ,  0);
+		setPCA9685Duty(fds , 3 ,  0);
+		setPCA9685Duty(fds , 4 ,  0);
+		setPCA9685Duty(fds , 5 ,  0);
+		setPCA9685Duty(fds , 6 ,  0);
+		setPCA9685Duty(fds , 7 ,  0);
+		setPCA9685Duty(fds , 8 ,  0);
+		setPCA9685Duty(fds , 9 ,  0);
+		setPCA9685Duty(fds , 10 ,  0);
+		setPCA9685Duty(fds , 11 ,  0);
+		setPCA9685Duty(fds , 12 ,  0);
+		setPCA9685Duty(fds , 13 ,  0);
 
 		do {
 			if (ps3c_test(&ps3dat) < 0) break;
