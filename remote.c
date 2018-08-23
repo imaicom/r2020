@@ -182,7 +182,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	b_btn_r1 = btn_r1;
 
 
-	if(ps3dat->button[PAD_KEY_SQUARE]) btn_square++;	// 左手を握る・離す
+	if(ps3dat->button[PAD_KEY_SQUARE]) btn_square++;
 	if(!ps3dat->button[PAD_KEY_SQUARE]) btn_square = 0;
 	if(b_btn_square > btn_square) {
 
@@ -190,7 +190,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	b_btn_square = btn_square;
 
 
-	if(ps3dat->button[PAD_KEY_TRIANGLE]) btn_tri++;	// 右手を握る・離す
+	if(ps3dat->button[PAD_KEY_TRIANGLE]) btn_tri++;
 	if(!ps3dat->button[PAD_KEY_TRIANGLE]) btn_tri = 0;
 	if(b_btn_tri > btn_tri) {
 	
@@ -198,7 +198,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	b_btn_tri = btn_tri;
 
 
-	if(ps3dat->button[PAD_KEY_CROSS]) btn_cross++;	// 左皿の握る・離す
+	if(ps3dat->button[PAD_KEY_CROSS]) btn_cross++;
 	if(!ps3dat->button[PAD_KEY_CROSS]) btn_cross = 0;
 	if(b_btn_cross > btn_cross) {
 
