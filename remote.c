@@ -80,6 +80,7 @@ int lock = 0;
 int megaPhoneLock = 0;
 int megaPhonePush = 0;
 int clawOn = 0;
+int clawArc = +27;
 
 
 int resetPCA9685(int fd) {
@@ -125,10 +126,10 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	unsigned char nr_stk = ps3dat->nr_sticks;
 	int xx,yy,x,y,z,v1,v2,ww,c1,c2,c3,c4;
 
-    c2 = (ps3dat->stick[PAD_LEFT_Y] )*(1-ps3dat->button[PAD_KEY_R2]);
-    c4 = (ps3dat->stick[PAD_RIGHT_Y])*(1-ps3dat->button[PAD_KEY_R2]);
+    c2 = ps3dat->stick[PAD_LEFT_Y] ;
+    c4 = ps3dat->stick[PAD_RIGHT_Y];
     
-    if (1 - ps3dat->button[PAD_KEY_L2]) {	// ゆっくり動く
+    if (1 - ps3dat->button[PAD_KEY_R2]) {	// ゆっくり動く
 		c2 = c2 / 15;
 		c4 = c4 / 15;
 	};
@@ -136,8 +137,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 
     printf(" 左=%4d ",c2);
     printf(" 右=%4d ",c4);
-    printf(" d_mode=%4d ",d_mode);
-    printf(" L_JOYSTICK=%4d ",ps3dat->button[PAD_KEY_L_JOYSTICK]);
+    printf(" clawArc=%4d ",clawArc);
     printf("\n");
     printf("\n");
 
@@ -166,14 +166,6 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	
 	};
 	b_btn_select = btn_select;
-
-
-	if(ps3dat->button[PAD_KEY_L1]) btn_l1++;
-	if(!ps3dat->button[PAD_KEY_L1]) btn_l1 = 0;
-	if(b_btn_l1 > btn_l1) {
-
-	};
-	b_btn_l1 = btn_l1;
 
 
 	if(ps3dat->button[PAD_KEY_R1]) btn_r1++;
@@ -251,14 +243,38 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 		
 		clawOn = 1 - clawOn;
 		
-		if(clawOn) {
-			setPCA9685Duty(fds ,  6 , +75);
-		} else {
-			setPCA9685Duty(fds ,  6 , +20);
-		};
-
 	};
 	b_btn_circle = btn_circle;
+
+
+//	if(ps3dat->button[PAD_KEY_R1]) { clawArc++;if(clawArc>+35) clawArc = +35; delay(20); };
+//	if(ps3dat->button[PAD_KEY_R2]) { clawArc--;if(clawArc<+15) clawArc = +15; delay(20); };
+
+
+//	if(ps3dat->button[PAD_KEY_L1]) btn_l1++;
+//	if(!ps3dat->button[PAD_KEY_L1]) btn_l1 = 0;
+//	if(b_btn_l1 > btn_l1) {
+//		clawArc++;if(clawArc>+35) clawArc = +35;
+//		setPCA9685Duty(fds ,  6 , clawArc);
+//	};
+//	b_btn_l1 = btn_l1;
+
+
+//	if(ps3dat->button[PAD_KEY_L2]) btn_l2++;
+//	if(!ps3dat->button[PAD_KEY_L2]) btn_l2 = 0;
+//	if(b_btn_l2 > btn_l2) {
+//		clawArc--;if(clawArc<+15) clawArc = +15;
+//		setPCA9685Duty(fds ,  6 , clawArc);
+//	};
+//	b_btn_l2 = btn_l2;
+
+	
+
+	if(clawOn) {
+		setPCA9685Duty(fds ,  6 , +75);
+	} else {
+		setPCA9685Duty(fds ,  6 , +27);
+	};
 
 
 	if(ps3dat->button[PAD_KEY_UP]) {
@@ -270,26 +286,21 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	};
 
 	
-	if((ps3dat->button[PAD_KEY_UP])&&(ps3dat->button[PAD_KEY_L2])) btn_upd++;
-	if((!ps3dat->button[PAD_KEY_UP])&&(ps3dat->button[PAD_KEY_L2])) btn_upd = 0;
+	if(ps3dat->button[PAD_KEY_UP]) btn_upd++;
+	if(!ps3dat->button[PAD_KEY_UP]) btn_upd = 0;
 	if(b_btn_upd > btn_upd) {
 
 
 	};
+	b_btn_upd = btn_upd;
 
-	if((ps3dat->button[PAD_KEY_DOWN])&&(ps3dat->button[PAD_KEY_L2])) btn_downd++;
-	if((!ps3dat->button[PAD_KEY_DOWN])&&(ps3dat->button[PAD_KEY_L2])) btn_downd = 0;
+
+	if(ps3dat->button[PAD_KEY_DOWN]) btn_downd++;
+	if(!ps3dat->button[PAD_KEY_DOWN]) btn_downd = 0;
 	if(b_btn_downd > btn_downd) {
 
 
 	};
-
-		if((b_btn_upd > btn_upd)||(b_btn_downd > btn_downd)) {
-			
-			
-		};
-
-	b_btn_upd = btn_upd;
 	b_btn_downd = btn_downd;
 	
 
@@ -473,7 +484,7 @@ void main() {
 		setPCA9685Duty(fds , 3 ,  0);
 		setPCA9685Duty(fds , 4 ,  0);
 		setPCA9685Duty(fds , 5 ,  0);
-		setPCA9685Duty(fds , 6 ,  +20);
+		setPCA9685Duty(fds , 6 ,  +27);
 		setPCA9685Duty(fds , 7 ,  0);
 		setPCA9685Duty(fds , 9 ,  0);
 		setPCA9685Duty(fds , 10 ,  0);
