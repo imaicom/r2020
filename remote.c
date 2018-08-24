@@ -79,6 +79,7 @@ int d_mode = 1;
 int lock = 0;
 int megaPhoneLock = 0;
 int megaPhonePush = 0;
+int clawOn = 0;
 
 
 int resetPCA9685(int fd) {
@@ -226,9 +227,6 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	};
 	b_btn_cross = btn_cross;
 
-	if(ps3dat->button[PAD_KEY_CIRCLE]) {
-
-	};
 
 	if(ps3dat->button[PAD_KEY_CROSS]) {
 		setPCA9685Duty(fds , 0 ,  0);
@@ -250,20 +248,24 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	if(ps3dat->button[PAD_KEY_CIRCLE]) btn_circle++;
 	if(!ps3dat->button[PAD_KEY_CIRCLE]) btn_circle = 0;
 	if(b_btn_circle > btn_circle) {
+		
+		clawOn = 1 - clawOn;
+		
+		if(clawOn) {
+			setPCA9685Duty(fds ,  6 , +75);
+		} else {
+			setPCA9685Duty(fds ,  6 , +20);
+		};
 
 	};
 	b_btn_circle = btn_circle;
 
+
 	if(ps3dat->button[PAD_KEY_UP]) {
-		
 		 setPCA9685Duty(fds , t_mode ,  +60);
-		 
 	} else if(ps3dat->button[PAD_KEY_DOWN]) {
-		
 		 setPCA9685Duty(fds , t_mode ,  -60);
-		 
 	} else {
-		
 		setPCA9685Duty(fds , t_mode ,  0);
 	};
 
