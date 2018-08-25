@@ -130,10 +130,22 @@ int ps3c_test(struct ps3ctls *ps3dat) {
     c4 = ps3dat->stick[PAD_RIGHT_Y];
     
     if (1 - ps3dat->button[PAD_KEY_R2]) {	// ゆっくり動く
-		c2 = c2 / 15;
-		c4 = c4 / 15;
+		c2 = c2 / 30;
+		c4 = c4 / 30;
+	} else {
+		c2 = c2 / 10;
+		c4 = c4 / 10;
 	};
 
+	if(ps3dat->button[PAD_KEY_L1]) {
+		c2 = +5;
+		c4 = +5;
+	};
+	
+	if(ps3dat->button[PAD_KEY_L2]) {
+		c2 = -5;
+		c4 = -5;
+	};
 
     printf(" 左=%4d ",c2);
     printf(" 右=%4d ",c4);
