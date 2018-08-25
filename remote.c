@@ -138,13 +138,13 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	};
 
 	if(ps3dat->button[PAD_KEY_L1]) {
-		c2 = +5;
-		c4 = +5;
+		c2 = +4;
+		c4 = +4;
 	};
 	
 	if(ps3dat->button[PAD_KEY_L2]) {
-		c2 = -5;
-		c4 = -5;
+		c2 = -4;
+		c4 = -4;
 	};
 
     printf(" 左=%4d ",c2);
@@ -198,7 +198,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 		if(megaPhonePush) {
 			setPCA9685Duty(fds , 11 , +90);
 		} else {
-			setPCA9685Duty(fds , 11 , -90);
+			setPCA9685Duty(fds , 11 , -100);
 		};
 
 	};
