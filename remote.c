@@ -286,6 +286,26 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 
 
 	if(ps3dat->button[PAD_KEY_UP]) {
+		 setPCA9685Duty(fds , 10 ,  +60);
+	} else if(ps3dat->button[PAD_KEY_DOWN]) {
+		 setPCA9685Duty(fds , 10 ,  -60);
+	} else {
+		setPCA9685Duty(fds , 10 ,  0);
+	};
+
+
+
+	if(ps3dat->button[PAD_KEY_RIGHT]) {
+		 setPCA9685Duty(fds , 7 ,  +60);
+	} else if(ps3dat->button[PAD_KEY_LEFT]) {
+		 setPCA9685Duty(fds , 7 ,  -60);
+	} else {
+		setPCA9685Duty(fds , 7 ,  0);
+	};
+
+
+/*
+	if(ps3dat->button[PAD_KEY_UP]) {
 		 setPCA9685Duty(fds , t_mode ,  +60);
 	} else if(ps3dat->button[PAD_KEY_DOWN]) {
 		 setPCA9685Duty(fds , t_mode ,  -60);
@@ -357,7 +377,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 
 	b_btn_left = btn_left;
 	b_btn_right = btn_right;
-
+*/
 
 	if(ps3dat->button[PAD_KEY_START]) {
 		system("mpg123 /home/pi/Music/Safe_mode.mp3 &");
