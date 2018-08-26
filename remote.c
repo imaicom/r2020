@@ -129,23 +129,23 @@ int ps3c_test(struct ps3ctls *ps3dat) {
     c2 = ps3dat->stick[PAD_LEFT_Y] ;
     c4 = ps3dat->stick[PAD_RIGHT_Y];
     
-    if (1 - ps3dat->button[PAD_KEY_R2]) {	// ゆっくり動く
+    if ((1 - ps3dat->button[PAD_KEY_L_JOYSTICK])||(1 - ps3dat->button[PAD_KEY_R_JOYSTICK])) {	// ゆっくり動く
 		c2 = c2 / 30;
 		c4 = c4 / 30;
 	} else {
-		c2 = c2 / 10;
-		c4 = c4 / 10;
+		c2 = c2 / 5; //10
+		c4 = c4 / 5; //10
 	};
 
-	if(ps3dat->button[PAD_KEY_L1]) {
-		c2 = +5;
-		c4 = +5;
-	};
+//	if(ps3dat->button[PAD_KEY_L1]) {
+//		c2 = +5;
+//		c4 = +5;
+//	};
 	
-	if(ps3dat->button[PAD_KEY_L2]) {
-		c2 = -5;
-		c4 = -5;
-	};
+//	if(ps3dat->button[PAD_KEY_L2]) {
+//		c2 = -5;
+//		c4 = -5;
+//	};
 
     printf(" 左=%4d ",c2);
     printf(" 右=%4d ",c4);
@@ -180,13 +180,13 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	b_btn_select = btn_select;
 
 
-	if(ps3dat->button[PAD_KEY_R1]) btn_r1++;
-	if(!ps3dat->button[PAD_KEY_R1]) btn_r1 = 0;
-	if(b_btn_r1 > btn_r1) {
-
-
-	};
-	b_btn_r1 = btn_r1;
+//	if(ps3dat->button[PAD_KEY_R1]) btn_r1++;
+//	if(!ps3dat->button[PAD_KEY_R1]) btn_r1 = 0;
+//	if(b_btn_r1 > btn_r1) {
+//
+//
+//	};
+//	b_btn_r1 = btn_r1;
 
 
 	if(ps3dat->button[PAD_KEY_SQUARE]) btn_square++;
@@ -219,13 +219,13 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	b_btn_tri = btn_tri;
 
 
-	if(ps3dat->button[PAD_KEY_CROSS]) btn_cross++;
-	if(!ps3dat->button[PAD_KEY_CROSS]) btn_cross = 0;
-	if(b_btn_cross > btn_cross) {
-		
-
-	};
-	b_btn_cross = btn_cross;
+//	if(ps3dat->button[PAD_KEY_CROSS]) btn_cross++;
+//	if(!ps3dat->button[PAD_KEY_CROSS]) btn_cross = 0;
+//	if(b_btn_cross > btn_cross) {
+//		
+//
+//	};
+//	b_btn_cross = btn_cross;
 
 
 	if(ps3dat->button[PAD_KEY_CROSS]) {
@@ -285,9 +285,9 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	};
 
 
-	if(ps3dat->button[PAD_KEY_UP]) {
+	if(ps3dat->button[PAD_KEY_L1]) {
 		 setPCA9685Duty(fds , 10 ,  +60);
-	} else if(ps3dat->button[PAD_KEY_DOWN]) {
+	} else if(ps3dat->button[PAD_KEY_L2]) {
 		 setPCA9685Duty(fds , 10 ,  -60);
 	} else {
 		setPCA9685Duty(fds , 10 ,  0);
@@ -295,9 +295,9 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 
 
 
-	if(ps3dat->button[PAD_KEY_RIGHT]) {
+	if(ps3dat->button[PAD_KEY_R1]) {
 		 setPCA9685Duty(fds , 7 ,  +60);
-	} else if(ps3dat->button[PAD_KEY_LEFT]) {
+	} else if(ps3dat->button[PAD_KEY_R2]) {
 		 setPCA9685Duty(fds , 7 ,  -60);
 	} else {
 		setPCA9685Duty(fds , 7 ,  0);
