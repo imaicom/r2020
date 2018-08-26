@@ -129,7 +129,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
     c2 = ps3dat->stick[PAD_LEFT_Y] ;
     c4 = ps3dat->stick[PAD_RIGHT_Y];
     
-    if ((1 - ps3dat->button[PAD_KEY_L_JOYSTICK])||(1 - ps3dat->button[PAD_KEY_R_JOYSTICK])) {	// ゆっくり動く
+    if ((1 - ps3dat->button[PAD_KEY_L_JOYSTICK])&&(1 - ps3dat->button[PAD_KEY_R_JOYSTICK])) {	// ゆっくり動く
 		c2 = c2 / 30;
 		c4 = c4 / 30;
 	} else {
