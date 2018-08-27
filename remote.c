@@ -81,6 +81,7 @@ int petBottleLock = 0;
 int megaPhonePush = 0;
 int clawOn = 0;
 int clawArc = +27;
+int UpDown = 0;
 
 
 int resetPCA9685(int fd) {
@@ -229,7 +230,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 
 
 	if(ps3dat->button[PAD_KEY_CROSS]) {
-		setPCA9685Duty(fds , 0 ,  0);
+		setPCA9685Duty(fds , 0 ,  -100);
 		setPCA9685Duty(fds , 1 ,  0);
 		setPCA9685Duty(fds , 2 ,  0);
 		setPCA9685Duty(fds , 3 ,  0);
@@ -249,7 +250,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	if(!ps3dat->button[PAD_KEY_CIRCLE]) btn_circle = 0;
 	if(b_btn_circle > btn_circle) {
 		
-		clawOn = 1 - clawOn;
+		clawOn++; if(clawOn > 1) clawOn = 0;
 		
 	};
 	b_btn_circle = btn_circle;
@@ -278,11 +279,12 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 
 	
 
-	if(clawOn) {
-		setPCA9685Duty(fds ,  6 , +75);
-	} else {
-		setPCA9685Duty(fds ,  6 , +27);
+	if(UpDown == 0) {
+		if(clawOn == 0) setPCA9685Duty(fds ,  6 , +20);
+		if(clawOn == 1) setPCA9685Duty(fds ,  6 , +75);
 	};
+//	if(clawOn == 1) setPCA9685Duty(fds ,  6 , +30);
+//	if(clawOn == 2) setPCA9685Duty(fds ,  6 , +75);
 
 
 	if(ps3dat->button[PAD_KEY_L1]) {
@@ -301,6 +303,15 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 		 setPCA9685Duty(fds , 7 ,  -60);
 	} else {
 		setPCA9685Duty(fds , 7 ,  0);
+	};
+
+
+	if(!clawOn) {
+		if(ps3dat->button[PAD_KEY_UP]) {
+			setPCA9685Duty(fds , 0 ,  -100);UpDown = 0;
+		} else if(ps3dat->button[PAD_KEY_DOWN]) {
+			setPCA9685Duty(fds , 0 ,  +70); UpDown = 1;
+		};
 	};
 
 
@@ -506,13 +517,14 @@ void main() {
 
 	if(!(ps3c_init(&ps3dat, df))) {
 		
-		setPCA9685Duty(fds , 0 ,  0);
+		setPCA9685Duty(fds , 0 ,  -100);
+		UpDown = 0;
 		setPCA9685Duty(fds , 1 ,  0);
 		setPCA9685Duty(fds , 2 ,  0);
 		setPCA9685Duty(fds , 3 ,  0);
 		setPCA9685Duty(fds , 4 ,  0);
 		setPCA9685Duty(fds , 5 ,  0);
-		setPCA9685Duty(fds , 6 ,  +27);
+		setPCA9685Duty(fds , 6 ,  +20);
 		setPCA9685Duty(fds , 7 ,  0);
 		setPCA9685Duty(fds , 9 ,  0);
 		setPCA9685Duty(fds , 10 ,  0);
