@@ -22,7 +22,10 @@ struct ps3ctls {
 	short *stick;			// stick[nr_sticks]
 };
 
+#define NumberOfButton 16
 
+int btn[NumberOfButton] = {};
+int b_btn[NumberOfButton] = {};
 int fds;
 int mode = 10;
 int btn_select = 0;
