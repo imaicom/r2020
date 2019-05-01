@@ -28,47 +28,6 @@ int btn[NumberOfButton] = {};
 int b_btn[NumberOfButton] = {};
 int fds;
 int mode = 10;
-int btn_select = 0;
-int b_btn_select = 0;
-int btn_tri = 0;
-int b_btn_tri = 0;
-int btn_cir = 0;
-int b_btn_cir = 0;
-int btn_squ = 0;
-int b_btn_squ = 0;
-int btn_up = 0;
-int b_btn_up = 0;
-int btn_down = 0;
-int b_btn_down = 0;
-int btn_upd = 0;
-int b_btn_upd = 0;
-int btn_downd = 0;
-int b_btn_downd = 0;
-int btn_left = 0;
-int b_btn_left = 0;
-int btn_right = 0;
-int b_btn_right = 0;
-int btn_cross = 0;
-int b_btn_cross = 0;
-int btn_square = 0;
-int b_btn_square = 0;
-int btn_circle = 0;
-int b_btn_circle = 0;
-int btn_ps = 0;
-int b_btn_ps = 0;
-int btn_ljoy = 0;
-int b_btn_ljoy = 0;
-int btn_rjoy = 0;
-int b_btn_rjoy = 0;
-
-int btn_r1 = 0;
-int b_btn_r1 = 0;
-int btn_r2 = 0;
-int b_btn_r2 = 0;
-int btn_l1 = 0;
-int b_btn_l1 = 0;
-int btn_l2 = 0;
-int b_btn_l2 = 0;
 
 int l_mode = 3;
 int l_mode_a = 60;//55
@@ -151,10 +110,19 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 
 	if(abs(c2) < 5) {   // 右
 		softPwmWrite(29,0); softPwmWrite(28,0);
+		softPwmWrite( 5,0); softPwmWrite( 6,0);
+		softPwmWrite(26,0); softPwmWrite(27,0);
+		softPwmWrite( 1,0); softPwmWrite( 4,0);
 	} else if(c2 > 0) {
 		softPwmWrite(29,0); softPwmWrite(28,abs(c2));
+		softPwmWrite( 5,0); softPwmWrite( 6,abs(c2));
+		softPwmWrite(26,0); softPwmWrite(27,abs(c2));
+		softPwmWrite( 1,0); softPwmWrite(4,abs(c2));
 	} else {
 		softPwmWrite(29,abs(c2)); softPwmWrite(28,0);
+		softPwmWrite( 5,abs(c2)); softPwmWrite( 6,0);
+		softPwmWrite(26,abs(c2)); softPwmWrite(27,0);
+		softPwmWrite( 1,abs(c2)); softPwmWrite( 4,0);
 	};
 
 
@@ -257,16 +225,16 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 
 	if(ps3dat->button[PAD_KEY_START]) {
 		system("mpg123 /home/pi/Music/Safe_mode.mp3 &");
-		softPwmWrite(5,0); // motor-1 10ms
-		softPwmWrite(6,0); // motor-1 10ms
+		softPwmWrite( 5,0); // motor-1 10ms
+		softPwmWrite( 6,0); // motor-1 10ms
 		softPwmWrite(26,0); // motor-2 10ms
 		softPwmWrite(27,0); // motor-2 10ms
-		softPwmWrite(28,0); // motor-3 10ms
-		softPwmWrite(29,0); // motor-3 10ms
-		softPwmWrite(24,0); // motor-4 10ms
-		softPwmWrite(25,0); // motor-4 10ms
-		softPwmWrite(14,0); // motor-5 10ms // NC
-		softPwmWrite(23,0); // motor-5 10ms // NC
+		softPwmWrite( 1,0); // motor-3 10ms
+		softPwmWrite( 4,0); // motor-3 10ms
+		softPwmWrite(28,0); // motor-4 10ms
+		softPwmWrite(29,0); // motor-4 10ms
+		softPwmWrite(25,0); // motor-5 10ms // NC
+		softPwmWrite(24,0); // motor-5 10ms // NC
 		softPwmWrite(3,0); // beep
 		
 		softPwmWrite(15,0); // motor-6 10ms
@@ -369,16 +337,16 @@ void main() {
 	struct ps3ctls ps3dat;
 
 	wiringPiSetup();
-	softPwmCreate(5,0,20); // motor-1 10ms
-	softPwmCreate(6,0,20); // motor-1 10ms
+	softPwmCreate( 5,0,20); // motor-1 10ms
+	softPwmCreate( 6,0,20); // motor-1 10ms
 	softPwmCreate(26,0,20); // motor-2 10ms
 	softPwmCreate(27,0,20); // motor-2 10ms
-	softPwmCreate(28,0,20); // motor-3 10ms
-	softPwmCreate(29,0,20); // motor-3 10ms
-	softPwmCreate(24,0,20); // motor-4 10ms
-	softPwmCreate(25,0,20); // motor-4 10ms
-	softPwmCreate(14,0,20); // motor-5 10ms // NC
-	softPwmCreate(23,0,20); // motor-5 10ms // NC
+	softPwmCreate( 1,0,20); // motor-3 10ms
+	softPwmCreate( 4,0,20); // motor-3 10ms
+	softPwmCreate(28,0,20); // motor-4 10ms
+	softPwmCreate(29,0,20); // motor-4 10ms
+	softPwmCreate(25,0,20); // motor-5 10ms // NC
+	softPwmCreate(24,0,20); // motor-5 10ms // NC
 	softPwmCreate(3,0,20); // beep
 	
 	softPwmCreate(15,0,20); // motor-6 10ms
