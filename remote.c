@@ -167,10 +167,18 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	};
 
 
+//	if(ps3dat->button[PAD_KEY_SELECT]) btn[PAD_KEY_SELECT]++;
+//	if(!ps3dat->button[PAD_KEY_SELECT]) btn[PAD_KEY_SELECT] = 0;
+//	if(b_btn[PAD_KEY_SELECT] > btn[PAD_KEY_SELECT]) {
+//		softPwmWrite(15,50);
+//	} else softPwmWrite(15,0);
+//	b_btn[PAD_KEY_SELECT] = btn[PAD_KEY_SELECT];
+
+
 	if(ps3dat->button[PAD_KEY_SELECT]) btn_select++;
 	if(!ps3dat->button[PAD_KEY_SELECT]) btn_select = 0;
 	if(b_btn_select > btn_select) {
-	
+		softPwmWrite(15,50);
 	};
 	b_btn_select = btn_select;
 
@@ -371,6 +379,9 @@ void main() {
 	softPwmCreate(14,0,20); // motor-5 10ms // NC
 	softPwmCreate(23,0,20); // motor-5 10ms // NC
 	softPwmCreate(3,0,20); // beep
+	
+	softPwmCreate(15,0,20); // motor-6 10ms
+	softPwmCreate(16,0,20); // motor-6 10ms
 
 	fds = wiringPiI2CSetup(0x41);	// PCA9685
 	resetPCA9685(fds);
