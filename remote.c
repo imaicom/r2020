@@ -22,7 +22,9 @@ struct ps3ctls {
 	short *stick;			// stick[nr_sticks]
 };
 
+
 #define NumberOfButton 17
+
 
 int btn[NumberOfButton] = {};
 int b_btn[NumberOfButton] = {};
@@ -345,9 +347,9 @@ void main() {
 	softPwmCreate( 4,0,20); // motor-3 10ms
 	softPwmCreate(28,0,20); // motor-4 10ms
 	softPwmCreate(29,0,20); // motor-4 10ms
-	softPwmCreate(25,0,20); // motor-5 10ms // NC
-	softPwmCreate(24,0,20); // motor-5 10ms // NC
-	softPwmCreate(3,0,20); // beep
+	softPwmCreate(25,0,20); // motor-5 10ms
+	softPwmCreate(24,0,20); // motor-5 10ms
+	softPwmCreate( 3,0,20); // beep
 
 	softPwmCreate(15,0,20); // motor-6 10ms
 	softPwmCreate(16,0,20); // motor-6 10ms
@@ -368,21 +370,21 @@ void main() {
 
 	if(!(ps3c_init(&ps3dat, df))) {
 
-		setPCA9685Duty(fds , 0 ,  -100);
 		UpDown = 0;
-		setPCA9685Duty(fds , 1 ,  0);
-		setPCA9685Duty(fds , 2 ,  0);
-		setPCA9685Duty(fds , 3 ,  0);
-		setPCA9685Duty(fds , 4 ,  0);
-		setPCA9685Duty(fds , 5 ,  0);
-		setPCA9685Duty(fds , 6 ,  +20);
-		setPCA9685Duty(fds , 7 ,  0);
-		setPCA9685Duty(fds , 9 ,  0);
-		setPCA9685Duty(fds , 10 ,  0);
-		setPCA9685Duty(fds , 11 ,  +90);
-		setPCA9685Duty(fds , 12 ,  0);
+		setPCA9685Duty(fds , 0 ,-100);
+		setPCA9685Duty(fds , 1 ,   0);
+		setPCA9685Duty(fds , 2 ,   0);
+		setPCA9685Duty(fds , 3 ,   0);
+		setPCA9685Duty(fds , 4 ,   0);
+		setPCA9685Duty(fds , 5 ,   0);
+		setPCA9685Duty(fds , 6 , +20);
+		setPCA9685Duty(fds , 7 ,   0);
+		setPCA9685Duty(fds , 8 , -10);
+		setPCA9685Duty(fds , 9 ,   0);
+		setPCA9685Duty(fds , 10,   0);
+		setPCA9685Duty(fds , 11, +90);
+		setPCA9685Duty(fds , 12,   0);
 
-		setPCA9685Duty(fds ,  8 , -10);
 
 		do {
 			if (ps3c_test(&ps3dat) < 0) break;
