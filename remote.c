@@ -91,137 +91,139 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	unsigned char nr_stk = ps3dat->nr_sticks;
 	int xx,yy,x,y,z,v1,v2,ww,c1,c2,c3,c4;
 
-    c2 = ps3dat->stick[PAD_LEFT_Y] ;
-    c4 = ps3dat->stick[PAD_RIGHT_Y];
+//    c2 = ps3dat->stick[PAD_LEFT_Y] ;
+//    c4 = ps3dat->stick[PAD_RIGHT_Y];
 
-    if ((1 - ps3dat->button[PAD_KEY_L_JOYSTICK])&&(1 - ps3dat->button[PAD_KEY_R_JOYSTICK])) {	// ゆっくり動く
-		c2 = c2 / 30;
-		c4 = c4 / 30;
-	} else {
-		c2 = c2 / 5; //10
-		c4 = c4 / 5; //10
-	};
-
-
-    printf(" 左=%4d ",c2);
-    printf(" 右=%4d ",c4);
-    printf(" clawOn=%4d ",clawOn);
-    printf("\n");
-    printf("\n");
+//    if ((1 - ps3dat->button[PAD_KEY_L_JOYSTICK])&&(1 - ps3dat->button[PAD_KEY_R_JOYSTICK])) {	// ゆっくり動く
+//		c2 = c2 / 30;
+//		c4 = c4 / 30;
+//	} else {
+//		c2 = c2 / 5; //10
+//		c4 = c4 / 5; //10
+//	};
 
 
-	if(abs(c2) < 5) {   // 右
-		softPwmWrite(29,0); softPwmWrite(28,0);
-		softPwmWrite( 5,0); softPwmWrite( 6,0);
-		softPwmWrite(26,0); softPwmWrite(27,0);
-		softPwmWrite( 1,0); softPwmWrite( 4,0);
-	} else if(c2 > 0) {
-		softPwmWrite(29,0); softPwmWrite(28,abs(c2));
-		softPwmWrite( 5,0); softPwmWrite( 6,abs(c2));
-		softPwmWrite(26,0); softPwmWrite(27,abs(c2));
-		softPwmWrite( 1,0); softPwmWrite(4,abs(c2));
-	} else {
-		softPwmWrite(29,abs(c2)); softPwmWrite(28,0);
-		softPwmWrite( 5,abs(c2)); softPwmWrite( 6,0);
-		softPwmWrite(26,abs(c2)); softPwmWrite(27,0);
-		softPwmWrite( 1,abs(c2)); softPwmWrite( 4,0);
-	};
+//    printf(" 左=%4d ",c2);
+//    printf(" 右=%4d ",c4);
+//    printf(" clawOn=%4d ",clawOn);
+//    printf("\n");
+//    printf("\n");
 
 
-	if(abs(c4) < 5) {   // 左
-		softPwmWrite(25,0); softPwmWrite(24,0);
-	} else if(c4 > 0) {
-		softPwmWrite(25,0); softPwmWrite(24,abs(c4));
-	} else {
-		softPwmWrite(25,abs(c4)); softPwmWrite(24,0);
-	};
+//	if(abs(c2) < 5) {   // 右
+//		softPwmWrite(29,0); softPwmWrite(28,0);
+//		softPwmWrite( 5,0); softPwmWrite( 6,0);
+//		softPwmWrite(26,0); softPwmWrite(27,0);
+//		softPwmWrite( 1,0); softPwmWrite( 4,0);
+//	} else if(c2 > 0) {
+//		softPwmWrite(29,0); softPwmWrite(28,abs(c2));
+//		softPwmWrite( 5,0); softPwmWrite( 6,abs(c2));
+//		softPwmWrite(26,0); softPwmWrite(27,abs(c2));
+//		softPwmWrite( 1,0); softPwmWrite(4,abs(c2));
+//	} else {
+//		softPwmWrite(29,abs(c2)); softPwmWrite(28,0);
+//		softPwmWrite( 5,abs(c2)); softPwmWrite( 6,0);
+//		softPwmWrite(26,abs(c2)); softPwmWrite(27,0);
+//		softPwmWrite( 1,abs(c2)); softPwmWrite( 4,0);
+//	};
 
 
-	if(ps3dat->button[PAD_KEY_SELECT]) btn[PAD_KEY_SELECT]++;
-	if(!ps3dat->button[PAD_KEY_SELECT]) btn[PAD_KEY_SELECT] = 0;
-	if(b_btn[PAD_KEY_SELECT] > btn[PAD_KEY_SELECT]) {
-		softPwmWrite(22,50);
-	};
-	b_btn[PAD_KEY_SELECT] = btn[PAD_KEY_SELECT];
+//	if(abs(c4) < 5) {   // 左
+//		softPwmWrite(25,0); softPwmWrite(24,0);
+//	} else if(c4 > 0) {
+//		softPwmWrite(25,0); softPwmWrite(24,abs(c4));
+//	} else {
+//		softPwmWrite(25,abs(c4)); softPwmWrite(24,0);
+//	};
 
 
-	if(ps3dat->button[PAD_KEY_SQUARE]) btn[PAD_KEY_SQUARE]++;
-	if(!ps3dat->button[PAD_KEY_SQUARE]) btn[PAD_KEY_SQUARE] = 0;
-	if(b_btn[PAD_KEY_SQUARE] > btn[PAD_KEY_SQUARE]) {
-
-		megaPhonePush = 1 - megaPhonePush;
-
-		if(megaPhonePush) {
-			setPCA9685Duty(fds , 11 , +90);
-		} else {
-			setPCA9685Duty(fds , 11 , -100);
-		};
-
-	};
-	b_btn[PAD_KEY_SQUARE] = btn[PAD_KEY_SQUARE];
+//	if(ps3dat->button[PAD_KEY_SELECT]) btn[PAD_KEY_SELECT]++;
+//	if(!ps3dat->button[PAD_KEY_SELECT]) btn[PAD_KEY_SELECT] = 0;
+//	if(b_btn[PAD_KEY_SELECT] > btn[PAD_KEY_SELECT]) {
+//		softPwmWrite(22,50);
+//	};
+//	b_btn[PAD_KEY_SELECT] = btn[PAD_KEY_SELECT];
 
 
-	if(ps3dat->button[PAD_KEY_TRIANGLE]) btn[PAD_KEY_TRIANGLE]++;
-	if(!ps3dat->button[PAD_KEY_TRIANGLE]) btn[PAD_KEY_TRIANGLE] = 0;
-	if(b_btn[PAD_KEY_TRIANGLE] > btn[PAD_KEY_TRIANGLE]) {
-
-		petBottleLock++; if(petBottleLock>2) petBottleLock = 0;
-
-		if(petBottleLock == 0) setPCA9685Duty(fds ,  8 , -10);
-		if(petBottleLock == 1) setPCA9685Duty(fds ,  8 , -70);
-		if(petBottleLock == 2) setPCA9685Duty(fds ,  8 , -90);
-
-	};
-	b_btn[PAD_KEY_TRIANGLE] = btn[PAD_KEY_TRIANGLE];
-
-
-	if(ps3dat->button[PAD_KEY_CIRCLE]) btn[PAD_KEY_CIRCLE]++;
-	if(!ps3dat->button[PAD_KEY_CIRCLE]) btn[PAD_KEY_CIRCLE] = 0;
-	if(b_btn[PAD_KEY_CIRCLE] > btn[PAD_KEY_CIRCLE]) {
-
-		clawOn++; if(clawOn > 2) clawOn = 0;
-
-		if(UpDown == 0) {
-			if(clawOn == 0) system("mpg123 /home/pi/Music/servo-0.mp3 &");
-			if(clawOn == 1) system("mpg123 /home/pi/Music/servo-1.mp3 &");
-			if(clawOn == 2) system("mpg123 /home/pi/Music/servo-2.mp3 &");
-		};
-	};
-	b_btn[PAD_KEY_CIRCLE] = btn[PAD_KEY_CIRCLE];
+//	if(ps3dat->button[PAD_KEY_SQUARE]) btn[PAD_KEY_SQUARE]++;
+//	if(!ps3dat->button[PAD_KEY_SQUARE]) btn[PAD_KEY_SQUARE] = 0;
+//	if(b_btn[PAD_KEY_SQUARE] > btn[PAD_KEY_SQUARE]) {
+//
+//		megaPhonePush = 1 - megaPhonePush;
+//
+//		if(megaPhonePush) {
+//			setPCA9685Duty(fds , 11 , +90);
+//		} else {
+//			setPCA9685Duty(fds , 11 , -100);
+//		};
+//
+//	};
+//	b_btn[PAD_KEY_SQUARE] = btn[PAD_KEY_SQUARE];
 
 
-	if(UpDown == 0) {
-		if(clawOn == 0) { setPCA9685Duty(fds ,  6 , +20); };
-		if(clawOn == 1) { setPCA9685Duty(fds ,  6 , +30); };
-		if(clawOn == 2) { setPCA9685Duty(fds ,  6 , +75); };
-	};
+//	if(ps3dat->button[PAD_KEY_TRIANGLE]) btn[PAD_KEY_TRIANGLE]++;
+//	if(!ps3dat->button[PAD_KEY_TRIANGLE]) btn[PAD_KEY_TRIANGLE] = 0;
+//	if(b_btn[PAD_KEY_TRIANGLE] > btn[PAD_KEY_TRIANGLE]) {
+//
+//		petBottleLock++; if(petBottleLock>2) petBottleLock = 0;
+//
+//		if(petBottleLock == 0) setPCA9685Duty(fds ,  8 , -10);
+//		if(petBottleLock == 1) setPCA9685Duty(fds ,  8 , -70);
+//		if(petBottleLock == 2) setPCA9685Duty(fds ,  8 , -90);
+//
+//	};
+//	b_btn[PAD_KEY_TRIANGLE] = btn[PAD_KEY_TRIANGLE];
+
+
+//	if(ps3dat->button[PAD_KEY_CIRCLE]) btn[PAD_KEY_CIRCLE]++;
+//	if(!ps3dat->button[PAD_KEY_CIRCLE]) btn[PAD_KEY_CIRCLE] = 0;
+//	if(b_btn[PAD_KEY_CIRCLE] > btn[PAD_KEY_CIRCLE]) {
+//
+//		clawOn++; if(clawOn > 2) clawOn = 0;
+//
+//		if(UpDown == 0) {
+//			if(clawOn == 0) system("mpg123 /home/pi/Music/servo-0.mp3 &");
+//			if(clawOn == 1) system("mpg123 /home/pi/Music/servo-1.mp3 &");
+//			if(clawOn == 2) system("mpg123 /home/pi/Music/servo-2.mp3 &");
+//		};
+//	};
+//	b_btn[PAD_KEY_CIRCLE] = btn[PAD_KEY_CIRCLE];
 
 
 	if(ps3dat->button[PAD_KEY_L1]) {
-		 setPCA9685Duty(fds , 10 ,  +60);
+		setPCA9685Duty(fds , 8 , +50);
 	} else if(ps3dat->button[PAD_KEY_L2]) {
-		 setPCA9685Duty(fds , 10 ,  -60);
+		setPCA9685Duty(fds , 8 , -50);
 	} else {
-		setPCA9685Duty(fds , 10 ,  0);
+		setPCA9685Duty(fds , 8 ,   0);
 	};
 
 
 
 	if(ps3dat->button[PAD_KEY_R1]) {
-		 setPCA9685Duty(fds , 7 ,  +60);
+		setPCA9685Duty(fds , 7 , -50);
 	} else if(ps3dat->button[PAD_KEY_R2]) {
-		 setPCA9685Duty(fds , 7 ,  -60);
+		setPCA9685Duty(fds , 7 , +50);
 	} else {
-		setPCA9685Duty(fds , 7 ,  0);
+		setPCA9685Duty(fds , 7 ,   0);
 	};
 
 
-	if((clawOn==0)||(clawOn==1)) {
-		if(ps3dat->button[PAD_KEY_UP]) {
-			setPCA9685Duty(fds , 0 ,  -100);UpDown = 0;
-		} else if(ps3dat->button[PAD_KEY_DOWN]) {
-			setPCA9685Duty(fds , 0 ,  +70); UpDown = 1;
-		};
+	if(ps3dat->button[PAD_KEY_LEFT]) {
+		softPwmWrite(16, 100); softPwmWrite(10, 100);
+	} else if(ps3dat->button[PAD_KEY_RIGHT]) {
+		softPwmWrite(15, 100); softPwmWrite(11, 100);
+	} else {
+		softPwmWrite(15, 0); softPwmWrite(16, 0); softPwmWrite(10, 0); softPwmWrite(11, 0);
+	};
+
+
+	if(ps3dat->button[PAD_KEY_SQUARE]) {
+		softPwmWrite( 6, 15); softPwmWrite(26, 15);
+	} else if(ps3dat->button[PAD_KEY_CIRCLE]) {
+		softPwmWrite( 5, 15); softPwmWrite(27, 15);
+	} else {
+		softPwmWrite( 5, 0); softPwmWrite( 6, 0); softPwmWrite(26, 0); softPwmWrite(27, 0);
 	};
 
 
@@ -371,19 +373,20 @@ void main() {
 	if(!(ps3c_init(&ps3dat, df))) {
 
 		UpDown = 0;
-		setPCA9685Duty(fds , 0 ,-100);
+		setPCA9685Duty(fds , 0 ,   0);
 		setPCA9685Duty(fds , 1 ,   0);
 		setPCA9685Duty(fds , 2 ,   0);
 		setPCA9685Duty(fds , 3 ,   0);
 		setPCA9685Duty(fds , 4 ,   0);
 		setPCA9685Duty(fds , 5 ,   0);
-		setPCA9685Duty(fds , 6 , +20);
+		setPCA9685Duty(fds , 6 ,   0);
 		setPCA9685Duty(fds , 7 ,   0);
-		setPCA9685Duty(fds , 8 , -10);
+		setPCA9685Duty(fds , 8 ,   0);
 		setPCA9685Duty(fds , 9 ,   0);
 		setPCA9685Duty(fds , 10,   0);
-		setPCA9685Duty(fds , 11, +90);
+		setPCA9685Duty(fds , 11,   0);
 		setPCA9685Duty(fds , 12,   0);
+		setPCA9685Duty(fds , 13,   0);
 
 
 		do {
