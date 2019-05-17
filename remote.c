@@ -91,8 +91,6 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	unsigned char nr_stk = ps3dat->nr_sticks;
 	int xx,yy,x,y,z,v1,v2,ww,c1,c2,c3,c4;
 
-//    c2 = ps3dat->stick[PAD_LEFT_Y] ;
-//    c4 = ps3dat->stick[PAD_RIGHT_Y];
 
 //    if ((1 - ps3dat->button[PAD_KEY_L_JOYSTICK])&&(1 - ps3dat->button[PAD_KEY_R_JOYSTICK])) {	// ゆっくり動く
 //		c2 = c2 / 30;
@@ -102,13 +100,23 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 //		c4 = c4 / 5; //10
 //	};
 
+    c2 = ps3dat->stick[PAD_LEFT_Y] ;
+    c4 = ps3dat->stick[PAD_RIGHT_Y];
+	c2 = c2 / 5;
+	c4 = c4 / 5;
 
-//    printf(" 左=%4d ",c2);
-//    printf(" 右=%4d ",c4);
-//    printf(" clawOn=%4d ",clawOn);
-//    printf("\n");
-//    printf("\n");
+    printf(" 前=%4d ",c2);
+    printf(" 後=%4d ",c4);
+    printf("\n");
 
+	if     (c2 > +5) {softPwmWrite(28,abs(c2));	softPwmWrite(29,     0);}
+	else if(c2 < -5)	{softPwmWrite(28,     0);	softPwmWrite(29,abs(c2));}
+	else 			{softPwmWrite(28, 0);	softPwmWrite(29, 0);};
+
+	if     (c4 > +5) {softPwmWrite( 1,     0);	softPwmWrite( 4,abs(c4));}
+	else if(c4 < -5)	{softPwmWrite( 1,abs(c4));	softPwmWrite( 4,     0);}
+	else 			{softPwmWrite( 1, 0);	softPwmWrite( 4, 0);};
+	
 
 //	if(abs(c2) < 5) {   // 右
 //		softPwmWrite(29,0); softPwmWrite(28,0);
