@@ -46,6 +46,7 @@ int megaPhonePush = 0;
 int clawOn = 0;
 int clawArc = +27;
 int UpDown = 0;
+int ready_Go = 0;
 
 
 int resetPCA9685(int fd) {
@@ -197,7 +198,11 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 //	};
 //	b_btn[PAD_KEY_CIRCLE] = btn[PAD_KEY_CIRCLE];
 
-
+	if((ps3dat->button[PAD_KEY_PS])&&(!ready_Go)) {
+		ready_Go = 1;
+		system("mpg123 /home/pi/Music/ready_Go.mp3");
+	};
+	
 	if(ps3dat->button[PAD_KEY_L1]) {
 		setPCA9685Duty(fds , 8 , +50);
 	} else if(ps3dat->button[PAD_KEY_L2]) {
