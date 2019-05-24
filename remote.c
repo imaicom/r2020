@@ -235,6 +235,10 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 		softPwmWrite( 6, 15); softPwmWrite(26, 15);
 	} else if(ps3dat->button[PAD_KEY_CIRCLE]) {
 		softPwmWrite( 5, 15); softPwmWrite(27, 15);
+	} else if(ps3dat->button[PAD_KEY_TRIANGLE]) {
+		softPwmWrite( 6, 15); softPwmWrite(27, 15);
+	} else if(ps3dat->button[PAD_KEY_CROSS]) {
+		softPwmWrite( 5, 15); softPwmWrite(26, 15);		
 	} else {
 		softPwmWrite( 5, 0); softPwmWrite( 6, 0); softPwmWrite(26, 0); softPwmWrite(27, 0);
 	};
