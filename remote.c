@@ -91,6 +91,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	unsigned char nr_btn = ps3dat->nr_buttons;
 	unsigned char nr_stk = ps3dat->nr_sticks;
 	int xx,yy,x,y,z,v1,v2,ww,c1,c2,c3,c4;
+	int tennisBallCatch = 0;
 
 
 //    if ((1 - ps3dat->button[PAD_KEY_L_JOYSTICK])&&(1 - ps3dat->button[PAD_KEY_R_JOYSTICK])) {	// ゆっくり動く
@@ -110,13 +111,13 @@ int ps3c_test(struct ps3ctls *ps3dat) {
     printf(" 後=%4d ",c4);
     printf("\n");
 
-	if     (c2 > +5) {softPwmWrite(28,abs(c2));	softPwmWrite(29,     0);}
-	else if(c2 < -5)	{softPwmWrite(28,     0);	softPwmWrite(29,abs(c2));}
-	else 			{softPwmWrite(28, 0);	softPwmWrite(29, 0);};
-
-	if     (c4 > +5) {softPwmWrite( 1,     0);	softPwmWrite( 4,abs(c4));}
-	else if(c4 < -5)	{softPwmWrite( 1,abs(c4));	softPwmWrite( 4,     0);}
-	else 			{softPwmWrite( 1, 0);	softPwmWrite( 4, 0);};
+//	if     (c2 > +5) {softPwmWrite(28,abs(c2));	softPwmWrite(29,     0);}
+//	else if(c2 < -5)	{softPwmWrite(28,     0);	softPwmWrite(29,abs(c2));}
+//	else 			{softPwmWrite(28, 0);	softPwmWrite(29, 0);};
+//
+//	if     (c4 > +5) {softPwmWrite( 1,     0);	softPwmWrite( 4,abs(c4));}
+//	else if(c4 < -5)	{softPwmWrite( 1,abs(c4));	softPwmWrite( 4,     0);}
+//	else 			{softPwmWrite( 1, 0);	softPwmWrite( 4, 0);};
 	
 
 //	if(abs(c2) < 5) {   // 右
@@ -230,18 +231,52 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 		softPwmWrite(15, 0); softPwmWrite(16, 0); softPwmWrite(10, 0); softPwmWrite(11, 0);
 	};
 
-
-	if(ps3dat->button[PAD_KEY_SQUARE]) {
+// 足回り系　しばらくカット
+/*
+	if(ps3dat->button[PAD_KEY_CIRCLE]) {
 		softPwmWrite( 6, 15); softPwmWrite(26, 15);
-	} else if(ps3dat->button[PAD_KEY_CIRCLE]) {
-		softPwmWrite( 5, 15); softPwmWrite(27, 15);
+	} else if(ps3dat->button[PAD_KEY_SQUARE]) {
+		softPwmWrite( 5, 100); softPwmWrite(27, 100);
 	} else if(ps3dat->button[PAD_KEY_TRIANGLE]) {
-		softPwmWrite( 6, 15); softPwmWrite(27, 15);
+		softPwmWrite( 6, 15); softPwmWrite(27, 15); softPwmWrite(28,20); softPwmWrite(29, 0); softPwmWrite( 1,20); softPwmWrite( 4, 0);
 	} else if(ps3dat->button[PAD_KEY_CROSS]) {
-		softPwmWrite( 5, 15); softPwmWrite(26, 15);		
+		softPwmWrite( 5, 15); softPwmWrite(26, 15); softPwmWrite(28, 0); softPwmWrite(29,20); softPwmWrite( 1, 0); softPwmWrite( 4,20);		
 	} else {
-		softPwmWrite( 5, 0); softPwmWrite( 6, 0); softPwmWrite(26, 0); softPwmWrite(27, 0);
+		softPwmWrite( 5, 0); softPwmWrite( 6, 0); softPwmWrite(26, 0); softPwmWrite(27, 0);softPwmWrite(28, 0);	softPwmWrite(29, 0);softPwmWrite( 1, 0);	softPwmWrite( 4, 0);
 	};
+*/
+	if(ps3dat->button[PAD_KEY_CIRCLE]) {
+		setPCA9685Duty(fds , 1 , -50);
+	} else if(ps3dat->button[PAD_KEY_SQUARE]) {
+		setPCA9685Duty(fds , 1 , +50);
+	} else {
+		setPCA9685Duty(fds , 1 ,   0);
+	};
+	
+	if(ps3dat->button[PAD_KEY_TRIANGLE]) {
+		setPCA9685Duty(fds , 0 , +50);
+	} else if(ps3dat->button[PAD_KEY_CROSS]) {
+		setPCA9685Duty(fds , 0 , -50);
+	} else {
+		setPCA9685Duty(fds , 0 ,   0);
+	};
+
+	if(ps3dat->button[PAD_KEY_SELECT]) btn[PAD_KEY_SELECT]++;
+	
+	if(!ps3dat->button[PAD_KEY_SELECT]) btn[PAD_KEY_SELECT] = 0;
+	
+	if(b_btn[PAD_KEY_SELECT] > btn[PAD_KEY_SELECT]) {
+//		tennisBallCatch = +50 - tennisBallCatch;
+		tennisBallCatch = +50;
+	};
+	b_btn[PAD_KEY_SELECT] = btn[PAD_KEY_SELECT];
+	
+
+//	if(ps3dat->button[PAD_KEY_SELECT]) tennisBallCatch = +50; else tennisBallCatch = 0;
+
+	setPCA9685Duty(fds , 2 , tennisBallCatch);
+	setPCA9685Duty(fds , 3 , tennisBallCatch);
+	setPCA9685Duty(fds , 4 , tennisBallCatch);
 
 
 	if(ps3dat->button[PAD_KEY_START]) {
@@ -385,6 +420,7 @@ void main() {
 	system("mpg123 /home/pi/Music/Main_system_startup.mp3");
 	delay(200);
 	system("mpg123 /home/pi/Music/Press_the_PS_button.mp3");
+//	system("cd;cd turbo2;cd sixad;sudo sixad -start &");
 
 
 	if(!(ps3c_init(&ps3dat, df))) {
