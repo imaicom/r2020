@@ -48,6 +48,9 @@ int clawArc = +27;
 int UpDown = 0;
 int ready_Go = 0;
 
+int tennisBallCatch = 0;
+int temp = 0;
+
 
 int resetPCA9685(int fd) {
 	wiringPiI2CWriteReg8(fd,0,0);
@@ -91,7 +94,6 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	unsigned char nr_btn = ps3dat->nr_buttons;
 	unsigned char nr_stk = ps3dat->nr_sticks;
 	int xx,yy,x,y,z,v1,v2,ww,c1,c2,c3,c4;
-	int tennisBallCatch = 0;
 
 
 //    if ((1 - ps3dat->button[PAD_KEY_L_JOYSTICK])&&(1 - ps3dat->button[PAD_KEY_R_JOYSTICK])) {	// ゆっくり動く
@@ -107,9 +109,9 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	c2 = c2 / 5;
 	c4 = c4 / 5;
 
-    printf(" 前=%4d ",c2);
-    printf(" 後=%4d ",c4);
-    printf("\n");
+//    printf(" 前=%4d ",c2);
+//    printf(" 後=%4d ",c4);
+//    printf("\n");
 
 //	if     (c2 > +5) {softPwmWrite(28,abs(c2));	softPwmWrite(29,     0);}
 //	else if(c2 < -5)	{softPwmWrite(28,     0);	softPwmWrite(29,abs(c2));}
@@ -146,58 +148,6 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 //		softPwmWrite(25,abs(c4)); softPwmWrite(24,0);
 //	};
 
-
-//	if(ps3dat->button[PAD_KEY_SELECT]) btn[PAD_KEY_SELECT]++;
-//	if(!ps3dat->button[PAD_KEY_SELECT]) btn[PAD_KEY_SELECT] = 0;
-//	if(b_btn[PAD_KEY_SELECT] > btn[PAD_KEY_SELECT]) {
-//		softPwmWrite(22,50);
-//	};
-//	b_btn[PAD_KEY_SELECT] = btn[PAD_KEY_SELECT];
-
-
-//	if(ps3dat->button[PAD_KEY_SQUARE]) btn[PAD_KEY_SQUARE]++;
-//	if(!ps3dat->button[PAD_KEY_SQUARE]) btn[PAD_KEY_SQUARE] = 0;
-//	if(b_btn[PAD_KEY_SQUARE] > btn[PAD_KEY_SQUARE]) {
-//
-//		megaPhonePush = 1 - megaPhonePush;
-//
-//		if(megaPhonePush) {
-//			setPCA9685Duty(fds , 11 , +90);
-//		} else {
-//			setPCA9685Duty(fds , 11 , -100);
-//		};
-//
-//	};
-//	b_btn[PAD_KEY_SQUARE] = btn[PAD_KEY_SQUARE];
-
-
-//	if(ps3dat->button[PAD_KEY_TRIANGLE]) btn[PAD_KEY_TRIANGLE]++;
-//	if(!ps3dat->button[PAD_KEY_TRIANGLE]) btn[PAD_KEY_TRIANGLE] = 0;
-//	if(b_btn[PAD_KEY_TRIANGLE] > btn[PAD_KEY_TRIANGLE]) {
-//
-//		petBottleLock++; if(petBottleLock>2) petBottleLock = 0;
-//
-//		if(petBottleLock == 0) setPCA9685Duty(fds ,  8 , -10);
-//		if(petBottleLock == 1) setPCA9685Duty(fds ,  8 , -70);
-//		if(petBottleLock == 2) setPCA9685Duty(fds ,  8 , -90);
-//
-//	};
-//	b_btn[PAD_KEY_TRIANGLE] = btn[PAD_KEY_TRIANGLE];
-
-
-//	if(ps3dat->button[PAD_KEY_CIRCLE]) btn[PAD_KEY_CIRCLE]++;
-//	if(!ps3dat->button[PAD_KEY_CIRCLE]) btn[PAD_KEY_CIRCLE] = 0;
-//	if(b_btn[PAD_KEY_CIRCLE] > btn[PAD_KEY_CIRCLE]) {
-//
-//		clawOn++; if(clawOn > 2) clawOn = 0;
-//
-//		if(UpDown == 0) {
-//			if(clawOn == 0) system("mpg123 /home/pi/Music/servo-0.mp3 &");
-//			if(clawOn == 1) system("mpg123 /home/pi/Music/servo-1.mp3 &");
-//			if(clawOn == 2) system("mpg123 /home/pi/Music/servo-2.mp3 &");
-//		};
-//	};
-//	b_btn[PAD_KEY_CIRCLE] = btn[PAD_KEY_CIRCLE];
 
 	if((ps3dat->button[PAD_KEY_PS])&&(!ready_Go)) {
 		ready_Go = 1;
@@ -261,19 +211,16 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 		setPCA9685Duty(fds , 0 ,   0);
 	};
 
+
 	if(ps3dat->button[PAD_KEY_SELECT]) btn[PAD_KEY_SELECT]++;
-	
 	if(!ps3dat->button[PAD_KEY_SELECT]) btn[PAD_KEY_SELECT] = 0;
-	
 	if(b_btn[PAD_KEY_SELECT] > btn[PAD_KEY_SELECT]) {
-//		tennisBallCatch = +50 - tennisBallCatch;
-		tennisBallCatch = +50;
+		tennisBallCatch = 100 - tennisBallCatch;
+		if(tennisBallCatch == 0) 		system("mpg123 /home/pi/Music/lock.mp3 &");
+		if(tennisBallCatch == 100) 	system("mpg123 /home/pi/Music/release.mp3 &");	
 	};
 	b_btn[PAD_KEY_SELECT] = btn[PAD_KEY_SELECT];
 	
-
-//	if(ps3dat->button[PAD_KEY_SELECT]) tennisBallCatch = +50; else tennisBallCatch = 0;
-
 	setPCA9685Duty(fds , 2 , tennisBallCatch);
 	setPCA9685Duty(fds , 3 , tennisBallCatch);
 	setPCA9685Duty(fds , 4 , tennisBallCatch);
