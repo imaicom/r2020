@@ -96,58 +96,48 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	int xx,yy,x,y,z,v1,v2,ww,c1,c2,c3,c4;
 
 
-//    if ((1 - ps3dat->button[PAD_KEY_L_JOYSTICK])&&(1 - ps3dat->button[PAD_KEY_R_JOYSTICK])) {	// ゆっくり動く
-//		c2 = c2 / 30;
-//		c4 = c4 / 30;
-//	} else {
-//		c2 = c2 / 5; //10
-//		c4 = c4 / 5; //10
-//	};
+// 足回り系　
 
-    c2 = ps3dat->stick[PAD_LEFT_Y] ;
-    c4 = ps3dat->stick[PAD_RIGHT_Y];
-	c2 = c2 / 5;
-	c4 = c4 / 5;
+    c1 = ps3dat->stick[PAD_RIGHT_Y]; c1 = c1/5;
+    c2 = ps3dat->stick[PAD_RIGHT_X];
 
-//    printf(" 前=%4d ",c2);
-//    printf(" 後=%4d ",c4);
-//    printf("\n");
 
-//	if     (c2 > +5) {softPwmWrite(28,abs(c2));	softPwmWrite(29,     0);}
-//	else if(c2 < -5)	{softPwmWrite(28,     0);	softPwmWrite(29,abs(c2));}
-//	else 			{softPwmWrite(28, 0);	softPwmWrite(29, 0);};
-//
-//	if     (c4 > +5) {softPwmWrite( 1,     0);	softPwmWrite( 4,abs(c4));}
-//	else if(c4 < -5)	{softPwmWrite( 1,abs(c4));	softPwmWrite( 4,     0);}
-//	else 			{softPwmWrite( 1, 0);	softPwmWrite( 4, 0);};
+	if(c1 > 5) {
+		softPwmWrite( 5, abs(c1)); softPwmWrite(27, abs(c1));
+	} else if(c1 < -5) {
+		softPwmWrite( 6, abs(c1)); softPwmWrite(26, abs(c1));
+	} else {
+		softPwmWrite( 5, 0);	softPwmWrite( 6, 0);
+		softPwmWrite(26, 0);	softPwmWrite(27, 0);
+	};
 	
-
-//	if(abs(c2) < 5) {   // 右
-//		softPwmWrite(29,0); softPwmWrite(28,0);
-//		softPwmWrite( 5,0); softPwmWrite( 6,0);
-//		softPwmWrite(26,0); softPwmWrite(27,0);
-//		softPwmWrite( 1,0); softPwmWrite( 4,0);
-//	} else if(c2 > 0) {
-//		softPwmWrite(29,0); softPwmWrite(28,abs(c2));
-//		softPwmWrite( 5,0); softPwmWrite( 6,abs(c2));
-//		softPwmWrite(26,0); softPwmWrite(27,abs(c2));
-//		softPwmWrite( 1,0); softPwmWrite(4,abs(c2));
-//	} else {
-//		softPwmWrite(29,abs(c2)); softPwmWrite(28,0);
-//		softPwmWrite( 5,abs(c2)); softPwmWrite( 6,0);
-//		softPwmWrite(26,abs(c2)); softPwmWrite(27,0);
-//		softPwmWrite( 1,abs(c2)); softPwmWrite( 4,0);
-//	};
-
-
-//	if(abs(c4) < 5) {   // 左
-//		softPwmWrite(25,0); softPwmWrite(24,0);
-//	} else if(c4 > 0) {
-//		softPwmWrite(25,0); softPwmWrite(24,abs(c4));
-//	} else {
-//		softPwmWrite(25,abs(c4)); softPwmWrite(24,0);
-//	};
-
+	if(c2 > 5) {
+		
+		if(ps3dat->button[PAD_KEY_R_JOYSTICK]) {
+			softPwmWrite(28, abs(c2)); softPwmWrite(29, 0);
+			softPwmWrite( 1, abs(c2)); softPwmWrite( 4, 0);
+		}else{
+			softPwmWrite(28, abs(c2)); softPwmWrite(29, 0);
+			softPwmWrite( 1, 0); softPwmWrite( 4, abs(c2));
+		};
+		
+	} else if(c2 < -5) {
+		
+		if(ps3dat->button[PAD_KEY_R_JOYSTICK]) {
+			softPwmWrite(28, 0); softPwmWrite(29, abs(c2));
+			softPwmWrite( 1, 0); softPwmWrite( 4, abs(c2));
+		}else{
+			softPwmWrite(28, 0); softPwmWrite(29, abs(c2));
+			softPwmWrite( 1, abs(c2)); softPwmWrite( 4, 0);
+		};
+		
+	} else {
+		softPwmWrite(28, 0);	softPwmWrite(29, 0);
+		softPwmWrite( 1, 0);	softPwmWrite( 4, 0);	
+	};
+		
+// 足回り系　終わり
+		
 
 	if((ps3dat->button[PAD_KEY_PS])&&(!ready_Go)) {
 		ready_Go = 1;
@@ -173,28 +163,15 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	};
 
 
-	if(ps3dat->button[PAD_KEY_LEFT]) {
-		softPwmWrite(16, 100); softPwmWrite(10, 100);
-	} else if(ps3dat->button[PAD_KEY_RIGHT]) {
+	if(ps3dat->button[PAD_KEY_UP]) {
 		softPwmWrite(15, 100); softPwmWrite(11, 100);
+	} else if(ps3dat->button[PAD_KEY_DOWN]) {
+		softPwmWrite(16, 100); softPwmWrite(10, 100);
 	} else {
 		softPwmWrite(15, 0); softPwmWrite(16, 0); softPwmWrite(10, 0); softPwmWrite(11, 0);
 	};
 
-// 足回り系　しばらくカット
-/*
-	if(ps3dat->button[PAD_KEY_CIRCLE]) {
-		softPwmWrite( 6, 15); softPwmWrite(26, 15);
-	} else if(ps3dat->button[PAD_KEY_SQUARE]) {
-		softPwmWrite( 5, 100); softPwmWrite(27, 100);
-	} else if(ps3dat->button[PAD_KEY_TRIANGLE]) {
-		softPwmWrite( 6, 15); softPwmWrite(27, 15); softPwmWrite(28,20); softPwmWrite(29, 0); softPwmWrite( 1,20); softPwmWrite( 4, 0);
-	} else if(ps3dat->button[PAD_KEY_CROSS]) {
-		softPwmWrite( 5, 15); softPwmWrite(26, 15); softPwmWrite(28, 0); softPwmWrite(29,20); softPwmWrite( 1, 0); softPwmWrite( 4,20);		
-	} else {
-		softPwmWrite( 5, 0); softPwmWrite( 6, 0); softPwmWrite(26, 0); softPwmWrite(27, 0);softPwmWrite(28, 0);	softPwmWrite(29, 0);softPwmWrite( 1, 0);	softPwmWrite( 4, 0);
-	};
-*/
+
 	if(ps3dat->button[PAD_KEY_CIRCLE]) {
 		setPCA9685Duty(fds , 1 , -50);
 	} else if(ps3dat->button[PAD_KEY_SQUARE]) {
@@ -212,14 +189,14 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	};
 
 
-	if(ps3dat->button[PAD_KEY_SELECT]) btn[PAD_KEY_SELECT]++;
-	if(!ps3dat->button[PAD_KEY_SELECT]) btn[PAD_KEY_SELECT] = 0;
-	if(b_btn[PAD_KEY_SELECT] > btn[PAD_KEY_SELECT]) {
+	if(ps3dat->button[PAD_KEY_PS]) btn[PAD_KEY_PS]++;
+	if(!ps3dat->button[PAD_KEY_PS]) btn[PAD_KEY_PS] = 0;
+	if(b_btn[PAD_KEY_PS] > btn[PAD_KEY_PS]) {
 		tennisBallCatch = 100 - tennisBallCatch;
 		if(tennisBallCatch == 0) 		system("mpg123 /home/pi/Music/lock.mp3 &");
 		if(tennisBallCatch == 100) 	system("mpg123 /home/pi/Music/release.mp3 &");	
 	};
-	b_btn[PAD_KEY_SELECT] = btn[PAD_KEY_SELECT];
+	b_btn[PAD_KEY_PS] = btn[PAD_KEY_PS];
 	
 	setPCA9685Duty(fds , 2 , tennisBallCatch);
 	setPCA9685Duty(fds , 3 , tennisBallCatch);
