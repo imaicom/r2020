@@ -105,47 +105,55 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	b_btn[PAD_KEY_LEFT] = btn[PAD_KEY_LEFT];
 	
 	
-// 足回り系　
+// Drive train
 
-    c1 = ps3dat->stick[PAD_RIGHT_Y]; c1 = c1/5;
+    c1 = ps3dat->stick[PAD_RIGHT_Y]; c1 = c1 / 5;
     c2 = ps3dat->stick[PAD_RIGHT_X];
 
 
 	if(c1 > 5) {
-		softPwmWrite( 5, abs(c1)); softPwmWrite(27, abs(c1));
+		if(ps3dat->button[PAD_KEY_R_JOYSTICK]) {
+			softPwmWrite( 5, 0);		softPwmWrite( 6, abs(c1));
+			softPwmWrite(27, abs(c1));		softPwmWrite(26, 0);
+		} else {
+			softPwmWrite( 5, abs(c1));	softPwmWrite( 6, 0);
+			softPwmWrite(27, abs(c1));	softPwmWrite(26, 0);
+		};	
 	} else if(c1 < -5) {
-		softPwmWrite( 6, abs(c1)); softPwmWrite(26, abs(c1));
+		if(ps3dat->button[PAD_KEY_R_JOYSTICK]) {
+			softPwmWrite( 5, abs(c1));	softPwmWrite( 6, 0);
+			softPwmWrite(27, 0);	softPwmWrite(26, abs(c1));			
+		} else {
+			softPwmWrite( 5, 0);		softPwmWrite( 6, abs(c1));
+			softPwmWrite(27, 0);		softPwmWrite(26, abs(c1));
+		};
 	} else {
 		softPwmWrite( 5, 0);	softPwmWrite( 6, 0);
 		softPwmWrite(26, 0);	softPwmWrite(27, 0);
 	};
 	
 	if(c2 > 5) {
-		
 		if(ps3dat->button[PAD_KEY_R_JOYSTICK]) {
-			softPwmWrite(28, 0); softPwmWrite(29, abs(c2));
-			softPwmWrite( 1, 0); softPwmWrite( 4, abs(c2));
+			softPwmWrite(28, 0); softPwmWrite(29, abs(c1));
+			softPwmWrite( 1, 0); softPwmWrite( 4, abs(c1));
 		}else{
 			softPwmWrite(28, abs(c2)); softPwmWrite(29, 0);
 			softPwmWrite( 1, 0); softPwmWrite( 4, abs(c2));
-		};
-		
+		};	
 	} else if(c2 < -5) {
-		
 		if(ps3dat->button[PAD_KEY_R_JOYSTICK]) {
-			softPwmWrite(28, abs(c2)); softPwmWrite(29, 0);
-			softPwmWrite( 1, abs(c2)); softPwmWrite( 4, 0);
+			softPwmWrite(28, abs(c1)); softPwmWrite(29, 0);
+			softPwmWrite( 1, abs(c1)); softPwmWrite( 4, 0);
 		}else{
 			softPwmWrite(28, 0); softPwmWrite(29, abs(c2));
 			softPwmWrite( 1, abs(c2)); softPwmWrite( 4, 0);
 		};
-		
 	} else {
 		softPwmWrite(28, 0);	softPwmWrite(29, 0);
 		softPwmWrite( 1, 0);	softPwmWrite( 4, 0);	
 	};
 		
-// 足回り系　終わり
+// end of Drive train
 		
 	if((ps3dat->button[PAD_KEY_PS])&&(!ready_Go)) {
 		ready_Go = 1;
