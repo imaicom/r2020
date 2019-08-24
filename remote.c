@@ -32,6 +32,7 @@ int fds;
 int ready_Go = 0;
 
 int tennisBallCatch = 0;
+int dropGate = 0;
 
 int mode = 0;
 
@@ -79,7 +80,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	unsigned char nr_stk = ps3dat->nr_sticks;
 	int xx,yy,x,y,z,v1,v2,ww,c1,c2,c3,c4;
 
-
+/*
 	if(ps3dat->button[PAD_KEY_RIGHT]) btn[PAD_KEY_RIGHT]++;
 	if(!ps3dat->button[PAD_KEY_RIGHT]) btn[PAD_KEY_RIGHT] = 0;
 	if(b_btn[PAD_KEY_RIGHT] > btn[PAD_KEY_RIGHT]) {
@@ -103,15 +104,53 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 		if(mode == 4) system("mpg123 /home/pi/Music/TennisBall.mp3 &");	
 	};
 	b_btn[PAD_KEY_LEFT] = btn[PAD_KEY_LEFT];
-	
-	
+*/	
+
+	if(ps3dat->button[PAD_KEY_RIGHT]) btn[PAD_KEY_RIGHT]++;
+	if(!ps3dat->button[PAD_KEY_RIGHT]) btn[PAD_KEY_RIGHT] = 0;
+	if(b_btn[PAD_KEY_RIGHT] > btn[PAD_KEY_RIGHT]) {
+		mode++; if(mode > 9) mode = 0; 
+		if(mode == 0) {system("mpg123 /home/pi/Music/01.mp3");};	
+		if(mode == 1) {system("mpg123 /home/pi/Music/02.mp3");};
+		if(mode == 2) {system("mpg123 /home/pi/Music/03.mp3");};
+		if(mode == 3) {system("mpg123 /home/pi/Music/04.mp3");};
+		if(mode == 4) {system("mpg123 /home/pi/Music/05.mp3");};	
+		if(mode == 5) {system("mpg123 /home/pi/Music/06.mp3");};	
+		if(mode == 6) {system("mpg123 /home/pi/Music/07.mp3");};	
+		if(mode == 7) {system("mpg123 /home/pi/Music/08.mp3");};	
+		if(mode == 8) {system("mpg123 /home/pi/Music/09.mp3");};	
+		if(mode == 9) {system("mpg123 /home/pi/Music/10.mp3");};	
+	};
+	b_btn[PAD_KEY_RIGHT] = btn[PAD_KEY_RIGHT];
+
+	if(mode == 0) {setPCA9685Duty(fds , 9 , -120);	setPCA9685Duty(fds , 10 , -90);	};	
+	if(mode == 1) {setPCA9685Duty(fds , 9 , 0);		setPCA9685Duty(fds , 10 ,-90);	};
+	if(mode == 2) {setPCA9685Duty(fds , 9 , 90);		setPCA9685Duty(fds , 10 ,-90);	};
+	if(mode == 3) {setPCA9685Duty(fds , 9 , 90);		setPCA9685Duty(fds , 10 ,60);	};
+	if(mode == 4) {setPCA9685Duty(fds , 9 , 30);		setPCA9685Duty(fds , 10 ,60);	};	
+	if(mode == 5) {setPCA9685Duty(fds , 9 , -120);	setPCA9685Duty(fds , 10 ,60);	};	
+	if(mode == 6) {setPCA9685Duty(fds , 9 , 0);		setPCA9685Duty(fds , 10 ,60);	};	
+	if(mode == 7) {setPCA9685Duty(fds , 9 , 90 );	setPCA9685Duty(fds , 10 ,60);	};	
+	if(mode == 8) {setPCA9685Duty(fds , 9 , 90);		setPCA9685Duty(fds , 10 ,-90);	};	
+	if(mode == 9) {setPCA9685Duty(fds , 9 , 60);		setPCA9685Duty(fds , 10 ,-90);	};	
+
+	if(ps3dat->button[PAD_KEY_LEFT]) btn[PAD_KEY_LEFT]++;
+	if(!ps3dat->button[PAD_KEY_LEFT]) btn[PAD_KEY_LEFT] = 0;
+	if(b_btn[PAD_KEY_LEFT] > btn[PAD_KEY_LEFT]) {
+		dropGate = 100 - dropGate;	
+	};
+	b_btn[PAD_KEY_LEFT] = btn[PAD_KEY_LEFT];
+
+	setPCA9685Duty(fds , 5 , dropGate);
+	setPCA9685Duty(fds , 6 , -dropGate);
+
 // Drive train
 
     c1 = ps3dat->stick[PAD_RIGHT_Y]; c1 = c1 / 5;
     c2 = ps3dat->stick[PAD_RIGHT_X];
 
 
-	if(c1 > 5) {
+	if(c1 > +10) {
 		if(ps3dat->button[PAD_KEY_R_JOYSTICK]) {
 			softPwmWrite( 5, 0);		softPwmWrite( 6, abs(c1));
 			softPwmWrite(27, abs(c1));		softPwmWrite(26, 0);
@@ -119,7 +158,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 			softPwmWrite( 5, abs(c1));	softPwmWrite( 6, 0);
 			softPwmWrite(27, abs(c1));	softPwmWrite(26, 0);
 		};	
-	} else if(c1 < -5) {
+	} else if(c1 < -10) {
 		if(ps3dat->button[PAD_KEY_R_JOYSTICK]) {
 			softPwmWrite( 5, abs(c1));	softPwmWrite( 6, 0);
 			softPwmWrite(27, 0);	softPwmWrite(26, abs(c1));			
@@ -132,7 +171,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 		softPwmWrite(26, 0);	softPwmWrite(27, 0);
 	};
 	
-	if(c2 > 5) {
+	if(c2 > 10) {
 		if(ps3dat->button[PAD_KEY_R_JOYSTICK]) {
 			softPwmWrite(28, 0); softPwmWrite(29, abs(c1));
 			softPwmWrite( 1, 0); softPwmWrite( 4, abs(c1));
@@ -140,7 +179,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 			softPwmWrite(28, abs(c2)); softPwmWrite(29, 0);
 			softPwmWrite( 1, 0); softPwmWrite( 4, abs(c2));
 		};	
-	} else if(c2 < -5) {
+	} else if(c2 < -10) {
 		if(ps3dat->button[PAD_KEY_R_JOYSTICK]) {
 			softPwmWrite(28, abs(c1)); softPwmWrite(29, 0);
 			softPwmWrite( 1, abs(c1)); softPwmWrite( 4, 0);
