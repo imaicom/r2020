@@ -1,4 +1,5 @@
 // cc -o remote remote.c -lwiringPi -lm
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
@@ -18,8 +19,8 @@ struct ps3ctls {
 	int fd;
 	unsigned char nr_buttons;	// Max number of Buttons
 	unsigned char nr_sticks;	// Max number of Sticks
-	short *button;			// button[nr_buttons]
-	short *stick;			// stick[nr_sticks]
+	short *button;				// button[nr_buttons]
+	short *stick;					// stick[nr_sticks]
 };
 
 
@@ -29,8 +30,8 @@ struct ps3ctls {
 int btn[NumberOfButton] = {};
 int b_btn[NumberOfButton] = {};
 int fds;
-int ready_Go = 0;
 
+int ready_Go = 0;
 int tennisBallCatch = 0;
 int dropGate = 0;
 
@@ -75,7 +76,6 @@ int setPCA9685Duty(int fd , int channel , int off) {
 
 int ps3c_test(struct ps3ctls *ps3dat) {
 
-	int i;
 	unsigned char nr_btn = ps3dat->nr_buttons;
 	unsigned char nr_stk = ps3dat->nr_sticks;
 	int c1,c2,c3,c4;
@@ -98,6 +98,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	};
 	b_btn[PAD_KEY_RIGHT] = btn[PAD_KEY_RIGHT];
 
+
 	if(ps3dat->button[PAD_KEY_LEFT]) btn[PAD_KEY_LEFT]++;
 	if(!ps3dat->button[PAD_KEY_LEFT]) btn[PAD_KEY_LEFT] = 0;
 	if(b_btn[PAD_KEY_LEFT] > btn[PAD_KEY_LEFT]) {
@@ -115,6 +116,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	};
 	b_btn[PAD_KEY_LEFT] = btn[PAD_KEY_LEFT];
 
+
 	if(mode == 0) {setPCA9685Duty(fds , 9 , -120);		setPCA9685Duty(fds , 10 ,-90);	};	
 	if(mode == 1) {setPCA9685Duty(fds , 9 , 0);		setPCA9685Duty(fds , 10 ,-90);	};
 	if(mode == 2) {setPCA9685Duty(fds , 9 , +90);		setPCA9685Duty(fds , 10 ,-90);	};
@@ -125,6 +127,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	if(mode == 7) {setPCA9685Duty(fds , 9 , +90);		setPCA9685Duty(fds , 10 ,+60);	};	
 	if(mode == 8) {setPCA9685Duty(fds , 9 , +90);		setPCA9685Duty(fds , 10 ,-90);	};	
 	if(mode == 9) {setPCA9685Duty(fds , 9 , +60);		setPCA9685Duty(fds , 10 ,-90);	};	
+
 
 	if(ps3dat->button[PAD_KEY_TRIANGLE]) btn[PAD_KEY_TRIANGLE]++;
 	if(!ps3dat->button[PAD_KEY_TRIANGLE]) btn[PAD_KEY_TRIANGLE] = 0;
@@ -138,6 +141,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	setPCA9685Duty(fds , 5 , dropGate);
 	setPCA9685Duty(fds , 6 , -dropGate);
 
+
 // Drive train
 
     c1 = ps3dat->stick[PAD_RIGHT_Y] / 4;
@@ -145,12 +149,12 @@ int ps3c_test(struct ps3ctls *ps3dat) {
     c3 = ps3dat->stick[PAD_LEFT_X];
     c4 = ps3dat->stick[PAD_LEFT_Y];
 
-	if(c3 > +60) {
+	if(c3 > +70) {
 		softPwmWrite( 5, 15); softPwmWrite( 6, 0); //Right rotation
 		softPwmWrite(26, 15); softPwmWrite(27, 0);
 		softPwmWrite(28,  0); softPwmWrite(29,20);
 		softPwmWrite( 1,  0); softPwmWrite( 4,20);	
-	}else if(c3 < -60) {
+	}else if(c3 < -70) {
 		softPwmWrite( 5, 0); softPwmWrite( 6, 15); //Left rotation
 		softPwmWrite(26, 0); softPwmWrite(27, 15);
 		softPwmWrite(28,20); softPwmWrite(29,  0);
@@ -183,10 +187,12 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 
 // end of Drive train
 		
+		
 	if((ps3dat->button[PAD_KEY_PS])&&(!ready_Go)) {
 		ready_Go = 1;
 		system("mpg123 /home/pi/Music/ready_Go.mp3");
 	};
+	
 	
 	if(ps3dat->button[PAD_KEY_L1]) {
 		setPCA9685Duty(fds , 8 , +50);
@@ -195,7 +201,6 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	} else {
 		setPCA9685Duty(fds , 8 ,   0);
 	};
-
 
 
 	if(ps3dat->button[PAD_KEY_R1]) {
@@ -217,57 +222,33 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 
 
 	if(ps3dat->button[PAD_KEY_CIRCLE]) {
-//		setPCA9685Duty(fds , 1 , +50);	// servo death
+		setPCA9685Duty(fds , 1 , +50);	// servo death
 		softPwmWrite(30, 100);
 	} else if(ps3dat->button[PAD_KEY_SQUARE]) {
-//		setPCA9685Duty(fds , 1 , -50);	// servo death
+		setPCA9685Duty(fds , 1 , -50);	// servo death
 		softPwmWrite(31, 100);
 	} else {
-//		setPCA9685Duty(fds , 1 ,   0);	// servo death
+		setPCA9685Duty(fds , 1 ,   0);	// servo death
 		softPwmWrite(30, 0); softPwmWrite(31, 0);
 	};
 	
-	if(c4 > +60) {
+	if(c4 > +70) {
+		setPCA9685Duty(fds , 0 , -50);	// servo death
 		softPwmWrite(22, 100);
-	}else if(c4< -60) {
+	}else if(c4< -70) {
+		setPCA9685Duty(fds , 0 , +50);	// servo death
 		softPwmWrite(21, 40);
 	}else {
+		setPCA9685Duty(fds , 0 ,   0);	// servo death
 		softPwmWrite(21, 0); softPwmWrite(22, 0);
 	};
 
-/*	
-	if(ps3dat->button[PAD_KEY_TRIANGLE]) {
-//		setPCA9685Duty(fds , 0 , +50);	// servo death
-		softPwmWrite(21, 100);
-	} else if(ps3dat->button[PAD_KEY_CROSS]) {
-//		setPCA9685Duty(fds , 0 , -50);	// servo death
-		softPwmWrite(22, 100);
-	} else {
-//		setPCA9685Duty(fds , 0 ,   0);	// servo death
-		softPwmWrite(21, 0); softPwmWrite(22, 0);
-	};
-*/
 
-// 足回り系　しばらくカット
-	/*
-	if(ps3dat->button[PAD_KEY_CIRCLE]) {
-		softPwmWrite( 6, 15); softPwmWrite(26, 15);
-	} else if(ps3dat->button[PAD_KEY_SQUARE]) {
-		softPwmWrite( 5, 100); softPwmWrite(27, 100);
-	} else if(ps3dat->button[PAD_KEY_TRIANGLE]) {
-		softPwmWrite( 6, 15); softPwmWrite(27, 15); softPwmWrite(28,20); softPwmWrite(29, 0); softPwmWrite( 1,20); softPwmWrite( 4, 0); //left rotation
-	} else if(ps3dat->button[PAD_KEY_CROSS]) {
-		softPwmWrite( 5, 15); softPwmWrite(26, 15); softPwmWrite(28, 0); softPwmWrite(29,20); softPwmWrite( 1, 0); softPwmWrite( 4,20); //right rotation		
-	} else {
-		softPwmWrite( 5, 0); softPwmWrite( 6, 0); softPwmWrite(26, 0); softPwmWrite(27, 0);softPwmWrite(28, 0);	softPwmWrite(29, 0);softPwmWrite( 1, 0);	softPwmWrite( 4, 0);
-	};
-	*/
-	
 	if(ps3dat->button[PAD_KEY_CROSS]) btn[PAD_KEY_CROSS]++;
 	if(!ps3dat->button[PAD_KEY_CROSS]) btn[PAD_KEY_CROSS] = 0;
 	if(b_btn[PAD_KEY_CROSS] > btn[PAD_KEY_CROSS]) {
 		tennisBallCatch = 100 - tennisBallCatch;
-		if(tennisBallCatch == 0) 		system("mpg123 /home/pi/Music/lock.mp3 &");
+		if(tennisBallCatch == 0) 	system("mpg123 /home/pi/Music/lock.mp3 &");
 		if(tennisBallCatch == 100) 	system("mpg123 /home/pi/Music/release.mp3 &");	
 	};
 	b_btn[PAD_KEY_CROSS] = btn[PAD_KEY_CROSS];
@@ -278,7 +259,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 
 
 	if(ps3dat->button[PAD_KEY_START]) {
-		system("mpg123 /home/pi/Music/Safe_mode.mp3 &");
+		system("mpg123 /home/pi/Music/turnOff.mp3");
 		softPwmWrite( 5,0); // motor-1 10ms
 		softPwmWrite( 6,0); // motor-1 10ms
 		softPwmWrite(26,0); // motor-2 10ms
@@ -299,8 +280,8 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 		softPwmWrite(31,0); // motor-8 10ms
 		softPwmWrite(21,0); // motor-9 10ms
 		softPwmWrite(22,0); // motor-9 10ms
+		system("mpg123 /home/pi/Music/byeBye.mp3");
 
-		delay(1000);
 		return -1; // end of program
 	};
 
@@ -418,7 +399,6 @@ void main() {
 	system("mpg123 /home/pi/Music/Main_system_startup.mp3");
 	delay(200);
 	system("mpg123 /home/pi/Music/Press_the_PS_button.mp3");
-//	system("cd;cd turbo2;cd sixad;sudo sixad -start &");
 
 
 	if(!(ps3c_init(&ps3dat, df))) {
