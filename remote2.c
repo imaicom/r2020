@@ -118,16 +118,16 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	b_btn[PAD_KEY_LEFT] = btn[PAD_KEY_LEFT];
 
 
-	if(mode == 0) {setPCA9685Duty(fds , 9 , -120);		setPCA9685Duty(fds , 10 ,-90);	};	
-	if(mode == 1) {setPCA9685Duty(fds , 9 , 0);		setPCA9685Duty(fds , 10 ,-90);	};
-	if(mode == 2) {setPCA9685Duty(fds , 9 , +90);		setPCA9685Duty(fds , 10 ,-90);	};
-	if(mode == 3) {setPCA9685Duty(fds , 9 , +90);		setPCA9685Duty(fds , 10 ,+60);	};
-	if(mode == 4) {setPCA9685Duty(fds , 9 , +30);		setPCA9685Duty(fds , 10 ,+60);	};	
-	if(mode == 5) {setPCA9685Duty(fds , 9 , -120);		setPCA9685Duty(fds , 10 ,+60);	};	
-	if(mode == 6) {setPCA9685Duty(fds , 9 , 0);		setPCA9685Duty(fds , 10 ,+60);	};	
-	if(mode == 7) {setPCA9685Duty(fds , 9 , +90);		setPCA9685Duty(fds , 10 ,+60);	};	
-	if(mode == 8) {setPCA9685Duty(fds , 9 , +90);		setPCA9685Duty(fds , 10 ,-90);	};	
-	if(mode == 9) {setPCA9685Duty(fds , 9 , +60);		setPCA9685Duty(fds , 10 ,-90);	};	
+	if(mode == 0) {setPCA9685Duty(fds , 9 , -120-20);		setPCA9685Duty(fds , 10 ,-90-15);	};	
+	if(mode == 1) {setPCA9685Duty(fds , 9 , 0-20);		setPCA9685Duty(fds , 10 ,-90-15);	};
+	if(mode == 2) {setPCA9685Duty(fds , 9 , +90-20);		setPCA9685Duty(fds , 10 ,-90-15);	};
+	if(mode == 3) {setPCA9685Duty(fds , 9 , +90-20);		setPCA9685Duty(fds , 10 ,+60-15);	};
+	if(mode == 4) {setPCA9685Duty(fds , 9 , +30-20);		setPCA9685Duty(fds , 10 ,+60-15);	};	
+	if(mode == 5) {setPCA9685Duty(fds , 9 , -120-20);		setPCA9685Duty(fds , 10 ,+60-15);	};	
+	if(mode == 6) {setPCA9685Duty(fds , 9 , 0-20);		setPCA9685Duty(fds , 10 ,+60-15);	};	
+	if(mode == 7) {setPCA9685Duty(fds , 9 , +90-20);		setPCA9685Duty(fds , 10 ,+60-15);	};	
+	if(mode == 8) {setPCA9685Duty(fds , 9 , +90-20);		setPCA9685Duty(fds , 10 ,-90-15);	};	
+	if(mode == 9) {setPCA9685Duty(fds , 9 , +60-20);		setPCA9685Duty(fds , 10 ,-90-15);	};	
 
 
 	if(ps3dat->button[PAD_KEY_TRIANGLE]) btn[PAD_KEY_TRIANGLE]++;
@@ -256,7 +256,6 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	setPCA9685Duty(fds , 2 , tennisBallCatch);
 	setPCA9685Duty(fds , 3 , tennisBallCatch);
 	setPCA9685Duty(fds , 4 , tennisBallCatch);
-	setPCA9685Duty(fds , 9 , tennisBallCatch);
 
 
 	if(ps3dat->button[PAD_KEY_START]) {
