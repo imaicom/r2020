@@ -231,18 +231,6 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 		softPwmWrite(30, 0); softPwmWrite(31, 0);
 	};
 	
-/*	
-	if(ps3dat->button[PAD_KEY_SELECT]) {
-		setPCA9685Duty(fds , 0 , +50);	// servo death
-		softPwmWrite(22, 100);
-	} else if(ps3dat->button[PAD_KEY_PS]) {
-		setPCA9685Duty(fds , 0 , -50);	// servo death
-		softPwmWrite(21, 100);
-	} else {
-		setPCA9685Duty(fds , 0 ,   0);	// servo death
-		softPwmWrite(21, 0); softPwmWrite(22, 0);
-	};
-*/
 	
 	if(ps3dat->stick [PAD_LEFT_Y] > +70) {
 		setPCA9685Duty(fds , 0 , -50);	// servo death
