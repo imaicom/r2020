@@ -148,7 +148,8 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 
     v1 = ps3dat->stick [PAD_RIGHT_X];    // horizontal Axis input
     v2 = ps3dat->stick [PAD_RIGHT_Y];    // vertical Axis input
-    ww = ps3dat->stick [PAD_LEFT_X];   // rotation input
+    ww = ps3dat->stick [PAD_LEFT_X]; if(abs(ww) < 40) ww = 0;  // rotation input
+    
 
     c1 = -( 8 * v1 +  8 * v2 + -6 * -ww ) / 10;   // left Front
     c2 = ( 8 * v1 + -8 * v2 +  6 * ww ) / 10;   // right Front
