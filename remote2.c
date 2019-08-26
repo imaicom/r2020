@@ -256,6 +256,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	setPCA9685Duty(fds , 2 , tennisBallCatch);
 	setPCA9685Duty(fds , 3 , tennisBallCatch);
 	setPCA9685Duty(fds , 4 , tennisBallCatch);
+	setPCA9685Duty(fds , 9 , tennisBallCatch);
 
 
 	if(ps3dat->button[PAD_KEY_START]) {
