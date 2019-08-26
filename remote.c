@@ -144,8 +144,8 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 
 // Drive train
 
-    c1 = ps3dat->stick[PAD_RIGHT_Y] / 4;
-    c2 = ps3dat->stick[PAD_RIGHT_X];
+    c1 = -ps3dat->stick[PAD_RIGHT_Y] / 4;
+    c2 = -ps3dat->stick[PAD_RIGHT_X];
     c3 = ps3dat->stick[PAD_LEFT_X];
     c4 = ps3dat->stick[PAD_LEFT_Y];
 
