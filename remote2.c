@@ -145,87 +145,45 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 
 // Drive train
 
-//    c1 = ps3dat->stick[PAD_RIGHT_Y];
-//    c2 = ps3dat->stick[PAD_RIGHT_X];
-//    c3 = ps3dat->stick[PAD_LEFT_X];
-//    c4 = ps3dat->stick[PAD_LEFT_Y];
 
+    v1 = ps3dat->stick [PAD_RIGHT_X];    // horizontal Axis input
+    v2 = ps3dat->stick [PAD_RIGHT_Y];    // vertical Axis input
+    ww = ps3dat->stick [PAD_LEFT_X];   // rotation input
 
-    v1 = ps3dat->stick [PAD_RIGHT_X];    // 横軸入力
-    v2 = ps3dat->stick [PAD_RIGHT_Y];    // 縦軸入力
-    ww = ps3dat->stick [PAD_LEFT_X];   // 回転入力
-
-    c1 = -( 8 * v1 +  8 * v2 + -6 * -ww ) / 10;   // 左前
-    c2 = ( 8 * v1 + -8 * v2 +  6 * ww ) / 10;   // 右前
-    c3 = ( 8 * v1 + -8 * v2 +  6 * -ww ) / 10;   // 左後
-    c4 = -( 8 * v1 +  8 * v2 + -6 * ww ) / 10;   // 右後
+    c1 = -( 8 * v1 +  8 * v2 + -6 * -ww ) / 10;   // left Front
+    c2 = ( 8 * v1 + -8 * v2 +  6 * ww ) / 10;   // right Front
+    c3 = ( 8 * v1 + -8 * v2 +  6 * -ww ) / 10;   // left Rear
+    c4 = -( 8 * v1 +  8 * v2 + -6 * ww ) / 10;   // right Rear
     
-	c1 = c1 / 15; c2 = c2 / 15; c3 = c3 / 15; c4 = c4 / 15;
+    if ((1 - ps3dat->button[PAD_KEY_R_JOYSTICK])&&(1 - ps3dat->button[PAD_KEY_L_JOYSTICK])) {	// slow Mode
+		c1 = c1 / 15; c2 = c2 / 15; c3 = c3 / 15; c4 = c4 / 15;
+	};
 
-
-
-    printf(" 左前=%4d ",c1);
-    printf(" 右前=%4d ",c2);
+    printf(" left Front=%4d ",c1);
+    printf(" right Front=%4d ",c2);
     printf("\n");
-    printf(" 左後=%4d ",c3);
-    printf(" 右後=%4d ",c4);
+    printf(" left Rear=%4d ",c3);
+    printf(" right Rear=%4d ",c4);
     printf("\n");
     printf("\n");
     
-    if(c1 > 0) {softPwmWrite( 5, abs(c1));	softPwmWrite( 6, 0);};
+    if(c1 > 0) {softPwmWrite( 5, abs(c1));	softPwmWrite( 6, 0);};	//left Front
 	if(c1 ==0) {softPwmWrite( 5, 0); 		softPwmWrite( 6, 0);};
     if(c1 < 0) {softPwmWrite( 5, 0); 		softPwmWrite( 6, abs(c1));};
  
-    if(c2 > 0) {softPwmWrite(26, 0);			softPwmWrite(27, abs(c2));};
+    if(c2 > 0) {softPwmWrite(26, 0);			softPwmWrite(27, abs(c2));};	//Right Front
 	if(c2 ==0) {softPwmWrite(26, 0); 		softPwmWrite(27, 0);};
     if(c2 < 0) {softPwmWrite(26, abs(c2)); 	softPwmWrite(27, 0);};
  
-    if(c3 > 0) {softPwmWrite(28, 0);			softPwmWrite(29, abs(c3));};
-	if(c3 ==0) {softPwmWrite(28, 0); 		softPwmWrite(29, 0);};
-    if(c3 < 0) {softPwmWrite(28, abs(c3)); 	softPwmWrite(29, 0);};
+    if(c3 > 0) {softPwmWrite( 1, abs(c3));	softPwmWrite( 4, 0);};	//left Rear
+	if(c3 ==0) {softPwmWrite( 1, 0); 		softPwmWrite( 4, 0);};
+    if(c3 < 0) {softPwmWrite( 1, 0); 		softPwmWrite( 4, abs(c3));};
+ 
+    if(c4 > 0) {softPwmWrite(28, 0);			softPwmWrite(29, abs(c4));};	//right Rear
+	if(c4 ==0) {softPwmWrite(28, 0); 		softPwmWrite(29, 0);};
+    if(c4 < 0) {softPwmWrite(28, abs(c4)); 	softPwmWrite(29, 0);};
 
-    if(c4 > 0) {softPwmWrite( 1, 0);			softPwmWrite( 4, abs(c4));};
-	if(c4 ==0) {softPwmWrite( 1, 0); 		softPwmWrite( 4, 0);};
-    if(c4 < 0) {softPwmWrite( 1, abs(c4)); 	softPwmWrite( 4, 0);};
       
-    
-
-/*	if(c3 > +70) {
-		softPwmWrite( 5, 15); softPwmWrite( 6, 0); //Right rotation
-		softPwmWrite(26, 15); softPwmWrite(27, 0);
-		softPwmWrite(28,  0); softPwmWrite(29,20);
-		softPwmWrite( 1,  0); softPwmWrite( 4,20);	
-	}else if(c3 < -70) {
-		softPwmWrite( 5, 0); softPwmWrite( 6, 15); //Left rotation
-		softPwmWrite(26, 0); softPwmWrite(27, 15);
-		softPwmWrite(28,20); softPwmWrite(29,  0);
-		softPwmWrite( 1,20); softPwmWrite( 4,  0);
-	}else { // other than c3
-
-		if(c1 < -10) {
-			softPwmWrite( 5, abs(c1)); softPwmWrite( 6, 0);
-			softPwmWrite(27, abs(c1)); softPwmWrite(26, 0);
-		} else if(c1 > +10) {
-			softPwmWrite( 5, 0); softPwmWrite( 6, abs(c1));
-			softPwmWrite(27, 0); softPwmWrite(26, abs(c1));
-		} else {
-			softPwmWrite( 5, 0); softPwmWrite( 6, 0);
-			softPwmWrite(26, 0); softPwmWrite(27, 0);
-		}; // end of if(c1 < -10) 
-	
-		if(c2 < -10) {
-			softPwmWrite(28, abs(c2)); softPwmWrite(29, 0);
-			softPwmWrite( 1, 0); softPwmWrite( 4, abs(c2));	
-		} else if(c2 > +10) {
-			softPwmWrite(28, 0); softPwmWrite(29, abs(c2));
-			softPwmWrite( 1, abs(c2)); softPwmWrite( 4, 0);
-		} else {
-			softPwmWrite(28, 0);	softPwmWrite(29, 0);
-			softPwmWrite( 1, 0);	softPwmWrite( 4, 0);	
-		}; // end of if(c2 < -10) 
-	
-	};// end of other than c3
-*/
 // end of Drive train
 		
 		
