@@ -194,9 +194,9 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	
 	
 	if(ps3dat->button[PAD_KEY_L1]) {
-		setPCA9685Duty(fds , 8 , +50);
-	} else if(ps3dat->button[PAD_KEY_L2]) {
 		setPCA9685Duty(fds , 8 , -50);
+	} else if(ps3dat->button[PAD_KEY_L2]) {
+		setPCA9685Duty(fds , 8 , +50);
 	} else {
 		setPCA9685Duty(fds , 8 ,   0);
 	};
@@ -212,11 +212,11 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 
 
 	if(ps3dat->button[PAD_KEY_UP]) {
-		softPwmWrite(15, 100); softPwmWrite(11, 100);
+		softPwmWrite(25,100); softPwmWrite(24, 0);
 	} else if(ps3dat->button[PAD_KEY_DOWN]) {
-		softPwmWrite(16, 100); softPwmWrite(10, 100);
+		softPwmWrite(25, 0); softPwmWrite(24,100);
 	} else {
-		softPwmWrite(15, 0); softPwmWrite(16, 0); softPwmWrite(10, 0); softPwmWrite(11, 0);
+		softPwmWrite(25, 0); softPwmWrite(24, 0);
 	};
 
 
@@ -231,10 +231,23 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 		softPwmWrite(30, 0); softPwmWrite(31, 0);
 	};
 	
-	if(c4 > +70) {
+/*	
+	if(ps3dat->button[PAD_KEY_SELECT]) {
+		setPCA9685Duty(fds , 0 , +50);	// servo death
+		softPwmWrite(22, 100);
+	} else if(ps3dat->button[PAD_KEY_PS]) {
+		setPCA9685Duty(fds , 0 , -50);	// servo death
+		softPwmWrite(21, 100);
+	} else {
+		setPCA9685Duty(fds , 0 ,   0);	// servo death
+		softPwmWrite(21, 0); softPwmWrite(22, 0);
+	};
+*/
+	
+	if(ps3dat->stick [PAD_LEFT_Y] > +70) {
 		setPCA9685Duty(fds , 0 , -50);	// servo death
 		softPwmWrite(22, 100);
-	}else if(c4< -70) {
+	}else if(ps3dat->stick [PAD_LEFT_Y] < -70) {
 		setPCA9685Duty(fds , 0 , +50);	// servo death
 		softPwmWrite(21, 40);
 	}else {
