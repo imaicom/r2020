@@ -122,11 +122,11 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	if(mode == 0) {setPCA9685Duty(fds , 9 , -120-20);		setPCA9685Duty(fds , 10 ,-90-15);	};	
 	if(mode == 1) {setPCA9685Duty(fds , 9 , 0-20);		setPCA9685Duty(fds , 10 ,-90-15);	};
 	if(mode == 2) {setPCA9685Duty(fds , 9 , +90-20);		setPCA9685Duty(fds , 10 ,-90-15);	};
-	if(mode == 3) {setPCA9685Duty(fds , 9 , +90-20);		setPCA9685Duty(fds , 10 ,+60-15);	};
-	if(mode == 4) {setPCA9685Duty(fds , 9 , +30-20);		setPCA9685Duty(fds , 10 ,+60-15);	};	
-	if(mode == 5) {setPCA9685Duty(fds , 9 , -120-20);		setPCA9685Duty(fds , 10 ,+60-15);	};	
-	if(mode == 6) {setPCA9685Duty(fds , 9 , 0-20);		setPCA9685Duty(fds , 10 ,+60-15);	};	
-	if(mode == 7) {setPCA9685Duty(fds , 9 , +90-20);		setPCA9685Duty(fds , 10 ,+60-15);	};	
+	if(mode == 3) {setPCA9685Duty(fds , 9 , +90-20);		setPCA9685Duty(fds , 10 ,+60-15+5);	};
+	if(mode == 4) {setPCA9685Duty(fds , 9 , +30-20);		setPCA9685Duty(fds , 10 ,+60-15+5);	};	
+	if(mode == 5) {setPCA9685Duty(fds , 9 , -120-20+20);		setPCA9685Duty(fds , 10 ,+60-15+5);	};	
+	if(mode == 6) {setPCA9685Duty(fds , 9 , 0-20);		setPCA9685Duty(fds , 10 ,+60-15+5);	};	
+	if(mode == 7) {setPCA9685Duty(fds , 9 , +90-20);		setPCA9685Duty(fds , 10 ,+60-15+5);	};	
 	if(mode == 8) {setPCA9685Duty(fds , 9 , +90-20);		setPCA9685Duty(fds , 10 ,-90-15);	};	
 	if(mode == 9) {setPCA9685Duty(fds , 9 , +60-20);		setPCA9685Duty(fds , 10 ,-90-15);	};	
 
