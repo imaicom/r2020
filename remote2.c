@@ -33,6 +33,7 @@ int fds;
 
 int ready_Go = 0;
 int tennisBallCatch = 0;
+int tennisBallCatch2 = 0;
 int dropGate = 0;
 
 int mode = 0;
@@ -146,7 +147,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 // Drive train
 
 
-    v1 = ps3dat->stick [PAD_RIGHT_X];    // horizontal Axis input
+    v1 = -ps3dat->stick [PAD_RIGHT_X];    // horizontal Axis input
     v2 = ps3dat->stick [PAD_RIGHT_Y];    // vertical Axis input
     ww = ps3dat->stick [PAD_LEFT_X]; if(abs(ww) < 40) ww = 0;  // rotation input
     
@@ -213,9 +214,9 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 
 
 	if(ps3dat->button[PAD_KEY_UP]) {
-		softPwmWrite(25,100); softPwmWrite(24, 0);
+		softPwmWrite(25,0); softPwmWrite(24, 100);
 	} else if(ps3dat->button[PAD_KEY_DOWN]) {
-		softPwmWrite(25, 0); softPwmWrite(24,100);
+		softPwmWrite(25,100); softPwmWrite(24,0);
 	} else {
 		softPwmWrite(25, 0); softPwmWrite(24, 0);
 	};
@@ -236,9 +237,9 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	if(ps3dat->stick [PAD_LEFT_Y] > +70) {
 		setPCA9685Duty(fds , 0 , -50);	// servo death
 		softPwmWrite(22, 100);
-	}else if(ps3dat->stick [PAD_LEFT_Y] < -70) {
+	}else if((ps3dat->stick [PAD_LEFT_Y] < -70)||(ps3dat->button[PAD_KEY_PS])) {
 		setPCA9685Duty(fds , 0 , +50);	// servo death
-		softPwmWrite(21, 40);
+		softPwmWrite(21, 100);
 	}else {
 		setPCA9685Duty(fds , 0 ,   0);	// servo death
 		softPwmWrite(21, 0); softPwmWrite(22, 0);
@@ -248,15 +249,17 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	if(ps3dat->button[PAD_KEY_CROSS]) btn[PAD_KEY_CROSS]++;
 	if(!ps3dat->button[PAD_KEY_CROSS]) btn[PAD_KEY_CROSS] = 0;
 	if(b_btn[PAD_KEY_CROSS] > btn[PAD_KEY_CROSS]) {
-		tennisBallCatch = 100 - tennisBallCatch;
+		tennisBallCatch = 110 - tennisBallCatch;
+		if(tennisBallCatch == 110) tennisBallCatch2 = 80;
+		if(tennisBallCatch == 0) tennisBallCatch2 = 0;
 		if(tennisBallCatch == 0) 	system("mpg123 /home/pi/Music/lock.mp3 &");
-		if(tennisBallCatch == 100) 	system("mpg123 /home/pi/Music/release.mp3 &");	
+		if(tennisBallCatch == 110) 	system("mpg123 /home/pi/Music/release.mp3 &");	
 	};
 	b_btn[PAD_KEY_CROSS] = btn[PAD_KEY_CROSS];
 	
-	setPCA9685Duty(fds , 2 , tennisBallCatch);
+	setPCA9685Duty(fds , 2 , tennisBallCatch2);
 	setPCA9685Duty(fds , 3 , tennisBallCatch);
-	setPCA9685Duty(fds , 4 , tennisBallCatch);
+	setPCA9685Duty(fds , 4 , tennisBallCatch2);
 
 
 	if(ps3dat->button[PAD_KEY_START]) {
