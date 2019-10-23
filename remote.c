@@ -235,7 +235,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	if(c4 > +70) {
 		setPCA9685Duty(fds , 0 , -50);	// servo death
 		softPwmWrite(22, 100);
-	}else if(c4< -70) {
+	}else if((c4< -70)||(ps3dat->button[PAD_KEY_PS])) {
 		setPCA9685Duty(fds , 0 , +50);	// servo death
 		softPwmWrite(21, 40);
 	}else {
