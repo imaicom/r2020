@@ -223,26 +223,26 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 
 
 	if(ps3dat->button[PAD_KEY_CIRCLE]) {
-		setPCA9685Duty(fds , 1 , +50);	// servo death
-		softPwmWrite(30, 100);
+		setPCA9685Duty(fds , 1 , -50);	
+		//softPwmWrite(30, 100);						// no use
 	} else if(ps3dat->button[PAD_KEY_SQUARE]) {
-		setPCA9685Duty(fds , 1 , -50);	// servo death
-		softPwmWrite(31, 100);
+		setPCA9685Duty(fds , 1 , +50);
+		//softPwmWrite(31, 100);						// no use
 	} else {
-		setPCA9685Duty(fds , 1 ,   0);	// servo death
-		softPwmWrite(30, 0); softPwmWrite(31, 0);
+		setPCA9685Duty(fds , 1 ,   0);	
+		//softPwmWrite(30, 0); softPwmWrite(31, 0);	// no use
 	};
 	
 	
 	if(ps3dat->stick [PAD_LEFT_Y] > +70) {
-		setPCA9685Duty(fds , 0 , -50);	// servo death
-		softPwmWrite(22, 100);
+		setPCA9685Duty(fds , 0 , +50);
+		//softPwmWrite(22, 100);						// no use
 	}else if((ps3dat->stick [PAD_LEFT_Y] < -70)||(ps3dat->button[PAD_KEY_PS])) {
-		setPCA9685Duty(fds , 0 , +50);	// servo death
-		softPwmWrite(21, 100);
+		setPCA9685Duty(fds , 0 , -50);
+		//softPwmWrite(21, 100);						// no use
 	}else {
-		setPCA9685Duty(fds , 0 ,   0);	// servo death
-		softPwmWrite(21, 0); softPwmWrite(22, 0);
+		setPCA9685Duty(fds , 0 ,   0);
+		//softPwmWrite(21, 0); softPwmWrite(22, 0);	// no use
 	};
 
 
