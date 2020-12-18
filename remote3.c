@@ -106,16 +106,16 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 		softPwmWrite( 5, abs(c1));	softPwmWrite( 6, 0); // left Front
 		softPwmWrite(28, abs(c1));	softPwmWrite(29, 0); // left Rear
 	} else if(c1 < -5) 	{
-		softPwmWrite( 5, 0); 	softPwmWrite( 6, abs(c1));
-		softPwmWrite(28, 0); 	softPwmWrite(29, abs(c1));
+		softPwmWrite( 5, 0); 		softPwmWrite( 6, abs(c1));
+		softPwmWrite(28, 0); 		softPwmWrite(29, abs(c1));
 	} else {
 		softPwmWrite( 5, 0);		softPwmWrite( 6, 0);
 		softPwmWrite(28, 0);		softPwmWrite(29, 0);
 	};
     
      if(c2 > +5) {
-		softPwmWrite(26, 0);			softPwmWrite(27, abs(c2)); // right Front
-		softPwmWrite( 1, 0); 			softPwmWrite( 4, abs(c2)); // right Rear
+		softPwmWrite(26, 0);		softPwmWrite(27, abs(c2)); // right Front
+		softPwmWrite( 1, 0); 		softPwmWrite( 4, abs(c2)); // right Rear
 	} else if(c2 < -5) 	{
 		softPwmWrite(26, abs(c2)); 	softPwmWrite(27, 0);
 		softPwmWrite( 1, abs(c2)); 	softPwmWrite( 4, 0);
@@ -124,16 +124,6 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 		softPwmWrite( 1, 0);		softPwmWrite( 4, 0);
 	};
     
- 
-//    if(c2 > 0) {softPwmWrite(26, 0);			softPwmWrite(27, abs(c2));};	//Right Front
-//    if(c2 ==0) {softPwmWrite(26, 0); 			softPwmWrite(27, 0);};
-//    if(c2 < 0) {softPwmWrite(26, abs(c2));	softPwmWrite(27, 0);};
- 
-//    if(c3 > 0) {softPwmWrite( 1, abs(c3));	softPwmWrite( 4, 0);};	
-//	  if(c3 ==0) {softPwmWrite( 1, 0); 			softPwmWrite( 4, 0);};
-//    if(c3 < 0) {softPwmWrite( 1, 0); 			softPwmWrite( 4, abs(c3));};
- 
-
       
 // end of Drive train
 		
