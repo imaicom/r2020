@@ -32,6 +32,7 @@ int b_btn[NumberOfButton] = {};
 int fds;
 
 int ready_Go = 0;
+int expander = +100;
 
 
 int resetPCA9685(int fd) {
@@ -123,12 +124,11 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 // end of Drive train
 		
 	if(ps3dat->button[PAD_KEY_L1]) {
-		setPCA9685Duty(fds , 0 , -100);	// Expanding
+		expander = -100;	// Expanding
 	} else if(ps3dat->button[PAD_KEY_L2]) {
-		setPCA9685Duty(fds , 0 , +100);	// Closing
-	} else {
-		setPCA9685Duty(fds , 0 ,   0);
+		expander = +100;	// Closing
 	};
+	setPCA9685Duty(fds , 0 , expander);
 	
 	if((ps3dat->button[PAD_KEY_PS])&&(!ready_Go)) {
 		ready_Go = 1;
