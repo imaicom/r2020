@@ -32,11 +32,6 @@ int b_btn[NumberOfButton] = {};
 int fds;
 
 int ready_Go = 0;
-int tennisBallCatch = 0;
-int tennisBallCatch2 = 0;
-int dropGate = 0;
-
-int mode = 0;
 
 
 int resetPCA9685(int fd) {
@@ -127,7 +122,14 @@ int ps3c_test(struct ps3ctls *ps3dat) {
       
 // end of Drive train
 		
-		
+	if(ps3dat->button[PAD_KEY_L1]) {
+		setPCA9685Duty(fds , 0 , -100);	// Expanding
+	} else if(ps3dat->button[PAD_KEY_L2]) {
+		setPCA9685Duty(fds , 0 , +100);	// Closing
+	} else {
+		setPCA9685Duty(fds , 0 ,   0);
+	};
+	
 	if((ps3dat->button[PAD_KEY_PS])&&(!ready_Go)) {
 		ready_Go = 1;
 		system("mpg123 /home/pi/Music/ready_Go.mp3");
@@ -271,7 +273,7 @@ void main() {
 
 	fds = wiringPiI2CSetup(0x40);	// PCA9685
 	resetPCA9685(fds);
-	setPCA9685Freq(fds,50);
+	setPCA9685Freq(fds,49);
 	system("mpg123 /home/pi/Music/Main_system_startup.mp3");
 	delay(200);
 	system("mpg123 /home/pi/Music/Press_the_PS_button.mp3");
