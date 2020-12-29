@@ -32,7 +32,7 @@ int b_btn[NumberOfButton] = {};
 int fds;
 
 int ready_Go = 0;
-int expander = +100;
+int expander = +110;
 
 
 int resetPCA9685(int fd) {
@@ -86,14 +86,11 @@ int ps3c_test(struct ps3ctls *ps3dat) {
     v1 = ps3dat->stick [PAD_LEFT_Y];
     v2 = ps3dat->stick [PAD_RIGHT_Y];
     
-    c1= -v1 / 2.0;
-    c2= -v2 / 2.0;
+    c1= -v1 / 1.5;
+    c2= -v2 / 1.5;
     
     printf(" 0=%4d ",c1);
     printf(" 1=%4d ",c2);
-    printf("\n");
-    printf(" 2=%4d ",c3);
-    printf(" 3=%4d ",c4);
     printf("\n");
     printf("\n");
     
@@ -126,7 +123,7 @@ int ps3c_test(struct ps3ctls *ps3dat) {
 	if(ps3dat->button[PAD_KEY_L1]) {
 		expander = -100;	// Expanding
 	} else if(ps3dat->button[PAD_KEY_L2]) {
-		expander = +100;	// Closing
+		expander = +110;	// Closing
 	};
 	setPCA9685Duty(fds , 0 , expander);
 	
